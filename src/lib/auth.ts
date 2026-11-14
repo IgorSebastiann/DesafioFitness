@@ -2,7 +2,7 @@ import "server-only";
 import { betterAuth } from "better-auth";
 import { nextCookies } from "better-auth/next-js";
 import { pool } from "@/lib/db";
-import { sendEmail } from "@/lib/email";
+import { passwordResetEmail, sendEmail } from "@/lib/email";
 import { SITE_URL } from "@/lib/env";
 
 /**
@@ -47,7 +47,7 @@ export const auth = betterAuth({
       await sendEmail({
         to: user.email,
         subject: "Redefinir sua senha · Desafio Fitness",
-        html: `<p>Olá, ${user.name}.</p><p>Para criar uma nova senha, <a href="${url}">clique aqui</a>. O link expira em 1 hora.</p>`,
+        ...passwordResetEmail(user.name, url),
       });
     },
   },

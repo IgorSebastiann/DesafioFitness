@@ -1,0 +1,33 @@
+{
+  "enabled": true,
+  "screenshotDirs": [
+    "test-results",
+    "playwright-report",
+    "screenshots",
+    "e2e/screenshots",
+    "tests/screenshots"
+  ],
+  "ignore": [
+    "node_modules",
+    ".git",
+    "data/",
+    "trace/"
+  ],
+  "pathPattern": null,
+  "reportsDir": "reports/visual-audit",
+  "mode": "incremental",
+  "maxImages": 40,
+  "batchSize": 10,
+  "concurrency": 2,
+  "timeoutMinutes": 15,
+  "failOn": [],
+  "pixelTolerance": 16,
+  "diffIgnoreRatio": 0.0005,
+  "contextFiles": [
+    "CLAUDE.md",
+    "AGENTS.md",
+    "docs/decisoes.md",
+    "README.md"
+  ],
+  "testResultsFile": "test-results/.last-run.json"
+}

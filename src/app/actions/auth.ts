@@ -85,8 +85,10 @@ export async function requestPasswordReset(_prev: ActionState, formData: FormDat
     await auth.api.requestPasswordReset({
       body: { email: email.data, redirectTo: `${SITE_URL}/atualizar-senha` },
     });
-  } catch {
-    // Resposta neutra: não revela se o e-mail existe nem falhas de envio.
+  } catch (error) {
+    // Resposta neutra para quem pediu: não revela se o e-mail existe nem falhas de envio.
+    // No servidor a falha fica registrada para diagnóstico.
+    console.error("[auth:reset]", error instanceof Error ? error.message : error);
   }
   return success("Se o e-mail estiver cadastrado, você receberá o link para criar uma nova senha.");
 }

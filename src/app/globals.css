@@ -60,12 +60,24 @@ body {
   50% { box-shadow: 0 0 24px 0 rgba(198, 255, 61, 0.18); }
 }
 
+/* Gaveta inferior do menu no celular. */
+@keyframes sheet-up {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-sheet { animation: sheet-up 0.28s cubic-bezier(0.32, 0.72, 0, 1) both; }
+.animate-fade { animation: fade-in 0.2s ease-out both; }
 .animate-score { animation: score-pop 0.6s ease-out both; }
 .animate-rise { animation: rise-in 0.35s ease-out both; }
 .animate-glow { animation: glow 2.4s ease-in-out infinite; }
 
 @media (prefers-reduced-motion: reduce) {
-  .animate-score, .animate-rise, .animate-glow { animation: none; }
+  .animate-score, .animate-rise, .animate-glow, .animate-sheet, .animate-fade { animation: none; }
 }
 
 /* Esconde a barra de rolagem horizontal das abas em telas pequenas. */
