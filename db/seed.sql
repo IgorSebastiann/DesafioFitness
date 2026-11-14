@@ -14,7 +14,7 @@ insert into public.activity_categories (name, points, min_duration_minutes, icon
   ('Pular corda',  1, 15, 'activity'),
   ('Pilates',      1, 20, 'activity'),
   ('Dança',        1, 20, 'music')
-on conflict (name) do nothing;
+on conflict (name) where challenge_id is null do nothing;
 
 insert into public.achievements (code, title, description, icon, sort_order) values
   ('first_activity',    'Primeiro passo',     'Registre sua primeira atividade aprovada.',       'medal',   1),

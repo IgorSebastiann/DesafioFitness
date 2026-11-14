@@ -89,11 +89,11 @@ export function PageHeader({
 }) {
   return (
     <header className="mb-6 flex items-end justify-between gap-4">
-      <div>
+      <div className="min-w-0">
         <h1 className="text-2xl font-bold tracking-tight">{title}</h1>
         {subtitle ? <p className="mt-1 text-sm text-muted">{subtitle}</p> : null}
       </div>
-      {action}
+      {action ? <div className="shrink-0">{action}</div> : null}
     </header>
   );
 }
@@ -197,7 +197,7 @@ export function Field({
   hint?: string;
 }) {
   return (
-    <label className="flex flex-col gap-1.5">
+    <label className="flex min-w-0 flex-col gap-1.5">
       <span className="text-sm font-medium text-foreground/90">{label}</span>
       {children}
       {hint && !error ? <span className="text-xs text-muted">{hint}</span> : null}

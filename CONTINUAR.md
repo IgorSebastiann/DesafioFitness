@@ -41,11 +41,12 @@ Para instalação e configuração completas, veja o `README.md`.
 - Desafio é de quem participa; admin só cuida de modalidades, papéis e auditoria.
 - Limite de 2 participantes e 1 desafio por pessoa.
 - Convite: um pendente por desafio, válido por 7 dias, aceito só pelo e-mail convidado.
-- Regra de pontos: 1 ponto por atividade aprovada, limite diário de 2 pontos. Pendentes contam para o limite; rejeitadas não contam.
+- Regra de pontos: 1 ponto por atividade aprovada (modalidades próprias podem valer de 1 a 10), limite diário configurável no desafio (padrão 2). Pendentes contam para o limite; rejeitadas não contam.
 - Duplicidade: mesma pessoa, modalidade, data e horário. Duas corridas no mesmo dia em horários diferentes são aceitas.
 - Semana de segunda a domingo; mês do dia 1 ao último dia; fuso America/Sao_Paulo.
 - Push: só aceita endereços dos serviços de push dos navegadores (FCM, Mozilla, Apple e Windows); no máximo 10 aparelhos por conta.
-- Fotos em JPEG (não WebP), porque o Safari do iPhone não codifica WebP no canvas.
+- Fotos convertidas no navegador antes do envio: WebP onde o navegador sabe gerar (Chrome/Android) e JPEG no iPhone, porque o Safari não codifica WebP no canvas. Aceita qualquer foto que o aparelho abra (JPG, PNG, HEIC, AVIF...).
+- Modalidades por desafio (migration 0008): o casal escolhe quais valem, o tempo mínimo de cada uma e pode criar modalidades próprias. Desafio sem configuração usa todas as globais com o tempo padrão. Mudanças avisam o parceiro.
 - O banco não guarda imagens; só o caminho no Blob.
 - Projeto de referência: o repositório `ReservaQuadras` (Supabase) serviu de modelo para o push, a conversão de imagem e a câmera. O código foi adaptado, não copiado.
 

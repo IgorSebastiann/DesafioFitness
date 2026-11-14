@@ -11,9 +11,12 @@ self.addEventListener("push", (event) => {
     self.registration.showNotification(payload.title, {
       body: payload.body,
       // PNG: o Android não exibe SVG em notificação.
+      // icon: imagem colorida ao lado do texto. badge: silhueta branca da barra de status do Android.
       icon: "/icon",
-      badge: "/icon",
+      badge: "/icon-badge",
       tag: payload.tag,
+      timestamp: Date.now(),
+      vibrate: [80, 40, 80],
       data: { url: payload.url || "/dashboard" },
     }),
   );

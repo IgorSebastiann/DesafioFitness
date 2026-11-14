@@ -219,3 +219,75 @@ export async function closePeriodManually(_prev: ActionState, formData: FormData
   revalidatePath("/conquistas");
   return success(closed ? "Período fechado e vencedor registrado." : "Este período já estava fechado.");
 }
+
+const categoryRulesSchema = z
+  .array(
+    z.object({
+      category_id: z.uuid(),
+      min_duration_minutes: z.coerce
+        .number({ error: "Informe o tempo mínimo em minutos." })
+        .int({ error: "O tempo mínimo precisa ser um número inteiro." })
+        .min(0, { error: "O tempo mínimo não pode ser negativo." })
+        .max(600, { error: "O tempo mínimo vai até 600 minutos." }),
+    }),
+  )
+  .min(1, { error: "Escolha pelo menos uma modalidade." })
+  .max(60);
+
+/** Salva quais modalidades valem no desafio e o tempo mínimo de cada uma. */
+export async function saveChallengeCategories(_prev: ActionState, formData: FormData): Promise<ActionState> {
+  const viewer = await getViewer();
+  if (!viewer.challenge) return fail("Você ainda não tem desafio.");
+
+  const items = formData.getAll("enabled").map((id) => ({
+    category_id: String(id),
+    min_duration_minutes: formData.get(`min_${String(id)}`),
+  }));
+  const parsed = categoryRulesSchema.safeParse(items);
+  if (!parsed.success) return fail(parsed.error.issues[0].message);
+
+  const err = await run(viewer.userId, (sql) =>
+    sql.query(`select save_challenge_categories($1, $2::jsonb)`, [viewer.challenge!.id, JSON.stringify(parsed.data)]),
+  );
+  if (err) return err;
+  revalidatePath("/desafio");
+  revalidatePath("/atividades/nova");
+  after(() => safeDispatchPush());
+  return success("Modalidades salvas.");
+}
+
+const newCategorySchema = z.object({
+  name: z.string().trim().min(2, { error: "O nome precisa ter pelo menos 2 caracteres." }).max(40, { error: "Use até 40 caracteres." }),
+  points: z.coerce.number().int().min(1, { error: "Os pontos vão de 1 a 10." }).max(10, { error: "Os pontos vão de 1 a 10." }),
+  minDuration: z.coerce
+    .number({ error: "Informe o tempo mínimo em minutos." })
+    .int()
+    .min(0, { error: "O tempo mínimo não pode ser negativo." })
+    .max(600, { error: "O tempo mínimo vai até 600 minutos." }),
+});
+
+/** Cria uma modalidade própria do desafio (já entra valendo). */
+export async function addChallengeCategory(_prev: ActionState, formData: FormData): Promise<ActionState> {
+  const viewer = await getViewer();
+  if (!viewer.challenge) return fail("Você ainda não tem desafio.");
+  const parsed = newCategorySchema.safeParse({
+    name: formData.get("name"),
+    points: formData.get("points"),
+    minDuration: formData.get("minDuration"),
+  });
+  if (!parsed.success) return fail(parsed.error.issues[0].message);
+
+  const err = await run(viewer.userId, (sql) =>
+    sql.query(`select add_challenge_category($1, $2, $3, $4)`, [
+      viewer.challenge!.id,
+      parsed.data.name,
+      parsed.data.points,
+      parsed.data.minDuration,
+    ]),
+  );
+  if (err) return err;
+  revalidatePath("/desafio");
+  revalidatePath("/atividades/nova");
+  after(() => safeDispatchPush());
+  return success(`Modalidade ${parsed.data.name} criada.`);
+}

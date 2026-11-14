@@ -4,7 +4,7 @@ import { getSessionUser } from "@/lib/session";
 
 const PROOF_TYPES = [
   "image/jpeg", "image/png", "image/webp", "image/heic", "image/heif",
-  "video/mp4", "video/quicktime", "video/webm",
+  "video/mp4", "video/quicktime", "video/webm", "video/3gpp", "video/3gpp2", "video/x-m4v",
 ];
 const AVATAR_TYPES = ["image/jpeg", "image/png", "image/webp"];
 const PROOF_MAX = 50 * 1024 * 1024;

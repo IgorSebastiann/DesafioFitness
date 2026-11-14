@@ -13,6 +13,7 @@ const PUBLIC_PATHS = [
   "/icon",
   "/apple-icon",
   "/convite/",
+  "/instalar",
 ];
 const AUTH_ONLY_PAGES = ["/login", "/cadastro", "/recuperar-senha"];
 

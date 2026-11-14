@@ -6,6 +6,11 @@ import { formatDayMonth, formatDurationMinutes, formatTimeShort } from "@/lib/ti
 import type { ActivityRow } from "@/lib/types";
 import { cn } from "@/lib/cn";
 
+/** Mesma rota de proofUrlFor (queries.ts): o servidor confere se a pessoa pode ver a comprovação. */
+function proofUrl(path: string | null | undefined): string | null {
+  return path ? `/api/proofs?p=${encodeURIComponent(path)}` : null;
+}
+
 export type ActivityWithProof = ActivityRow & { proofUrl?: string | null };
 
 /** Lista compacta de atividades com a comprovação (foto ou vídeo) quando disponível. */
@@ -29,7 +34,7 @@ export function ActivityList({
               href={`/atividades/${a.id}`}
               className="flex gap-3 rounded-2xl border border-border bg-surface p-3 transition hover:border-accent/40"
             >
-              <ProofThumb url={a.proofUrl ?? null} kind={a.proof_kind} />
+              <ProofThumb url={a.proofUrl ?? proofUrl(a.proof_path)} kind={a.proof_kind} />
               <div className="min-w-0 flex-1">
                 <div className="flex items-center gap-2">
                   {showOwner ? (
@@ -68,8 +73,19 @@ export function ProofThumb({ url, kind }: { url: string | null; kind: "image" | 
   }
   if (kind === "video") {
     return (
-      <div className={box}>
-        <Video className="h-6 w-6 text-accent" aria-label="Vídeo de comprovação" />
+      <div className={`${box} relative`}>
+        {/* Primeiro quadro do vídeo como miniatura (#t força o iPhone a desenhar o quadro). */}
+        <video
+          src={`${url}#t=0.1`}
+          preload="metadata"
+          muted
+          playsInline
+          aria-label="Vídeo de comprovação"
+          className="pointer-events-none h-full w-full object-cover"
+        />
+        <span className="absolute inset-0 flex items-center justify-center bg-black/25">
+          <Video className="h-5 w-5 text-white drop-shadow" aria-hidden />
+        </span>
       </div>
     );
   }

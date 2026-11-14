@@ -1,12 +1,18 @@
 "use client";
 
 import { useActionState, useRef, useState, useTransition } from "react";
-import { Camera, ImagePlus, Loader2, X } from "lucide-react";
+import { Camera, ImagePlus, Images, Loader2, X } from "lucide-react";
 import { createActivity } from "@/app/actions/activities";
 import { Field, Notice, inputClass } from "@/components/ui";
 import { upload } from "@vercel/blob/client";
 import { ImageConversionError } from "@/lib/image";
-import { compressImageIfNeeded, MAX_PROOF_BYTES, proofKindFor, validateProofFile } from "@/lib/proof-upload";
+import {
+  compressImageIfNeeded,
+  contentTypeFor,
+  MAX_PROOF_BYTES,
+  proofKindFor,
+  validateProofFile,
+} from "@/lib/proof-upload";
 import type { Category } from "@/lib/types";
 
 export function ActivityForm({
@@ -29,33 +35,42 @@ export function ActivityForm({
   const [uploadError, setUploadError] = useState<string | null>(null);
   const [preview, setPreview] = useState<{ url: string; kind: "image" | "video"; name: string } | null>(null);
   const [categoryId, setCategoryId] = useState(categories[0]?.id ?? "");
+  const [file, setFile] = useState<File | null>(null);
   const formRef = useRef<HTMLFormElement>(null);
-  const fileRef = useRef<HTMLInputElement>(null);
+  const cameraRef = useRef<HTMLInputElement>(null);
+  const galleryRef = useRef<HTMLInputElement>(null);
 
   const selected = categories.find((c) => c.id === categoryId);
   const remaining = Math.max(0, dailyLimit - pointsUsedToday);
 
-  function onFileChange(file: File | undefined) {
+  function clearInputs() {
+    if (cameraRef.current) cameraRef.current.value = "";
+    if (galleryRef.current) galleryRef.current.value = "";
+  }
+
+  function onFileChange(chosen: File | undefined) {
     setUploadError(null);
     if (preview) URL.revokeObjectURL(preview.url);
-    if (!file) {
+    if (!chosen) {
       setPreview(null);
+      setFile(null);
       return;
     }
-    const error = validateProofFile(file);
+    const error = validateProofFile(chosen);
     if (error) {
       setUploadError(error);
-      if (fileRef.current) fileRef.current.value = "";
+      clearInputs();
       setPreview(null);
+      setFile(null);
       return;
     }
-    setPreview({ url: URL.createObjectURL(file), kind: proofKindFor(file), name: file.name });
+    setFile(chosen);
+    setPreview({ url: URL.createObjectURL(chosen), kind: proofKindFor(chosen), name: chosen.name });
   }
 
   function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = formRef.current;
-    const file = fileRef.current?.files?.[0];
     if (!form) return;
     if (!file) {
       setUploadError("Envie uma foto ou um vídeo como comprovação.");
@@ -77,7 +92,7 @@ export function ActivityForm({
           await upload(path, body, {
             access: "private",
             handleUploadUrl: "/api/proofs/upload",
-            contentType: body.type,
+            contentType: contentTypeFor(body),
           });
         } catch {
           setUploadError("Não foi possível enviar a comprovação. Verifique sua conexão e tente novamente.");
@@ -85,7 +100,8 @@ export function ActivityForm({
         }
 
         const data = new FormData(form);
-        data.delete("proof");
+        data.delete("proofCamera");
+        data.delete("proofGallery");
         data.set("proofPath", path);
         data.set("proofKind", proofKindFor(body));
         formAction(data);
@@ -155,33 +171,55 @@ export function ActivityForm({
 
       <div className="flex flex-col gap-3">
         <span className="text-sm font-medium text-foreground/90">Comprovação</span>
-        <label className="flex cursor-pointer flex-col items-center justify-center gap-3 rounded-2xl border border-dashed border-accent/40 bg-surface-2 p-6 text-center transition hover:bg-surface-3">
-          {preview ? (
-            preview.kind === "image" ? (
+        {preview ? (
+          <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-accent/40 bg-surface-2 p-4">
+            {preview.kind === "image" ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img src={preview.url} alt="Pré-visualização da comprovação" className="max-h-64 rounded-xl object-contain" />
             ) : (
               <video src={preview.url} controls playsInline className="max-h-64 rounded-xl" />
-            )
-          ) : (
-            <>
-              <span className="flex h-14 w-14 items-center justify-center rounded-full bg-accent/15 text-accent">
-                <Camera className="h-7 w-7" aria-hidden />
-              </span>
-              <span className="font-semibold">Tirar foto ou escolher vídeo</span>
-              <span className="text-xs text-muted">Foto ou vídeo curto · até {Math.round(MAX_PROOF_BYTES / 1024 / 1024)} MB</span>
-            </>
-          )}
-          <input
-            ref={fileRef}
-            name="proof"
-            type="file"
-            accept="image/*,video/*"
-            capture="environment"
-            className="sr-only"
-            onChange={(e) => onFileChange(e.target.files?.[0])}
-          />
-        </label>
+            )}
+          </div>
+        ) : (
+          <div className="flex flex-col gap-3 rounded-2xl border border-dashed border-accent/40 bg-surface-2 p-4">
+            <div className="grid grid-cols-2 gap-3">
+              <label className="flex cursor-pointer flex-col items-center gap-2 rounded-xl bg-surface-3 px-3 py-4 text-center transition hover:brightness-110 active:scale-[0.98]">
+                <span className="flex h-12 w-12 items-center justify-center rounded-full bg-accent/15 text-accent">
+                  <Camera className="h-6 w-6" aria-hidden />
+                </span>
+                <span className="text-sm font-semibold">Câmera</span>
+                <span className="text-xs text-muted">Foto ou vídeo agora</span>
+                <input
+                  ref={cameraRef}
+                  name="proofCamera"
+                  type="file"
+                  accept="image/*,video/*"
+                  capture="environment"
+                  className="sr-only"
+                  onChange={(e) => onFileChange(e.target.files?.[0])}
+                />
+              </label>
+              <label className="flex cursor-pointer flex-col items-center gap-2 rounded-xl bg-surface-3 px-3 py-4 text-center transition hover:brightness-110 active:scale-[0.98]">
+                <span className="flex h-12 w-12 items-center justify-center rounded-full bg-accent/15 text-accent">
+                  <Images className="h-6 w-6" aria-hidden />
+                </span>
+                <span className="text-sm font-semibold">Galeria</span>
+                <span className="text-xs text-muted">Escolher arquivo</span>
+                <input
+                  ref={galleryRef}
+                  name="proofGallery"
+                  type="file"
+                  accept="image/*,video/*,.heic,.heif,.avif"
+                  className="sr-only"
+                  onChange={(e) => onFileChange(e.target.files?.[0])}
+                />
+              </label>
+            </div>
+            <span className="text-center text-xs text-muted">
+              Qualquer foto (JPG, PNG, HEIC, WebP...) ou vídeo curto até {Math.round(MAX_PROOF_BYTES / 1024 / 1024)} MB
+            </span>
+          </div>
+        )}
         {preview ? (
           <div className="flex items-center justify-between gap-3 text-xs text-muted">
             <span className="flex min-w-0 items-center gap-2 truncate"><ImagePlus className="h-4 w-4 shrink-0" aria-hidden /> <span className="truncate">{preview.name}</span></span>
@@ -189,7 +227,7 @@ export function ActivityForm({
               type="button"
               onClick={() => {
                 onFileChange(undefined);
-                if (fileRef.current) fileRef.current.value = "";
+                clearInputs();
               }}
               className="flex items-center gap-1 text-danger"
             >

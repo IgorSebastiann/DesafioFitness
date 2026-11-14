@@ -9,9 +9,10 @@ import {
   InviteForm,
   LeaveChallengeButton,
 } from "@/components/challenge-forms";
+import { AddCategoryForm, ChallengeCategoriesForm } from "@/components/challenge-categories-form";
 import { Avatar, Card, EmptyState, Notice, PageHeader, SectionTitle } from "@/components/ui";
 import { getViewer } from "@/lib/data/viewer";
-import { listAwards } from "@/lib/data/queries";
+import { getChallengeCategoryRules, listAwards } from "@/lib/data/queries";
 import { displayName } from "@/lib/format";
 import { todayIso } from "@/lib/time";
 
@@ -62,7 +63,10 @@ export default async function ChallengePage({
   }
 
   const challenge = viewer.challenge;
-  const awards = await listAwards(viewer.userId, challenge.id);
+  const [awards, categoryRules] = await Promise.all([
+    listAwards(viewer.userId, challenge.id),
+    getChallengeCategoryRules(viewer.userId, challenge.id),
+  ]);
   const isFull = viewer.participants.length >= 2;
 
   return (
@@ -109,6 +113,19 @@ export default async function ChallengePage({
         </SectionTitle>
         <Card>
           <EditChallengeForm challenge={challenge} />
+        </Card>
+      </section>
+
+      <section aria-labelledby="modalidades" className="flex flex-col gap-4">
+        <SectionTitle>
+          <span id="modalidades">Modalidades e tempo mínimo</span>
+        </SectionTitle>
+        <Card className="flex flex-col gap-4">
+          <ChallengeCategoriesForm
+            key={categoryRules.map((r) => `${r.id}:${r.enabled}:${r.min_duration_minutes}`).join("|")}
+            rules={categoryRules}
+          />
+          <AddCategoryForm />
         </Card>
       </section>
 

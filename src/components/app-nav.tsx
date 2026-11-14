@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import {
   Bell,
   CalendarDays,
+  Download,
   Flame,
   Gift,
   House,
@@ -37,6 +38,7 @@ const MORE_LINKS = [
   { href: "/conquistas", label: "Conquistas", icon: Medal },
   { href: "/notificacoes", label: "Notificações", icon: Bell },
   { href: "/perfil", label: "Perfil", icon: User },
+  { href: "/instalar", label: "Instalar o app", icon: Download },
 ] as const;
 
 const SIDE_LINKS = [
@@ -50,6 +52,7 @@ const SIDE_LINKS = [
   { href: "/conquistas", label: "Conquistas", icon: Medal },
   { href: "/notificacoes", label: "Notificações", icon: Bell },
   { href: "/perfil", label: "Perfil", icon: User },
+  { href: "/instalar", label: "Instalar o app", icon: Download },
 ] as const;
 
 function isActive(pathname: string, href: string) {

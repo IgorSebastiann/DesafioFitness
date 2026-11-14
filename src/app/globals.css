@@ -84,6 +84,20 @@ body {
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { scrollbar-width: none; }
 
+/*
+ * iPhone: campos de data e hora têm largura mínima própria e "vazam" da grade,
+ * cobrindo o campo do lado. Zera a largura mínima e alinha o texto à esquerda.
+ */
+input[type="date"],
+input[type="time"],
+input[type="datetime-local"] {
+  min-width: 0;
+  max-width: 100%;
+  -webkit-appearance: none;
+  appearance: none;
+}
+input::-webkit-date-and-time-value { text-align: left; }
+
 /* O app tem seu próprio botão de olho nos campos de senha; esconde o do Edge para não aparecer dois. */
 input::-ms-reveal,
 input::-ms-clear { display: none; }

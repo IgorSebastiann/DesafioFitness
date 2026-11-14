@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Bell, CheckCircle2, Medal, Crown, Flag, Circle, XCircle } from "lucide-react";
+import { Bell, CheckCircle2, Medal, Crown, Flag, Circle, Settings2, XCircle } from "lucide-react";
 import { MarkAllReadButton } from "@/components/profile-forms";
 import { PushSettings } from "@/components/push-settings";
 import { Card, EmptyState, PageHeader } from "@/components/ui";
@@ -17,6 +17,7 @@ const KIND_ICON: Record<string, typeof Bell> = {
   leadership_change: Crown,
   period_closed: Flag,
   achievement_unlocked: Medal,
+  rules_changed: Settings2,
 };
 
 export default async function NotificationsPage() {

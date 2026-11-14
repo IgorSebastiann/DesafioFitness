@@ -204,14 +204,50 @@ export async function getActivityDetail(uid: string, id: string) {
   });
 }
 
+/** Modalidades globais (as próprias de cada desafio ficam fora; são do casal, não do admin). */
 export async function getCategories(uid: string, onlyActive = true): Promise<Category[]> {
   return withUser(uid, async (sql) => {
     const { rows } = await sql.query<Category>(
       `select id, name, points, min_duration_minutes, icon, is_active
-         from activity_categories ${onlyActive ? "where is_active" : ""} order by name`,
+         from activity_categories where challenge_id is null ${onlyActive ? "and is_active" : ""} order by name`,
     );
     return rows;
   });
+}
+
+export type ChallengeCategoryRule = {
+  id: string;
+  name: string;
+  points: number;
+  icon: string;
+  min_duration_minutes: number;
+  default_min_duration: number;
+  enabled: boolean;
+  is_custom: boolean;
+};
+
+/** Modalidades do desafio com o tempo mínimo que vale nele (todas, marcando as que valem). */
+export async function getChallengeCategoryRules(uid: string, challengeId: string): Promise<ChallengeCategoryRule[]> {
+  return withUser(uid, async (sql) => {
+    const { rows } = await sql.query<ChallengeCategoryRule>(`select * from challenge_category_rules($1)`, [challengeId]);
+    return rows;
+  });
+}
+
+/** Modalidades que valem no desafio, no formato do formulário de atividade. */
+export async function getChallengeCategories(uid: string, challengeId: string): Promise<Category[]> {
+  const rules = await getChallengeCategoryRules(uid, challengeId);
+  return rules
+    .filter((r) => r.enabled)
+    .map((r) => ({
+      id: r.id,
+      name: r.name,
+      points: r.points,
+      min_duration_minutes: r.min_duration_minutes,
+      icon: r.icon,
+      is_active: true,
+    }))
+    .sort((a, b) => a.name.localeCompare(b.name, "pt-BR"));
 }
 
 /** Pontos já usados hoje pelo usuário (atividades não rejeitadas). */

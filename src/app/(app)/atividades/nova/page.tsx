@@ -3,7 +3,7 @@ import { ActivityForm } from "@/components/activity-form";
 import { NoChallenge } from "@/components/no-challenge";
 import { PageHeader } from "@/components/ui";
 import { getViewer } from "@/lib/data/viewer";
-import { getCategories, pointsUsedOn } from "@/lib/data/queries";
+import { getChallengeCategories, pointsUsedOn } from "@/lib/data/queries";
 import { nowHourMinute, todayIso } from "@/lib/time";
 
 export const metadata: Metadata = { title: "Registrar atividade" };
@@ -14,7 +14,7 @@ export default async function NewActivityPage() {
 
   const today = todayIso();
   const [categories, used] = await Promise.all([
-    getCategories(viewer.userId),
+    getChallengeCategories(viewer.userId, viewer.challenge.id),
     pointsUsedOn(viewer.userId, viewer.challenge.id, viewer.userId, today),
   ]);
 

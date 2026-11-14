@@ -52,7 +52,7 @@ export function EditChallengeForm({ challenge }: { challenge: Challenge }) {
         <input name="name" defaultValue={challenge.name} required minLength={3} maxLength={80} className={inputClass} />
       </Field>
       <div className="grid grid-cols-2 gap-4">
-        <Field label="Limite diário (pontos)">
+        <Field label="Limite diário (pontos)" hint="Máximo de pontos por pessoa em um dia.">
           <input name="dailyPointLimit" type="number" min={0} max={10} defaultValue={challenge.daily_point_limit} required className={inputClass} />
         </Field>
         <Field label="Início">

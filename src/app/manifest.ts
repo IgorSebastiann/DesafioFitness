@@ -6,6 +6,8 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "Desafio Fitness",
     short_name: "Desafio",
     description: "Competição fitness de casal: pontos por atividade e rankings.",
+    id: "/dashboard",
+    lang: "pt-BR",
     start_url: "/dashboard",
     scope: "/",
     display: "standalone",
@@ -14,7 +16,7 @@ export default function manifest(): MetadataRoute.Manifest {
     theme_color: "#0b0c0e",
     icons: [
       { src: "/icon", sizes: "512x512", type: "image/png", purpose: "any" },
-      { src: "/icon", sizes: "512x512", type: "image/png", purpose: "maskable" },
+      { src: "/icon-maskable", sizes: "512x512", type: "image/png", purpose: "maskable" },
     ],
   };
 }

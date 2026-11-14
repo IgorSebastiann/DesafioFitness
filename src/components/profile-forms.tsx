@@ -7,7 +7,8 @@ import { markAllNotificationsRead } from "@/app/actions/notifications";
 import { Avatar, Field, Notice, inputClass } from "@/components/ui";
 import { SubmitButton } from "@/components/submit-button";
 import { upload } from "@vercel/blob/client";
-import { AVATAR_IMAGE, ImageConversionError, toJpeg } from "@/lib/image";
+import { AVATAR_IMAGE, ImageConversionError, toWebImage } from "@/lib/image";
+import { isImageFile } from "@/lib/proof-upload";
 import type { ActionState } from "@/lib/action-state";
 
 export function ProfileForm({ displayName, nickname }: { displayName: string; nickname: string | null }) {
@@ -45,19 +46,15 @@ export function AvatarUploader({
     setError(null);
     setSuccess(null);
     if (!file) return;
-    if (!file.type.startsWith("image/")) {
-      setError("Escolha uma imagem (JPG, PNG ou WebP).");
-      return;
-    }
-    if (file.size > 5 * 1024 * 1024) {
-      setError("A imagem passa de 5 MB.");
+    if (!isImageFile(file)) {
+      setError("Escolha uma imagem (JPG, PNG, WebP, HEIC...).");
       return;
     }
     setPreview(URL.createObjectURL(file));
     startTransition(async () => {
       try {
-        const body = await toJpeg(file, AVATAR_IMAGE.maxSide, AVATAR_IMAGE.quality);
-        const path = `avatars/${userId}/${crypto.randomUUID()}.jpg`;
+        const body = await toWebImage(file, AVATAR_IMAGE.maxSide, AVATAR_IMAGE.quality);
+        const path = `avatars/${userId}/${crypto.randomUUID()}.${body.type === "image/webp" ? "webp" : "jpg"}`;
         try {
           await upload(path, body, {
             access: "private",
