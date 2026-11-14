@@ -1,0 +1,109 @@
+- generic [active] [ref=e1]:
+  - alert [ref=e27]: Casal de teste
+  - generic [ref=e28]:
+    - navigation "Principal" [ref=e29]:
+      - list [ref=e30]:
+        - listitem [ref=e31]:
+          - link "Início" [ref=e32] [cursor=pointer]:
+            - /url: /dashboard
+        - listitem [ref=e36]:
+          - link "Atividades" [ref=e37] [cursor=pointer]:
+            - /url: /atividades
+        - listitem [ref=e41]:
+          - link "Registrar atividade" [ref=e42] [cursor=pointer]:
+            - /url: /atividades/nova
+        - listitem [ref=e44]:
+          - link "Ranking" [ref=e45] [cursor=pointer]:
+            - /url: /ranking
+        - listitem [ref=e52]:
+          - link "Perfil" [ref=e53] [cursor=pointer]:
+            - /url: /perfil
+    - main [ref=e57]:
+      - region "Notificações no celular" [ref=e58]:
+        - generic [ref=e64]:
+          - paragraph [ref=e65]: Receba os avisos no celular
+          - paragraph [ref=e66]: Saiba na hora quando o parceiro(a) registrar uma atividade, quando ela for validada e quando o período fechar, mesmo com o app fechado.
+          - button "Ativar" [ref=e67]
+        - button "Fechar aviso" [ref=e68]
+      - generic [ref=e77]:
+        - generic [ref=e79]:
+          - heading "Casal de teste" [level=1] [ref=e103]
+          - paragraph [ref=e81]: Gerencie o desafio do casal.
+        - status [ref=e104]: Desafio criado! Agora convide seu parceiro(a) abaixo.
+        - region "Participantes (1/2)" [ref=e105]:
+          - heading "Participantes (1/2)" [level=2] [ref=e107]
+          - generic [ref=e109]:
+            - list [ref=e110]:
+              - listitem [ref=e111]:
+                - generic [ref=e112]: TN
+                - generic [ref=e113]: Você
+            - button "Sair do desafio" [ref=e116]
+        - region "Convidar o parceiro(a)" [ref=e117]:
+          - heading "Convidar o parceiro(a)" [level=2] [ref=e119]
+          - generic [ref=e121]:
+            - generic [ref=e122]:
+              - generic [ref=e123]:
+                - generic [ref=e124]: E-mail do seu parceiro(a)
+                - textbox "E-mail do seu parceiro(a) Ele(a) precisa entrar com este e-mail para aceitar." [ref=e125]:
+                  - /placeholder: parceiro@exemplo.com
+                - generic [ref=e126]: Ele(a) precisa entrar com este e-mail para aceitar.
+              - button "Gerar convite" [ref=e127]
+            - generic [ref=e181]:
+              - paragraph [ref=e182]: Convite criado (vale por 7 dias)
+              - paragraph [ref=e186]: https://desafio-fitness-brown.vercel.app/convite/6d7462574a123a696caa5236685a0172618d511e305c1130
+              - generic [ref=e187]:
+                - button "Compartilhar" [ref=e188]
+                - button "Copiar link" [ref=e195]
+        - region "Regras" [ref=e128]:
+          - heading "Regras" [level=2] [ref=e130]
+          - generic [ref=e132]:
+            - generic [ref=e133]:
+              - generic [ref=e134]: Nome
+              - textbox "Nome" [ref=e135]: Casal de teste
+            - generic [ref=e136]:
+              - generic [ref=e137]:
+                - generic [ref=e138]: Limite diário (pontos)
+                - spinbutton "Limite diário (pontos)" [ref=e139]: "2"
+              - generic [ref=e140]:
+                - generic [ref=e141]: Início
+                - textbox "Início" [ref=e142]: 2026-11-13
+            - button "Salvar alterações" [ref=e143]
+        - region "Premiações" [ref=e144]:
+          - heading "Premiações" [level=2] [ref=e146]
+          - generic [ref=e147]:
+            - generic [ref=e148]:
+              - paragraph [ref=e149]: Nenhum prêmio cadastrado
+              - paragraph [ref=e150]: Defina o que está em jogo para cada semana ou mês.
+            - generic [ref=e152]:
+              - generic [ref=e153]:
+                - generic [ref=e154]: Período
+                - combobox "Período" [ref=e155]:
+                  - option "Semanal" [selected]
+                  - option "Mensal"
+              - generic [ref=e156]:
+                - generic [ref=e157]: Prêmio
+                - textbox "Prêmio" [ref=e158]:
+                  - /placeholder: "Ex.: Pagar um hambúrguer"
+              - generic [ref=e159]:
+                - generic [ref=e160]: Valor ou observação
+                - textbox "Valor ou observação" [ref=e161]:
+                  - /placeholder: "Ex.: até R$ 60"
+              - generic [ref=e162]:
+                - generic [ref=e163]: Descrição
+                - textbox "Descrição" [ref=e164]
+              - button "Cadastrar prêmio" [ref=e166]
+        - region "Fechar um período" [ref=e167]:
+          - heading "Fechar um período" [level=2] [ref=e169]
+          - generic [ref=e170]:
+            - paragraph [ref=e171]: Os períodos encerrados são fechados automaticamente. Use isto só para registrar um período que ficou para trás.
+            - generic [ref=e172]:
+              - generic [ref=e173]:
+                - generic [ref=e174]: Período
+                - combobox "Período" [ref=e175]:
+                  - option "Semana" [selected]
+                  - option "Mês"
+              - generic [ref=e176]:
+                - generic [ref=e177]: Data de referência
+                - textbox "Data de referência Um dia dentro do período já encerrado." [ref=e178]: 2026-11-13
+                - generic [ref=e179]: Um dia dentro do período já encerrado.
+              - button "Fechar período" [ref=e180]

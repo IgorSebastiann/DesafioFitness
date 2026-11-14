@@ -1,0 +1,53 @@
+- generic [active] [ref=e1]:
+  - alert [ref=e27]: Meu desafio · Desafio Fitness
+  - generic [ref=e28]:
+    - navigation "Principal" [ref=e29]:
+      - list [ref=e30]:
+        - listitem [ref=e31]:
+          - link "Início" [ref=e32] [cursor=pointer]:
+            - /url: /dashboard
+        - listitem [ref=e36]:
+          - link "Atividades" [ref=e37] [cursor=pointer]:
+            - /url: /atividades
+        - listitem [ref=e41]:
+          - link "Registrar atividade" [ref=e42] [cursor=pointer]:
+            - /url: /atividades/nova
+        - listitem [ref=e44]:
+          - link "Ranking" [ref=e45] [cursor=pointer]:
+            - /url: /ranking
+        - listitem [ref=e52]:
+          - link "Perfil" [ref=e53] [cursor=pointer]:
+            - /url: /perfil
+    - main [ref=e57]:
+      - region "Notificações no celular" [ref=e58]:
+        - generic [ref=e64]:
+          - paragraph [ref=e65]: Receba os avisos no celular
+          - paragraph [ref=e66]: Saiba na hora quando o parceiro(a) registrar uma atividade, quando ela for validada e quando o período fechar, mesmo com o app fechado.
+          - button "Ativar" [ref=e67]
+        - button "Fechar aviso" [ref=e68]
+      - generic [ref=e77]:
+        - generic [ref=e79]:
+          - heading "Meu desafio" [level=1] [ref=e80]
+          - paragraph [ref=e81]: Crie o seu desafio e convide seu parceiro(a).
+        - generic [ref=e82]:
+          - heading "Criar um desafio" [level=2] [ref=e83]
+          - generic [ref=e84]:
+            - generic [ref=e85]:
+              - generic [ref=e86]: Nome do desafio
+              - textbox "Nome do desafio" [ref=e87]:
+                - /placeholder: "Ex.: Casal em forma 2027"
+            - generic [ref=e88]:
+              - generic [ref=e89]:
+                - generic [ref=e90]: Limite diário (pontos)
+                - spinbutton "Limite diário (pontos) Quantos pontos por dia contam." [ref=e91]: "2"
+                - generic [ref=e92]: Quantos pontos por dia contam.
+              - generic [ref=e93]:
+                - generic [ref=e94]: Início
+                - textbox "Início" [ref=e95]: 2026-11-13
+            - button "Criar desafio" [ref=e96]
+        - generic [ref=e97]:
+          - heading "Recebi um convite" [level=2] [ref=e98]
+          - paragraph [ref=e99]: Cole o link que seu parceiro(a) enviou.
+          - generic [ref=e100]:
+            - textbox "Cole o link do convite" [ref=e101]
+            - button "Abrir convite" [ref=e102]

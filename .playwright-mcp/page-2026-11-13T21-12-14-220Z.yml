@@ -1,0 +1,9 @@
+- generic [active] [ref=f1e1]:
+  - main [ref=f1e2]:
+    - generic [ref=f1e3]:
+      - generic [ref=f1e4]: Desafio Fitness
+      - generic [ref=f1e10]:
+        - heading "Teste Navegador convidou você" [level=1] [ref=f1e11]
+        - paragraph [ref=f1e12]: Para o desafio Casal de teste.
+        - alert [ref=f1e14]: Este convite foi enviado para outro e-mail. Saia da conta atual e entre com o e-mail convidado.
+  - alert [ref=f1e15]

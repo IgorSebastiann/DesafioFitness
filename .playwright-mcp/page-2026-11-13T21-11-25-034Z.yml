@@ -1,0 +1,32 @@
+- generic [active] [ref=e1]:
+  - alert [ref=e27]: Início · Desafio Fitness
+  - generic [ref=e28]:
+    - navigation "Principal" [ref=e29]:
+      - list [ref=e30]:
+        - listitem [ref=e31]:
+          - link "Início" [ref=e32] [cursor=pointer]:
+            - /url: /dashboard
+        - listitem [ref=e36]:
+          - link "Atividades" [ref=e37] [cursor=pointer]:
+            - /url: /atividades
+        - listitem [ref=e41]:
+          - link "Registrar atividade" [ref=e42] [cursor=pointer]:
+            - /url: /atividades/nova
+        - listitem [ref=e44]:
+          - link "Ranking" [ref=e45] [cursor=pointer]:
+            - /url: /ranking
+        - listitem [ref=e52]:
+          - link "Perfil" [ref=e53] [cursor=pointer]:
+            - /url: /perfil
+    - main [ref=e57]:
+      - region "Notificações no celular" [ref=e58]:
+        - generic [ref=e64]:
+          - paragraph [ref=e65]: Receba os avisos no celular
+          - paragraph [ref=e66]: Saiba na hora quando o parceiro(a) registrar uma atividade, quando ela for validada e quando o período fechar, mesmo com o app fechado.
+          - button "Ativar" [ref=e67]
+        - button "Fechar aviso" [ref=e68]
+      - generic [ref=e72]:
+        - heading "Você ainda não está em um desafio" [level=1] [ref=e73]
+        - paragraph [ref=e74]: Crie o seu desafio e convide seu parceiro(a) com um link, ou entre com um convite que você recebeu.
+        - link "Criar ou entrar num desafio" [ref=e76] [cursor=pointer]:
+          - /url: /desafio

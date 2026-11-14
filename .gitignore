@@ -43,5 +43,3 @@ next-env.d.ts
 .vercel
 .env*
 
-# artefatos de teste do navegador
-.playwright-mcp/
