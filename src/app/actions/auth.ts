@@ -11,6 +11,26 @@ import { fail, success, type ActionState } from "@/lib/action-state";
 const emailSchema = z.email({ error: "Informe um e-mail válido." }).trim();
 const passwordSchema = z.string().min(8, { error: "A senha precisa ter pelo menos 8 caracteres." });
 
+/**
+ * Mensagem para o usuário a partir do erro do Better Auth. Não confundimos limite de
+ * tentativas ou problema de endereço com senha errada.
+ */
+function authErrorMessage(error: APIError, action: "signin" | "signup"): string {
+  const code = error.body?.code ?? "";
+  if (error.status === 429) return "Muitas tentativas seguidas. Aguarde um minuto e tente de novo.";
+  if (code === "INVALID_EMAIL_OR_PASSWORD") return "E-mail ou senha incorretos.";
+  if (code === "USER_ALREADY_EXISTS" || code === "USER_ALREADY_EXISTS_USE_ANOTHER_EMAIL") {
+    return "Este e-mail já está cadastrado. Tente entrar ou recuperar a senha.";
+  }
+  if (code === "INVALID_ORIGIN" || error.status === 403) {
+    return "Não foi possível acessar pelo endereço atual. Abra o app pelo endereço oficial.";
+  }
+  console.error(`[auth:${action}]`, code, error.message);
+  return action === "signin"
+    ? "Não foi possível entrar agora. Tente de novo em instantes."
+    : "Não foi possível criar a conta agora. Tente de novo em instantes.";
+}
+
 /** Só aceita caminhos internos para evitar redirecionamento aberto. */
 function safeNext(value: FormDataEntryValue | null, fallback = "/dashboard"): string {
   const next = typeof value === "string" ? value : "";
@@ -29,7 +49,7 @@ export async function signIn(_prev: ActionState, formData: FormData): Promise<Ac
       headers: await headers(),
     });
   } catch (error) {
-    if (error instanceof APIError) return fail("E-mail ou senha incorretos.");
+    if (error instanceof APIError) return fail(authErrorMessage(error, "signin"));
     throw error;
   }
   redirect(safeNext(formData.get("next")));
@@ -51,13 +71,7 @@ export async function signUp(_prev: ActionState, formData: FormData): Promise<Ac
       headers: await headers(),
     });
   } catch (error) {
-    if (error instanceof APIError) {
-      return fail(
-        error.body?.code === "USER_ALREADY_EXISTS"
-          ? "Este e-mail já está cadastrado."
-          : "Não foi possível criar a conta.",
-      );
-    }
+    if (error instanceof APIError) return fail(authErrorMessage(error, "signup"));
     throw error;
   }
   redirect(safeNext(formData.get("next")));
