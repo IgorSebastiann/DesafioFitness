@@ -83,3 +83,7 @@ body {
 /* Esconde a barra de rolagem horizontal das abas em telas pequenas. */
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { scrollbar-width: none; }
+
+/* O app tem seu próprio botão de olho nos campos de senha; esconde o do Edge para não aparecer dois. */
+input::-ms-reveal,
+input::-ms-clear { display: none; }

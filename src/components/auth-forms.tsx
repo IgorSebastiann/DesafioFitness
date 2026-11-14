@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useActionState } from "react";
 import { Field, Notice, inputClass } from "@/components/ui";
 import { SubmitButton } from "@/components/submit-button";
+import { PasswordInput } from "@/components/password-input";
 import {
   requestPasswordReset,
   signIn,
@@ -47,7 +48,7 @@ export function LoginForm({
         <input name="email" type="email" autoComplete="email" required className={inputClass} />
       </Field>
       <Field label="Senha" error={fieldError(state, "password")}>
-        <input name="password" type="password" autoComplete="current-password" required className={inputClass} />
+        <PasswordInput name="password" autoComplete="current-password" required />
       </Field>
       <StateNotice state={state} />
       <SubmitButton pendingLabel="Entrando...">Entrar</SubmitButton>
@@ -75,7 +76,7 @@ export function SignupForm({ next }: { next: string }) {
         <input name="email" type="email" autoComplete="email" required className={inputClass} />
       </Field>
       <Field label="Senha" hint="Mínimo de 8 caracteres." error={fieldError(state, "password")}>
-        <input name="password" type="password" autoComplete="new-password" required minLength={8} className={inputClass} />
+        <PasswordInput name="password" autoComplete="new-password" required minLength={8} />
       </Field>
       <StateNotice state={state} />
       <SubmitButton pendingLabel="Criando conta...">Criar conta</SubmitButton>
@@ -114,10 +115,10 @@ export function UpdatePasswordForm({ token }: { token: string }) {
       </div>
       <input type="hidden" name="token" value={token} />
       <Field label="Nova senha" error={fieldError(state, "password")}>
-        <input name="password" type="password" autoComplete="new-password" required minLength={8} className={inputClass} />
+        <PasswordInput name="password" autoComplete="new-password" required minLength={8} />
       </Field>
       <Field label="Confirmar senha" error={fieldError(state, "confirm")}>
-        <input name="confirm" type="password" autoComplete="new-password" required minLength={8} className={inputClass} />
+        <PasswordInput name="confirm" autoComplete="new-password" required minLength={8} />
       </Field>
       <StateNotice state={state} />
       <SubmitButton pendingLabel="Salvando...">Salvar senha</SubmitButton>
