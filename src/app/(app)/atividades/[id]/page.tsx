@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Clock, Ruler } from "lucide-react";
 import { ActivityDecisionPanel } from "@/components/activity-decision";
+import { ActivityComments, ReactionBar } from "@/components/activity-social";
 import { Avatar, Card, Notice, StatusBadge } from "@/components/ui";
 import { getViewer } from "@/lib/data/viewer";
 import { getActivityDetail } from "@/lib/data/queries";
@@ -24,7 +25,7 @@ export default async function ActivityDetailPage({
   const detail = await getActivityDetail(viewer.userId, id);
   if (!detail) notFound();
 
-  const { activity, proofUrl, history } = detail;
+  const { activity, proofUrl, history, reactions, comments } = detail;
   const mine = activity.user_id === viewer.user.id;
   const ownerName = activity.owner ? displayName(activity.owner) : "Participante";
 
@@ -93,6 +94,10 @@ export default async function ActivityDetailPage({
             </div>
           ) : null}
         </dl>
+
+        <div className="mt-5 border-t border-border pt-4">
+          <ReactionBar activityId={activity.id} viewerId={viewer.user.id} reactions={reactions} />
+        </div>
       </Card>
 
       <ActivityDecisionPanel
@@ -101,6 +106,8 @@ export default async function ActivityDetailPage({
         isAdmin={viewer.isAdmin}
         canEditOwn={mine && activity.status === "pending"}
       />
+
+      <ActivityComments activityId={activity.id} viewerId={viewer.user.id} comments={comments} />
 
       {history.length > 0 ? (
         <Card>

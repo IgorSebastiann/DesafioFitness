@@ -4,6 +4,7 @@ import { gap, rank } from "./ranking";
 import {
   activeDays,
   addDays,
+  currentStreak,
   determineOutcome,
   longestStreak,
   monthRange,
@@ -204,5 +205,19 @@ describe("gap", () => {
         { userId: "b", points: 2 },
       ]),
     ).toEqual({ diff: 0, leaderId: null });
+  });
+});
+
+describe("currentStreak", () => {
+  it("conta os dias seguidos até hoje", () => {
+    expect(currentStreak(["2026-11-12", "2026-11-13", "2026-11-14"], "2026-11-14")).toBe(3);
+  });
+
+  it("sem atividade hoje, a sequência ainda vale até ontem", () => {
+    expect(currentStreak(["2026-11-12", "2026-11-13"], "2026-11-14")).toBe(2);
+  });
+
+  it("um dia em branco antes de ontem zera a sequência", () => {
+    expect(currentStreak(["2026-11-10", "2026-11-11"], "2026-11-14")).toBe(0);
   });
 });

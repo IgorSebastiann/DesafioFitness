@@ -72,3 +72,18 @@ export function longestStreak(dates: string[]): number {
 export function activeDays(dates: string[]): number {
   return new Set(dates).size;
 }
+
+/**
+ * Sequência atual: dias seguidos com atividade terminando hoje. Se hoje ainda não tem
+ * atividade, conta até ontem (a sequência só "quebra" quando o dia termina em branco).
+ */
+export function currentStreak(dates: string[], today: string): number {
+  const days = new Set(dates);
+  let cursor = days.has(today) ? today : addDays(today, -1);
+  let run = 0;
+  while (days.has(cursor)) {
+    run += 1;
+    cursor = addDays(cursor, -1);
+  }
+  return run;
+}

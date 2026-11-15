@@ -1,5 +1,5 @@
 import "server-only";
-import { activeDays, longestStreak, monthRange, weekRange } from "@/lib/domain/periods";
+import { activeDays, currentStreak, longestStreak, monthRange, weekRange } from "@/lib/domain/periods";
 import { withUser, type Sql } from "@/lib/db";
 import { todayIso } from "@/lib/time";
 import type {
@@ -132,6 +132,8 @@ export async function getDashboard(uid: string, challenge: Challenge) {
         strength: mine.filter((a) => a.category_name === "Musculação").length,
         activeDays: activeDays(dates),
         longestStreak: longestStreak(dates),
+        currentStreak: currentStreak(dates, today),
+        trainedToday: dates.includes(today),
       },
       recent: recent.map((r) => ({ ...r, proofUrl: proofUrlFor(r.proof_path) })),
     };
@@ -190,9 +192,42 @@ export async function getActivityDetail(uid: string, id: string) {
       )
     ).rows;
 
+    const reactions = (
+      await sql.query<{ emoji: string; user_id: string }>(
+        `select emoji, user_id from activity_reactions where activity_id = $1 order by created_at`,
+        [id],
+      )
+    ).rows;
+
+    const comments = (
+      await sql.query<{
+        id: string;
+        user_id: string;
+        body: string;
+        created_at: Date;
+        display_name: string;
+        nickname: string | null;
+        avatar_path: string | null;
+      }>(
+        `select c.id, c.user_id, c.body, c.created_at, p.display_name, p.nickname, p.avatar_path
+           from activity_comments c join profiles p on p.id = c.user_id
+          where c.activity_id = $1 order by c.created_at`,
+        [id],
+      )
+    ).rows;
+
     return {
       activity,
       proofUrl: proofUrlFor(activity.proof_path),
+      reactions,
+      comments: comments.map((c) => ({
+        id: c.id,
+        user_id: c.user_id,
+        body: c.body,
+        created_at: new Date(c.created_at).toISOString(),
+        author: { display_name: c.display_name, nickname: c.nickname },
+        avatarUrl: avatarUrlFor({ id: c.user_id, avatar_path: c.avatar_path }),
+      })),
       history: history.map((h) => ({
         id: h.id,
         decision: h.decision,
@@ -395,6 +430,14 @@ export async function listNotifications(uid: string) {
       read_at: n.read_at ? new Date(n.read_at).toISOString() : null,
       created_at: new Date(n.created_at).toISOString(),
     }));
+  });
+}
+
+/** Lembrete diário das 19h ligado? (padrão: sim) */
+export async function getDailyReminder(uid: string): Promise<boolean> {
+  return withUser(uid, async (sql) => {
+    const { rows } = await sql.query<{ daily_reminder: boolean }>(`select daily_reminder from profiles where id = $1`, [uid]);
+    return rows[0]?.daily_reminder ?? true;
   });
 }
 

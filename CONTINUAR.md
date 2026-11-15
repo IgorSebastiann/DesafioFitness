@@ -31,7 +31,7 @@ Para instalação e configuração completas, veja o `README.md`.
    - Limite: sem domínio verificado, o Resend só entrega ao e-mail da própria conta Resend. Para enviar a qualquer pessoa é preciso um domínio próprio verificado.
    - Alternativas: outro provedor pelo Marketplace (Postmark, SendGrid) ou trocar a autenticação para o Neon Auth.
 2. **Confirmar login e cadastro no navegador**. As correções de mensagens de erro e de origens confiáveis foram publicadas no commit `ebb5d2e`, mas o login da sua conta ainda não foi confirmado.
-3. **Fechamento automático dos períodos**. A rota `GET /api/cron/close-periods` existe e é protegida por `CRON_SECRET`, mas não está agendada. Falta um `vercel.json` com `crons`. No plano gratuito o cron roda no máximo uma vez por dia.
+3. **Fechamento automático dos períodos**: agendado no `vercel.json` (diário). Conferir na Vercel → Settings → Cron Jobs depois do deploy.
 4. **Testar push em aparelho real**. Android: abrir o site, tocar em Ativar e enviar o aviso de teste pela tela Notificações. iPhone: adicionar à tela de início (Safari, Compartilhar, Adicionar à Tela de Início), abrir pelo ícone e tocar em Ativar. Não há como testar push a partir do computador.
 5. **Testar o convite completo com duas contas**: criar o desafio com a conta A, convidar o e-mail da conta B, entrar com a B e aceitar.
 6. **Vídeos** não são convertidos. O limite é 50 MB. Se o espaço virar problema, vale comprimir ou limitar a duração.
@@ -47,6 +47,9 @@ Para instalação e configuração completas, veja o `README.md`.
 - Push: só aceita endereços dos serviços de push dos navegadores (FCM, Mozilla, Apple e Windows); no máximo 10 aparelhos por conta.
 - Fotos convertidas no navegador antes do envio: WebP onde o navegador sabe gerar (Chrome/Android) e JPEG no iPhone, porque o Safari não codifica WebP no canvas. Aceita qualquer foto que o aparelho abra (JPG, PNG, HEIC, AVIF...).
 - Modalidades por desafio (migration 0008): o casal escolhe quais valem, o tempo mínimo de cada uma e pode criar modalidades próprias. Desafio sem configuração usa todas as globais com o tempo padrão. Mudanças avisam o parceiro.
+- Reações e comentários (migration 0009): só quem participa do desafio vê e reage; reação avisa o dono no máximo uma vez a cada 30 min por atividade; comentário avisa o parceiro. Emojis aceitos: 🔥 💪 👏 😮 ❤️ (lista no banco e em `src/lib/reactions.ts`).
+- Lembrete diário às 19h (cron `/api/cron/daily-reminder`, 22h UTC): só para quem tem push ativo, deixou o lembrete ligado (Notificações) e não registrou nada no dia; uma vez por dia. Se o parceiro já treinou, o aviso cita o nome dele.
+- Crons em `vercel.json`: fechamento de períodos 00h05 de Brasília e lembrete 19h. A Vercel manda `Authorization: Bearer CRON_SECRET` sozinha.
 - O banco não guarda imagens; só o caminho no Blob.
 - Projeto de referência: o repositório `ReservaQuadras` (Supabase) serviu de modelo para o push, a conversão de imagem e a câmera. O código foi adaptado, não copiado.
 

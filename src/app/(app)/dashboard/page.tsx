@@ -5,6 +5,7 @@ import { ActivityList } from "@/components/activity-list";
 import { Card, ButtonLink, PageHeader, SectionTitle } from "@/components/ui";
 import { NoChallenge } from "@/components/no-challenge";
 import { ScoreBoard } from "@/components/score-board";
+import { StreakBanner } from "@/components/streak-banner";
 import { getViewer } from "@/lib/data/viewer";
 import { avatarUrlFor, getDashboard } from "@/lib/data/queries";
 import { displayName } from "@/lib/format";
@@ -54,6 +55,8 @@ export default async function DashboardPage({
           </ButtonLink>
         }
       />
+
+      <StreakBanner streak={data.stats.currentStreak} trainedToday={data.stats.trainedToday} />
 
       <section aria-labelledby="placar">
         <div className="mb-3 flex items-center justify-between gap-3">
@@ -134,3 +137,4 @@ function PeriodSwitch({ active }: { active: "semana" | "mes" }) {
     </nav>
   );
 }
+

@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Bell, CheckCircle2, Medal, Crown, Flag, Circle, Settings2, XCircle } from "lucide-react";
+import { AlarmClock, Bell, CheckCircle2, Medal, Crown, Flag, Circle, MessageCircle, Settings2, Smile, XCircle } from "lucide-react";
+import { DailyReminderToggle } from "@/components/daily-reminder";
 import { MarkAllReadButton } from "@/components/profile-forms";
 import { PushSettings } from "@/components/push-settings";
 import { Card, EmptyState, PageHeader } from "@/components/ui";
 import { getViewer } from "@/lib/data/viewer";
-import { listNotifications } from "@/lib/data/queries";
+import { getDailyReminder, listNotifications } from "@/lib/data/queries";
 import { cn } from "@/lib/cn";
 
 export const metadata: Metadata = { title: "Notificações" };
@@ -18,11 +19,14 @@ const KIND_ICON: Record<string, typeof Bell> = {
   period_closed: Flag,
   achievement_unlocked: Medal,
   rules_changed: Settings2,
+  reaction: Smile,
+  comment: MessageCircle,
+  daily_reminder: AlarmClock,
 };
 
 export default async function NotificationsPage() {
   const viewer = await getViewer();
-  const items = await listNotifications(viewer.userId);
+  const [items, reminder] = await Promise.all([listNotifications(viewer.userId), getDailyReminder(viewer.userId)]);
   const unread = items.filter((n) => !n.read_at).length;
 
   return (
@@ -34,6 +38,7 @@ export default async function NotificationsPage() {
       />
 
       <PushSettings />
+      <DailyReminderToggle enabled={reminder} />
 
       {items.length === 0 ? (
         <EmptyState title="Nenhuma notificação" description="Atividades, aprovações, liderança e conquistas aparecem aqui." />
