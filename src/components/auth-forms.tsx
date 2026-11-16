@@ -66,7 +66,7 @@ export function SignupForm({ next }: { next: string }) {
     <form action={action} className="flex flex-col gap-5 rounded-3xl border border-border bg-surface p-6">
       <div>
         <h1 className="text-2xl font-bold">Criar conta</h1>
-        <p className="mt-1 text-sm text-muted">Depois você cria seu desafio e convida seu parceiro(a).</p>
+        <p className="mt-1 text-sm text-muted">Depois você cria seu desafio e convida até 3 pessoas.</p>
       </div>
       <input type="hidden" name="next" value={next} />
       <Field label="Nome" error={fieldError(state, "displayName")}>

@@ -108,9 +108,9 @@ describe("convites", () => {
     expect(err).toMatch(/já participa|Convite inválido ou expirado/);
   });
 
-  it("não é possível criar convite com o desafio já completo", async () => {
-    const err = await errorOf(as(LUIZA, `select create_invitation($1, 'novo@teste.local')`, [challengeId]));
-    expect(err).toContain("já tem 2 participantes");
+  it("com 2 participantes ainda dá para convidar mais gente (até 4)", async () => {
+    const [row] = await as<{ create_invitation: string }>(LUIZA, `select create_invitation($1, 'novo@teste.local')`, [challengeId]);
+    expect(row.create_invitation).toMatch(/^[0-9a-f]{48}$/);
   });
 });
 

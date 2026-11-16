@@ -3,10 +3,11 @@ import { cache } from "react";
 import { redirect } from "next/navigation";
 import { getSessionUser } from "@/lib/session";
 import { withUser } from "@/lib/db";
+import { meFirst, toneMap } from "@/lib/people";
 import type { Challenge, Profile } from "@/lib/types";
 
 /**
- * Usuário logado, perfil, desafio e parceiro(a). Cacheado por requisição.
+ * Usuário logado, perfil, desafio e participantes (até 4). Cacheado por requisição.
  * Sem sessão → redireciona para /login.
  */
 export const getViewer = cache(async () => {
@@ -20,7 +21,7 @@ export const getViewer = cache(async () => {
       [userId],
     );
     const membership = await sql.query<Challenge>(
-      `select c.id, c.name, c.daily_point_limit, c.starts_on, c.is_active
+      `select c.id, c.name, c.daily_point_limit, c.starts_on, c.ends_on, c.is_active
          from challenge_participants cp join challenges c on c.id = cp.challenge_id
         where cp.user_id = $1 limit 1`,
       [userId],
@@ -31,7 +32,8 @@ export const getViewer = cache(async () => {
           await sql.query<Profile>(
             `select p.id, p.display_name, p.nickname, p.avatar_path, p.role
                from challenge_participants cp join profiles p on p.id = cp.user_id
-              where cp.challenge_id = $1`,
+              where cp.challenge_id = $1
+              order by cp.joined_at, p.id`,
             [challengeRow.id],
           )
         ).rows
@@ -47,15 +49,22 @@ export const getViewer = cache(async () => {
     role: "member",
   };
   const current = profile ?? fallbackProfile;
-  const partner = participants.find((p) => p.id !== userId) ?? null;
+  // Quem entrou primeiro (fora você) é o "parceiro" nas telas que comparam só duas pessoas.
+  const others = participants.filter((p) => p.id !== userId);
+  const partner = others[0] ?? null;
 
   return {
     userId,
     user: sessionUser,
     profile: current,
     challenge,
+    /** Ordem de entrada no desafio. */
     participants,
+    /** Você primeiro, depois os demais na ordem de entrada. */
+    people: meFirst(participants, userId),
+    others,
     partner,
+    tones: toneMap(participants, userId),
     isAdmin: current.role === "admin",
   };
 });

@@ -10,6 +10,7 @@ import { monthRange, parseIsoDate, addDays } from "@/lib/domain/periods";
 import { displayName } from "@/lib/format";
 import { formatDatePtBr, formatMonthTitle, isoToYearMonth, shiftMonth, todayIso } from "@/lib/time";
 import { cn } from "@/lib/cn";
+import { TONE, toneOf } from "@/lib/people";
 
 export const metadata: Metadata = { title: "Calendário" };
 
@@ -29,15 +30,14 @@ export default async function CalendarPage({
   const range = monthRange(`${yearMonth}-01`);
   const selectedDay = params.dia && params.dia >= range.start && params.dia <= range.end ? params.dia : null;
 
-  const { user, partner, challenge } = viewer;
+  const { user, challenge, people, tones } = viewer;
   const activities = await getMonthActivities(user.id, challenge.id, range.start, range.end);
 
-  // Mapa dia → quantidade por participante.
-  const byDay = new Map<string, { mine: number; partner: number }>();
+  // Mapa dia → quem treinou (um pontinho por pessoa, na cor dela).
+  const byDay = new Map<string, Set<string>>();
   for (const a of activities) {
-    const entry = byDay.get(a.activity_date) ?? { mine: 0, partner: 0 };
-    if (a.user_id === user.id) entry.mine += 1;
-    else entry.partner += 1;
+    const entry = byDay.get(a.activity_date) ?? new Set<string>();
+    entry.add(a.user_id);
     byDay.set(a.activity_date, entry);
   }
 
@@ -57,7 +57,6 @@ export default async function CalendarPage({
   const emptyPastDays = Math.max(0, elapsedDays - daysWithActivity);
 
   const dayActivities = selectedDay ? activities.filter((a) => a.activity_date === selectedDay) : [];
-  const partnerName = partner ? displayName(partner) : "Parceiro(a)";
 
   return (
     <div className="flex flex-col gap-6">
@@ -98,9 +97,12 @@ export default async function CalendarPage({
                 )}
               >
                 <span className="font-medium tabular-nums">{dayNum}</span>
-                <span className="flex gap-1">
-                  {entry?.mine ? <span className={cn("h-1.5 w-1.5 rounded-full", selected ? "bg-accent-ink" : "bg-accent")} /> : null}
-                  {entry?.partner ? <span className={cn("h-1.5 w-1.5 rounded-full", selected ? "bg-accent-ink" : "bg-partner")} /> : null}
+                <span className="flex gap-0.5">
+                  {people
+                    .filter((p) => entry?.has(p.id))
+                    .map((p) => (
+                      <span key={p.id} className={cn("h-1.5 w-1.5 rounded-full", selected ? "bg-accent-ink" : TONE[toneOf(tones, p.id)].bg)} />
+                    ))}
                 </span>
               </Link>
             );
@@ -108,8 +110,11 @@ export default async function CalendarPage({
         </div>
 
         <div className="mt-4 flex flex-wrap items-center gap-4 border-t border-border pt-4 text-xs text-muted">
-          <span className="flex items-center gap-2"><span className="h-2 w-2 rounded-full bg-accent" /> Você</span>
-          <span className="flex items-center gap-2"><span className="h-2 w-2 rounded-full bg-partner" /> {partnerName}</span>
+          {people.map((p) => (
+            <span key={p.id} className="flex items-center gap-2">
+              <span className={cn("h-2 w-2 rounded-full", TONE[toneOf(tones, p.id)].bg)} /> {p.id === user.id ? "Você" : displayName(p)}
+            </span>
+          ))}
           <span className="ml-auto">{emptyPastDays} {emptyPastDays === 1 ? "dia sem atividade" : "dias sem atividade"}</span>
         </div>
       </Card>
@@ -121,7 +126,7 @@ export default async function CalendarPage({
               {formatDatePtBr(selectedDay)}
             </h2>
             {dayActivities.length === 0 ? (
-              <EmptyState title="Sem atividade neste dia" description="Nenhum dos dois registrou treino." />
+              <EmptyState title="Sem atividade neste dia" description="Ninguém registrou treino." />
             ) : (
               <>
                 <p className="text-sm text-muted">
@@ -130,7 +135,7 @@ export default async function CalendarPage({
                     {dayActivities.reduce((s, a) => s + a.points_awarded, 0)}
                   </strong>
                 </p>
-                <ActivityList items={dayActivities} myId={user.id} />
+                <ActivityList items={dayActivities} myId={user.id} tones={tones} />
               </>
             )}
           </>

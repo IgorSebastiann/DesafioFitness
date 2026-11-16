@@ -4,6 +4,7 @@ import { useActionState, useState, useTransition } from "react";
 import { Check, Copy, Link2, Share2 } from "lucide-react";
 import {
   acceptInvitation,
+  cancelInvitation,
   closePeriodManually,
   createAward,
   createChallenge,
@@ -12,6 +13,7 @@ import {
   toggleAward,
   updateChallengeInfo,
 } from "@/app/actions/challenge";
+import { ChallengeScheduleFields } from "@/components/challenge-schedule";
 import { Field, Notice, inputClass } from "@/components/ui";
 import { SubmitButton } from "@/components/submit-button";
 import type { ActionState } from "@/lib/action-state";
@@ -28,16 +30,12 @@ export function CreateChallengeForm({ today }: { today: string }) {
   return (
     <form action={action} className="grid gap-4">
       <Field label="Nome do desafio" error={state && !state.ok ? state.fieldErrors?.name : undefined}>
-        <input name="name" required minLength={3} maxLength={80} placeholder="Ex.: Casal em forma 2027" className={inputClass} />
+        <input name="name" required minLength={3} maxLength={80} placeholder="Ex.: Verão em forma 2027" className={inputClass} />
       </Field>
-      <div className="grid grid-cols-2 gap-4">
-        <Field label="Limite diário (pontos)" hint="Quantos pontos por dia contam.">
-          <input name="dailyPointLimit" type="number" min={0} max={10} defaultValue={2} required className={inputClass} />
-        </Field>
-        <Field label="Início">
-          <input name="startsOn" type="date" defaultValue={today} required className={inputClass} />
-        </Field>
-      </div>
+      <Field label="Limite diário (pontos)" hint="Quantos pontos por dia contam para cada pessoa.">
+        <input name="dailyPointLimit" type="number" min={0} max={10} defaultValue={2} required className={inputClass} />
+      </Field>
+      <ChallengeScheduleFields defaultStart={today} defaultEnd={null} />
       <Feedback state={state} />
       <SubmitButton>Criar desafio</SubmitButton>
     </form>
@@ -51,14 +49,10 @@ export function EditChallengeForm({ challenge }: { challenge: Challenge }) {
       <Field label="Nome">
         <input name="name" defaultValue={challenge.name} required minLength={3} maxLength={80} className={inputClass} />
       </Field>
-      <div className="grid grid-cols-2 gap-4">
-        <Field label="Limite diário (pontos)" hint="Máximo de pontos por pessoa em um dia.">
-          <input name="dailyPointLimit" type="number" min={0} max={10} defaultValue={challenge.daily_point_limit} required className={inputClass} />
-        </Field>
-        <Field label="Início">
-          <input name="startsOn" type="date" defaultValue={challenge.starts_on} required className={inputClass} />
-        </Field>
-      </div>
+      <Field label="Limite diário (pontos)" hint="Máximo de pontos por pessoa em um dia.">
+        <input name="dailyPointLimit" type="number" min={0} max={10} defaultValue={challenge.daily_point_limit} required className={inputClass} />
+      </Field>
+      <ChallengeScheduleFields defaultStart={challenge.starts_on} defaultEnd={challenge.ends_on} />
       <Feedback state={state} />
       <SubmitButton variant="secondary">Salvar alterações</SubmitButton>
     </form>
@@ -89,8 +83,8 @@ export function InviteForm() {
   return (
     <div className="flex flex-col gap-4">
       <form action={action} className="flex flex-col gap-3 sm:flex-row sm:items-end">
-        <Field label="E-mail do seu parceiro(a)" hint="Ele(a) precisa entrar com este e-mail para aceitar.">
-          <input name="email" type="email" required placeholder="parceiro@exemplo.com" className={inputClass} />
+        <Field label="E-mail de quem você quer convidar" hint="A pessoa precisa entrar com este e-mail para aceitar.">
+          <input name="email" type="email" required placeholder="amigo@exemplo.com" className={inputClass} />
         </Field>
         <SubmitButton variant="secondary" className="sm:w-auto">Gerar convite</SubmitButton>
       </form>
@@ -110,6 +104,58 @@ export function InviteForm() {
           </div>
         </div>
       ) : null}
+    </div>
+  );
+}
+
+/** Convites enviados que ainda não foram aceitos: copiar o link de novo ou cancelar. */
+export function PendingInvitations({ items }: { items: { id: string; email: string; link: string; expiresOn: string }[] }) {
+  const [pending, startTransition] = useTransition();
+  const [copiedId, setCopiedId] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  if (items.length === 0) return null;
+  return (
+    <div className="flex flex-col gap-2">
+      <p className="text-xs font-semibold uppercase tracking-wider text-muted">Aguardando aceitar</p>
+      <ul className="flex flex-col divide-y divide-border rounded-2xl bg-surface-2">
+        {items.map((inv) => (
+          <li key={inv.id} className="flex items-center gap-2 px-3 py-2.5">
+            <div className="min-w-0 flex-1">
+              <p className="truncate text-sm font-medium">{inv.email}</p>
+              <p className="text-xs text-muted">Vale até {inv.expiresOn}</p>
+            </div>
+            <button
+              type="button"
+              onClick={async () => {
+                await navigator.clipboard.writeText(inv.link);
+                setCopiedId(inv.id);
+                setTimeout(() => setCopiedId(null), 2000);
+              }}
+              aria-label={`Copiar link do convite para ${inv.email}`}
+              className="inline-flex h-9 items-center gap-1.5 rounded-lg border border-border px-2.5 text-xs font-semibold"
+            >
+              {copiedId === inv.id ? <Check className="h-3.5 w-3.5 text-accent" aria-hidden /> : <Copy className="h-3.5 w-3.5" aria-hidden />}
+              {copiedId === inv.id ? "Copiado" : "Link"}
+            </button>
+            <button
+              type="button"
+              disabled={pending}
+              onClick={() =>
+                startTransition(async () => {
+                  setError(null);
+                  const result = await cancelInvitation(inv.id);
+                  if (result && !result.ok) setError(result.error);
+                })
+              }
+              className="h-9 rounded-lg px-2.5 text-xs font-semibold text-danger disabled:opacity-50"
+            >
+              Cancelar
+            </button>
+          </li>
+        ))}
+      </ul>
+      {error ? <Notice kind="error">{error}</Notice> : null}
     </div>
   );
 }

@@ -18,6 +18,7 @@ import { Avatar, Card, Notice } from "@/components/ui";
 import { REACTIONS } from "@/lib/reactions";
 import { displayName } from "@/lib/format";
 import { cn } from "@/lib/cn";
+import { toneOf, type Tone } from "@/lib/people";
 import { formatRelativeTime } from "@/lib/time";
 
 /** Hora relativa que se atualiza a cada minuto; a data completa fica no title. */
@@ -116,10 +117,12 @@ export function ActivityComments({
   activityId,
   viewerId,
   comments,
+  tones = {},
 }: {
   activityId: string;
   viewerId: string;
   comments: CommentRow[];
+  tones?: Record<string, Tone>;
 }) {
   const [state, action, pending] = useActionState(addComment, null);
   const formRef = useRef<HTMLFormElement>(null);
@@ -154,7 +157,7 @@ export function ActivityComments({
                     name={name}
                     src={c.avatarUrl}
                     size={32}
-                    tone={mine ? "accent" : "partner"}
+                    tone={mine ? "accent" : toneOf(tones, c.user_id)}
                   />
                   <div className="min-w-0 flex-1">
                     <p className="flex flex-wrap items-baseline gap-x-2 text-sm">

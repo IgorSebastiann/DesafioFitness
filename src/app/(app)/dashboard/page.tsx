@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Activity, Bike, Dumbbell, Flame, Footprints, Trophy, Zap } from "lucide-react";
 import { ActivityList } from "@/components/activity-list";
+import { ChallengeProgress } from "@/components/challenge-progress";
 import { Card, ButtonLink, PageHeader, SectionTitle } from "@/components/ui";
 import { NoChallenge } from "@/components/no-challenge";
 import { ScoreBoard } from "@/components/score-board";
-import { ShareWeekButton } from "@/components/share-week";
+import { ShareCardButton } from "@/components/share-card-dialog";
 import { StreakBanner } from "@/components/streak-banner";
 import { WeeklyGoals, type GoalRow } from "@/components/weekly-goals";
 import { getViewer } from "@/lib/data/viewer";
@@ -13,6 +14,7 @@ import { avatarUrlFor, getActivityFacts, getDashboard } from "@/lib/data/queries
 import { missionForWeek } from "@/lib/domain/missions";
 import { WeeklyMission, type MissionRow } from "@/components/weekly-mission";
 import { displayName } from "@/lib/format";
+import { toneOf } from "@/lib/people";
 import { formatDayMonth, formatMonthTitle } from "@/lib/time";
 import { cn } from "@/lib/cn";
 
@@ -24,26 +26,29 @@ export default async function DashboardPage({
   searchParams: Promise<{ periodo?: string }>;
 }) {
   const viewer = await getViewer();
-  const { challenge, user, profile, partner } = viewer;
+  const { challenge, user, profile } = viewer;
   if (!challenge) return <NoChallenge />;
 
   const { periodo } = await searchParams;
-  const isMonth = periodo === "mes";
+  const period: Period = periodo === "mes" || periodo === "geral" ? periodo : "semana";
   const data = await getDashboard(user.id, challenge);
   const weekFacts = await getActivityFacts(user.id, challenge.id, data.week);
   const mission = missionForWeek(data.week.start);
-  const missionRows: MissionRow[] = [...viewer.participants]
-    .sort((a, b) => Number(b.id === user.id) - Number(a.id === user.id))
-    .map((p) => ({
-      userId: p.id,
-      name: displayName(p),
-      isMe: p.id === user.id,
-      progress: mission.progress(weekFacts.filter((f) => f.user_id === p.id)),
-    }));
-  const rows = isMonth ? data.monthRows : data.weekRows;
-  const periodLabel = isMonth
-    ? formatMonthTitle(data.month.start)
-    : `${formatDayMonth(data.week.start)} a ${formatDayMonth(data.week.end)}`;
+  const missionRows: MissionRow[] = viewer.people.map((p) => ({
+    userId: p.id,
+    name: displayName(p),
+    isMe: p.id === user.id,
+    tone: toneOf(viewer.tones, p.id),
+    progress: mission.progress(weekFacts.filter((f) => f.user_id === p.id)),
+  }));
+  const rows = period === "mes" ? data.monthRows : period === "geral" ? data.totalRows : data.weekRows;
+  const periodLabel =
+    period === "mes"
+      ? formatMonthTitle(data.month.start)
+      : period === "geral"
+        ? `desde ${formatDayMonth(data.total.start)}`
+        : `${formatDayMonth(data.week.start)} a ${formatDayMonth(data.week.end)}`;
+  const players = viewer.people.map((p) => ({ profile: p, tone: toneOf(viewer.tones, p.id), isMe: p.id === user.id }));
 
   const avatarUrls = Object.fromEntries(
     viewer.participants.map((p) => [p.id, avatarUrlFor(p)]),
@@ -60,9 +65,10 @@ export default async function DashboardPage({
         days: g.days,
         trainedToday: g.trained_today,
         isMe: g.user_id === user.id,
+        tone: toneOf(viewer.tones, g.user_id),
       };
     })
-    .sort((a, b) => Number(b.isMe) - Number(a.isMe));
+    .sort((a, b) => viewer.people.findIndex((p) => p.id === a.userId) - viewer.people.findIndex((p) => p.id === b.userId));
 
   const stats = [
     { label: "Atividades", value: data.stats.totalActivities, icon: Activity },
@@ -87,20 +93,23 @@ export default async function DashboardPage({
 
       <StreakBanner streak={data.stats.currentStreak} trainedToday={data.stats.trainedToday} />
 
+      {challenge.ends_on || data.today < challenge.starts_on ? (
+        <ChallengeProgress startsOn={challenge.starts_on} endsOn={challenge.ends_on} today={data.today} compact />
+      ) : null}
+
       <section aria-labelledby="placar">
         <div className="mb-3 flex items-center justify-between gap-3">
           <h2 id="placar" className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">Placar</h2>
-          <PeriodSwitch active={isMonth ? "mes" : "semana"} />
+          <PeriodSwitch active={period} />
         </div>
         <ScoreBoard
-          me={profile}
-          partner={partner}
+          players={players}
           rows={rows}
           periodLabel={periodLabel}
           avatarUrls={avatarUrls}
         />
         <div className="mt-2 flex items-start justify-between gap-3 text-xs">
-          <ShareWeekButton />
+          <ShareCardButton defaultPeriod={period === "mes" ? "mes" : period === "geral" ? "geral" : "semana"} />
           <Link href="/ranking" className="font-semibold text-accent hover:underline">Ver ranking e histórico →</Link>
         </div>
       </section>
@@ -144,15 +153,17 @@ export default async function DashboardPage({
             </div>
           </Card>
         ) : (
-          <ActivityList items={data.recent} myId={user.id} />
+          <ActivityList items={data.recent} myId={user.id} tones={viewer.tones} />
         )}
       </section>
     </div>
   );
 }
 
-function PeriodSwitch({ active }: { active: "semana" | "mes" }) {
-  const tab = (value: "semana" | "mes", label: string) => (
+type Period = "semana" | "mes" | "geral";
+
+function PeriodSwitch({ active }: { active: Period }) {
+  const tab = (value: Period, label: string) => (
     <Link
       href={`/dashboard?periodo=${value}`}
       aria-current={active === value ? "true" : undefined}
@@ -168,6 +179,7 @@ function PeriodSwitch({ active }: { active: "semana" | "mes" }) {
     <nav aria-label="Período" className="inline-flex rounded-full bg-surface-2 p-1">
       {tab("semana", "Semana")}
       {tab("mes", "Mês")}
+      {tab("geral", "Geral")}
     </nav>
   );
 }

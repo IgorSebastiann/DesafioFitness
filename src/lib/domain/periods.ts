@@ -88,3 +88,34 @@ export function currentStreak(dates: string[], today: string): number {
   }
   return run;
 }
+
+/** Dias corridos entre duas datas, contando as duas pontas (inclusivo). */
+export function daysBetweenInclusive(start: string, end: string): number {
+  return Math.round((parseIsoDate(end).getTime() - parseIsoDate(start).getTime()) / DAY_MS) + 1;
+}
+
+export type ChallengeProgress = {
+  /** Dia atual do desafio (1 = primeiro dia). 0 se ainda não começou. */
+  day: number;
+  /** Duração total em dias; null quando o desafio não tem data de fim. */
+  totalDays: number | null;
+  /** Dias que faltam depois de hoje; null sem data de fim. */
+  daysLeft: number | null;
+  notStarted: boolean;
+  ended: boolean;
+};
+
+/** Em que ponto o desafio está hoje. */
+export function challengeProgress(startsOn: string, endsOn: string | null, today: string): ChallengeProgress {
+  const notStarted = today < startsOn;
+  const ended = endsOn !== null && today > endsOn;
+  const totalDays = endsOn ? daysBetweenInclusive(startsOn, endsOn) : null;
+  const day = notStarted ? 0 : ended && totalDays !== null ? totalDays : daysBetweenInclusive(startsOn, today);
+  const daysLeft = endsOn === null ? null : ended ? 0 : daysBetweenInclusive(notStarted ? startsOn : today, endsOn) - 1;
+  return { day, totalDays, daysLeft, notStarted, ended };
+}
+
+/** Intervalo do desafio inteiro até agora (ou até o fim, se já acabou). */
+export function challengeRange(startsOn: string, endsOn: string | null, today: string): DateRange {
+  return { start: startsOn, end: endsOn !== null && endsOn < today ? endsOn : today };
+}

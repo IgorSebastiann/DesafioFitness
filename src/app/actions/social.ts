@@ -97,11 +97,13 @@ export async function setDailyReminder(enabled: boolean): Promise<ActionState> {
   return success(enabled ? "Lembrete diário ligado." : "Lembrete diário desligado.");
 }
 
-/** Cutuca o parceiro (aviso + push). O limite de uma a cada 4 horas fica no banco. */
-export async function pokePartner(): Promise<ActionState> {
+/** Cutuca outra pessoa do desafio (aviso + push). O limite de uma a cada 4 horas fica no banco. */
+export async function pokePartner(targetId: string): Promise<ActionState> {
   const viewer = await getViewer();
+  const target = z.uuid().safeParse(targetId);
+  if (!target.success) return fail("Pessoa inválida.");
   try {
-    await withUser(viewer.userId, (sql) => sql.query(`select poke_partner()`));
+    await withUser(viewer.userId, (sql) => sql.query(`select poke_partner($1)`, [target.data]));
   } catch (error) {
     return fail(friendlyDbError(error as { code?: string; message?: string }));
   }

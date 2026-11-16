@@ -3,22 +3,23 @@ import { Avatar, Card } from "@/components/ui";
 import type { Recap } from "@/lib/domain/recap";
 import { formatDayMonth, formatDurationMinutes } from "@/lib/time";
 import { cn } from "@/lib/cn";
+import { TONE, type Tone } from "@/lib/people";
 
 /** Cartão da retrospectiva de uma pessoa: números do mês e curiosidades. */
 export function PersonRecap({
   name,
   avatarUrl,
-  isMe,
+  tone,
   points,
   recap,
 }: {
   name: string;
   avatarUrl: string | null;
-  isMe: boolean;
+  tone: Tone;
   points: number;
   recap: Recap;
 }) {
-  const color = isMe ? "text-accent" : "text-partner";
+  const color = TONE[tone].text;
   const facts = [
     recap.favorite && { icon: Heart, label: "Modalidade favorita", value: `${recap.favorite.name} (${recap.favorite.count}x)` },
     recap.bestWeekday && { icon: CalendarDays, label: "Dia preferido", value: `${recap.bestWeekday.name.charAt(0).toUpperCase()}${recap.bestWeekday.name.slice(1)} (${recap.bestWeekday.count}x)` },
@@ -31,9 +32,9 @@ export function PersonRecap({
   ].filter(Boolean) as { icon: typeof Heart; label: string; value: string }[];
 
   return (
-    <Card className={cn("flex flex-col gap-5", isMe ? "border-accent/30" : "border-partner/30")}>
+    <Card className={cn("flex flex-col gap-5", TONE[tone].border)}>
       <div className="flex items-center gap-3">
-        <Avatar name={name} src={avatarUrl} size={44} tone={isMe ? "accent" : "partner"} ring />
+        <Avatar name={name} src={avatarUrl} size={44} tone={tone} ring />
         <div className="min-w-0 flex-1">
           <p className={cn("truncate text-lg font-bold", color)}>{name}</p>
           <p className="text-xs text-muted tabular-nums">{points} {points === 1 ? "ponto" : "pontos"} no mês</p>

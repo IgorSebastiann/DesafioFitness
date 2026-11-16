@@ -1,5 +1,5 @@
 import "server-only";
-import { activeDays, currentStreak, longestStreak, monthRange, weekRange } from "@/lib/domain/periods";
+import { activeDays, challengeRange, currentStreak, longestStreak, monthRange, weekRange } from "@/lib/domain/periods";
 import { withUser, type Sql } from "@/lib/db";
 import { todayIso } from "@/lib/time";
 import type {
@@ -104,10 +104,12 @@ export async function getDashboard(uid: string, challenge: Challenge) {
   const today = todayIso();
   const week = weekRange(today);
   const month = monthRange(today);
+  const total = challengeRange(challenge.starts_on, challenge.ends_on, today);
 
   return withUser(uid, async (sql) => {
     const weekRows = (await sql.query<StandingRow>(`select * from standings($1,$2,$3)`, [challenge.id, week.start, week.end])).rows;
     const monthRows = (await sql.query<StandingRow>(`select * from standings($1,$2,$3)`, [challenge.id, month.start, month.end])).rows;
+    const totalRows = (await sql.query<StandingRow>(`select * from standings($1,$2,$3)`, [challenge.id, total.start, total.end])).rows;
 
     // Aprovadas e pendentes (rejeitadas ficam de fora). Estatísticas usam só as aprovadas;
     // a sequência atual conta também as pendentes, pela data da atividade (não da aprovação).
@@ -164,6 +166,8 @@ export async function getDashboard(uid: string, challenge: Challenge) {
         trainedToday: streakDates.includes(today),
       },
       recent: recent.map((r) => ({ ...r, proofUrl: proofUrlFor(r.proof_path) })),
+      totalRows,
+      total,
     };
   });
 }
@@ -267,7 +271,7 @@ export async function getActivityDetail(uid: string, id: string) {
   });
 }
 
-/** Modalidades globais (as próprias de cada desafio ficam fora; são do casal, não do admin). */
+/** Modalidades globais (as próprias de cada desafio ficam fora; são do desafio, não do admin). */
 export async function getCategories(uid: string, onlyActive = true): Promise<Category[]> {
   return withUser(uid, async (sql) => {
     const { rows } = await sql.query<Category>(
@@ -418,6 +422,21 @@ export async function listAwards(uid: string, challengeId: string) {
       [challengeId],
     );
     return rows;
+  });
+}
+
+export type PendingInvitation = { id: string; invited_email: string; token: string; expires_at: string };
+
+/** Convites ainda válidos (cada um ocupa uma vaga até ser aceito, cancelado ou expirar). */
+export async function listPendingInvitations(uid: string, challengeId: string): Promise<PendingInvitation[]> {
+  return withUser(uid, async (sql) => {
+    const { rows } = await sql.query<{ id: string; invited_email: string; token: string; expires_at: Date }>(
+      `select id, invited_email, token, expires_at from challenge_invitations
+        where challenge_id = $1 and status = 'pending' and expires_at > now()
+        order by created_at`,
+      [challengeId],
+    );
+    return rows.map((r) => ({ ...r, expires_at: new Date(r.expires_at).toISOString() }));
   });
 }
 
@@ -652,7 +671,7 @@ export async function listChallengesAdmin(uid: string) {
   return withUser(uid, async (sql) => {
     const challenges = (
       await sql.query<Challenge>(
-        `select id, name, daily_point_limit, starts_on::text as starts_on, is_active
+        `select id, name, daily_point_limit, starts_on::text as starts_on, ends_on::text as ends_on, is_active
            from challenges order by created_at desc`,
       )
     ).rows;
@@ -660,6 +679,43 @@ export async function listChallengesAdmin(uid: string) {
       await sql.query<{ challenge_id: string; user_id: string }>(`select challenge_id, user_id from challenge_participants`)
     ).rows;
     return { challenges, members };
+  });
+}
+
+// ---------------------------------------------------------------------------
+// Desafio inteiro (ranking geral)
+// ---------------------------------------------------------------------------
+export type WeekPoints = { user_id: string; week_start: string; points: number };
+
+/** Pontos aprovados por semana e por pessoa num intervalo (para a evolução acumulada). */
+export async function getWeeklyPoints(uid: string, challengeId: string, range: { start: string; end: string }): Promise<WeekPoints[]> {
+  return withUser(uid, async (sql) => {
+    const { rows } = await sql.query<{ user_id: string; week_start: string; points: number }>(
+      `select a.user_id, date_trunc('week', a.activity_date)::date::text as week_start,
+              sum(a.points_awarded)::int as points
+         from activities a
+        where a.challenge_id = $1 and a.status = 'approved' and a.activity_date between $2::date and $3::date
+        group by a.user_id, week_start`,
+      [challengeId, range.start, range.end],
+    );
+    return rows.map((r) => ({ ...r, points: Number(r.points) }));
+  });
+}
+
+export type WinCount = { user_id: string; weeks: number; months: number };
+
+/** Quantas semanas e meses fechados cada pessoa venceu. */
+export async function getWinCounts(uid: string, challengeId: string): Promise<WinCount[]> {
+  return withUser(uid, async (sql) => {
+    const { rows } = await sql.query<WinCount>(
+      `select cp.user_id,
+              (select count(*)::int from weekly_results w where w.challenge_id = cp.challenge_id and w.user_id = cp.user_id and w.is_winner) as weeks,
+              (select count(*)::int from monthly_results m where m.challenge_id = cp.challenge_id and m.user_id = cp.user_id and m.is_winner) as months
+         from challenge_participants cp
+        where cp.challenge_id = $1`,
+      [challengeId],
+    );
+    return rows;
   });
 }
 

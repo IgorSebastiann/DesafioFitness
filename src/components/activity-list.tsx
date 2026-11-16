@@ -5,6 +5,7 @@ import { displayName } from "@/lib/format";
 import { formatDayMonth, formatDurationMinutes, formatTimeShort } from "@/lib/time";
 import type { ActivityRow } from "@/lib/types";
 import { cn } from "@/lib/cn";
+import { TONE, toneOf, type Tone } from "@/lib/people";
 
 /** Mesma rota de proofUrlFor (queries.ts): o servidor confere se a pessoa pode ver a comprovação. */
 function proofUrl(path: string | null | undefined): string | null {
@@ -17,10 +18,13 @@ export type ActivityWithProof = ActivityRow & { proofUrl?: string | null };
 export function ActivityList({
   items,
   myId,
+  tones = {},
   showOwner = true,
 }: {
   items: ActivityWithProof[];
   myId: string;
+  /** Cor de cada pessoa (id → tom). Sem o mapa, os outros usam a cor laranja. */
+  tones?: Record<string, Tone>;
   showOwner?: boolean;
 }) {
   return (
@@ -28,6 +32,7 @@ export function ActivityList({
       {items.map((a) => {
         const mine = a.user_id === myId;
         const ownerName = a.owner ? displayName(a.owner) : "Participante";
+        const tone = mine ? "accent" : toneOf(tones, a.user_id);
         return (
           <li key={a.id} className="animate-rise">
             <Link
@@ -38,12 +43,12 @@ export function ActivityList({
               <div className="min-w-0 flex-1">
                 <div className="flex items-center gap-2">
                   {showOwner ? (
-                    <Avatar name={ownerName} src={null} size={20} tone={mine ? "accent" : "partner"} />
+                    <Avatar name={ownerName} src={null} size={20} tone={tone} />
                   ) : null}
                   <p className="truncate font-semibold">{a.category?.name ?? "Atividade"}</p>
                 </div>
                 <p className="mt-0.5 flex flex-wrap items-center gap-x-2 text-xs text-muted">
-                  {showOwner ? <span className={cn(mine ? "text-accent" : "text-partner")}>{mine ? "Você" : ownerName}</span> : null}
+                  {showOwner ? <span className={TONE[tone].text}>{mine ? "Você" : ownerName}</span> : null}
                   <span>{formatDayMonth(a.activity_date)} · {formatTimeShort(a.activity_time)}</span>
                   <span className="inline-flex items-center gap-1"><Clock className="h-3 w-3" aria-hidden />{formatDurationMinutes(a.duration_minutes)}</span>
                 </p>

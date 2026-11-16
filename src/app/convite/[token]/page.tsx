@@ -39,7 +39,7 @@ export default async function InvitePage({ params }: { params: Promise<{ token: 
           {!preview || !preview.valid ? (
             <>
               <h1 className="text-xl font-bold">Convite inválido ou expirado</h1>
-              <p className="mt-2 text-sm text-muted">Peça ao seu parceiro(a) um novo convite.</p>
+              <p className="mt-2 text-sm text-muted">Peça a quem te convidou um novo convite.</p>
             </>
           ) : (
             <>

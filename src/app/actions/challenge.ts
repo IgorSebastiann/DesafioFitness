@@ -9,6 +9,7 @@ import { getViewer } from "@/lib/data/viewer";
 import { withUser, type Sql } from "@/lib/db";
 import { safeDispatchPush } from "@/lib/push";
 import { SITE_URL } from "@/lib/env";
+import { addDays } from "@/lib/domain/periods";
 import { fail, friendlyDbError, success, type ActionState } from "@/lib/action-state";
 
 /**
@@ -29,27 +30,56 @@ async function run(uid: string, fn: (sql: Sql) => Promise<unknown>): Promise<Act
   }
 }
 
-const createSchema = z.object({
-  name: z.string().trim().min(3, { error: "O nome precisa ter pelo menos 3 caracteres." }).max(80),
-  dailyPointLimit: z.coerce.number().int().min(0).max(10),
-  startsOn: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, { error: "Data de início inválida." }),
-});
+const isoDate = /^\d{4}-\d{2}-\d{2}$/;
+
+const createSchema = z
+  .object({
+    name: z.string().trim().min(3, { error: "O nome precisa ter pelo menos 3 caracteres." }).max(80),
+    dailyPointLimit: z.coerce.number().int().min(0).max(10),
+    startsOn: z.string().regex(isoDate, { error: "Data de início inválida." }),
+    duration: z.enum(["30", "60", "90", "180", "custom", "none"], { error: "Escolha a duração do desafio." }),
+    endsOn: z.string().regex(isoDate, { error: "Data de fim inválida." }).optional(),
+  })
+  .transform(({ duration, endsOn, ...rest }, ctx) => {
+    let end: string | null = null;
+    if (duration === "custom") {
+      if (!endsOn) {
+        ctx.addIssue({ code: "custom", message: "Escolha o último dia do desafio." });
+        return z.NEVER;
+      }
+      end = endsOn;
+    } else if (duration !== "none") {
+      end = addDays(rest.startsOn, Number(duration) - 1);
+    }
+    if (end !== null && end < rest.startsOn) {
+      ctx.addIssue({ code: "custom", message: "A data de fim precisa ser depois do início." });
+      return z.NEVER;
+    }
+    return { ...rest, endsOn: end };
+  });
+
+function readChallengeForm(formData: FormData) {
+  return createSchema.safeParse({
+    name: formData.get("name"),
+    dailyPointLimit: formData.get("dailyPointLimit"),
+    startsOn: formData.get("startsOn"),
+    duration: formData.get("duration") ?? "none",
+    endsOn: formData.get("endsOn") || undefined,
+  });
+}
 
 export async function createChallenge(_prev: ActionState, formData: FormData): Promise<ActionState> {
   const user = await getSessionUser();
   if (!user) redirect("/login");
-  const parsed = createSchema.safeParse({
-    name: formData.get("name"),
-    dailyPointLimit: formData.get("dailyPointLimit"),
-    startsOn: formData.get("startsOn"),
-  });
+  const parsed = readChallengeForm(formData);
   if (!parsed.success) return fail(parsed.error.issues[0].message);
 
   const err = await run(user.id, (sql) =>
-    sql.query(`select create_challenge($1, $2, $3)`, [
+    sql.query(`select create_challenge($1, $2, $3, $4)`, [
       parsed.data.name,
       parsed.data.dailyPointLimit,
       parsed.data.startsOn,
+      parsed.data.endsOn,
     ]),
   );
   if (err) return err;
@@ -61,28 +91,25 @@ export async function createChallenge(_prev: ActionState, formData: FormData): P
 export async function updateChallengeInfo(_prev: ActionState, formData: FormData): Promise<ActionState> {
   const viewer = await getViewer();
   if (!viewer.challenge) return fail("Você ainda não tem desafio.");
-  const parsed = createSchema.safeParse({
-    name: formData.get("name"),
-    dailyPointLimit: formData.get("dailyPointLimit"),
-    startsOn: formData.get("startsOn"),
-  });
+  const parsed = readChallengeForm(formData);
   if (!parsed.success) return fail(parsed.error.issues[0].message);
 
   const err = await run(viewer.userId, (sql) =>
     sql.query(
-      `update challenges set name = $1, daily_point_limit = $2, starts_on = $3 where id = $4`,
-      [parsed.data.name, parsed.data.dailyPointLimit, parsed.data.startsOn, viewer.challenge!.id],
+      `update challenges set name = $1, daily_point_limit = $2, starts_on = $3, ends_on = $4 where id = $5`,
+      [parsed.data.name, parsed.data.dailyPointLimit, parsed.data.startsOn, parsed.data.endsOn, viewer.challenge!.id],
     ),
   );
   if (err) return err;
   revalidatePath("/desafio");
   revalidatePath("/dashboard");
+  revalidatePath("/ranking");
   return success("Desafio atualizado.");
 }
 
 const inviteSchema = z.object({ email: z.email({ error: "Informe um e-mail válido." }).trim() });
 
-/** Cria o convite e devolve o link para enviar ao parceiro(a). */
+/** Cria o convite e devolve o link para enviar a quem vai entrar no desafio. */
 export async function createInvitation(_prev: ActionState, formData: FormData): Promise<ActionState> {
   const viewer = await getViewer();
   if (!viewer.challenge) return fail("Você ainda não tem desafio.");
@@ -97,10 +124,22 @@ export async function createInvitation(_prev: ActionState, formData: FormData): 
       ]);
       return rows[0].create_invitation;
     });
+    revalidatePath("/desafio");
     return { ok: true, message: `${SITE_URL}/convite/${token}` };
   } catch (error) {
     return dbFail(error);
   }
+}
+
+/** Cancela um convite pendente (libera a vaga). */
+export async function cancelInvitation(invitationId: string): Promise<ActionState> {
+  const viewer = await getViewer();
+  const id = z.uuid().safeParse(invitationId);
+  if (!id.success) return fail("Convite inválido.");
+  const err = await run(viewer.userId, (sql) => sql.query(`select cancel_invitation($1)`, [id.data]));
+  if (err) return err;
+  revalidatePath("/desafio");
+  return success("Convite cancelado.");
 }
 
 const tokenSchema = z.string().regex(/^[0-9a-f]{48}$/, { error: "Link de convite inválido." });

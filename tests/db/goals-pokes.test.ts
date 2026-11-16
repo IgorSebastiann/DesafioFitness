@@ -56,7 +56,7 @@ describe("cutucar", () => {
   });
 
   it("sem parceiro não dá para cutucar", async () => {
-    expect(await errorOf(as(SOLO, `select poke_partner()`))).toMatch(/parceiro/);
+    expect(await errorOf(as(SOLO, `select poke_partner()`))).toMatch(/não está no seu desafio/);
   });
 
   it("ninguém grava cutucada direto na tabela nem vê as dos outros", async () => {

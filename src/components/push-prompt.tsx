@@ -92,7 +92,7 @@ export function PushPrompt() {
         {kind === "ask" ? (
           <>
             <p className="mt-1 text-sm leading-relaxed text-muted">
-              Saiba na hora quando o parceiro(a) registrar uma atividade, quando ela for validada e quando o período
+              Saiba na hora quando alguém do desafio registrar uma atividade, quando ela for validada e quando o período
               fechar, mesmo com o app fechado.
             </p>
             <button

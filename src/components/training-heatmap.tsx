@@ -2,6 +2,7 @@ import { Fragment } from "react";
 import { addDays, weekRange } from "@/lib/domain/periods";
 import { formatDayMonth } from "@/lib/time";
 import { cn } from "@/lib/cn";
+import { TONE, type Tone } from "@/lib/people";
 
 const ROW_LABELS = ["S", "T", "Q", "Q", "S", "S", "D"];
 
@@ -20,7 +21,7 @@ export function TrainingHeatmap({
   counts: Record<string, number>;
   today: string;
   weeks?: number;
-  tone: "accent" | "partner";
+  tone: Tone;
 }) {
   const lastMonday = weekRange(today).start;
   const firstMonday = addDays(lastMonday, -7 * (weeks - 1));
@@ -29,16 +30,13 @@ export function TrainingHeatmap({
   );
   const activeDays = Object.keys(counts).filter((d) => d >= firstMonday && d <= today).length;
 
-  const level = (n: number) =>
-    n === 0 ? "bg-surface-3" : tone === "accent"
-      ? n === 1 ? "bg-accent/45" : n === 2 ? "bg-accent/75" : "bg-accent"
-      : n === 1 ? "bg-partner/45" : n === 2 ? "bg-partner/75" : "bg-partner";
+  const level = (n: number) => (n === 0 ? "bg-surface-3" : TONE[tone].heat[Math.min(n, 3) - 1]);
 
   return (
     <figure className="flex flex-col gap-2">
       <figcaption className="flex items-baseline justify-between gap-2 text-sm">
-        <span className={cn("font-semibold", tone === "accent" ? "text-accent" : "text-partner")}>{title}</span>
-        <span className="text-xs text-muted tabular-nums">
+        <span className={cn("min-w-0 truncate font-semibold", TONE[tone].text)}>{title}</span>
+        <span className="shrink-0 text-xs text-muted tabular-nums">
           {activeDays} {activeDays === 1 ? "dia" : "dias"} em {weeks} semanas
         </span>
       </figcaption>

@@ -88,7 +88,7 @@ export function ChallengeCategoriesForm({ rules }: { rules: ChallengeCategoryRul
 
       <p className="text-xs text-muted">
         O tempo mínimo é quanto a atividade precisa durar para valer pontos. As mudanças valem para os próximos registros
-        e seu parceiro(a) recebe um aviso.
+        e quem participa recebe um aviso.
       </p>
       <Feedback state={state} />
       <SubmitButton variant="secondary">Salvar modalidades</SubmitButton>

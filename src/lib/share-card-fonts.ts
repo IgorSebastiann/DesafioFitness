@@ -3,7 +3,7 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 
 /** Geist (a fonte do app) em regular e negrito: a fonte padrão do next/og não tem negrito. */
-export async function weekCardFonts() {
+export async function shareCardFonts() {
   const dir = join(process.cwd(), "src", "assets", "fonts");
   const [regular, bold] = await Promise.all([
     readFile(join(dir, "geist-latin-400.woff")),

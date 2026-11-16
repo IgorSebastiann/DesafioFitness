@@ -23,11 +23,14 @@ export function rank(rows: RankInput[]): RankedEntry[] {
   });
 }
 
-/** Diferença absoluta de pontos e quem lidera (null em empate ou sem pontos). */
+/**
+ * Quem lidera e por quanto (diferença para o 2º colocado). Sem líder (null) em empate
+ * no topo ou sem pontos. Funciona para qualquer número de participantes.
+ */
 export function gap(rows: RankInput[]): { diff: number; leaderId: string | null } {
   if (rows.length < 2) return { diff: 0, leaderId: null };
-  const [a, b] = rows;
-  const diff = Math.abs(a.points - b.points);
+  const sorted = [...rows].sort((a, b) => b.points - a.points);
+  const diff = sorted[0].points - sorted[1].points;
   if (diff === 0) return { diff: 0, leaderId: null };
-  return { diff, leaderId: a.points > b.points ? a.userId : b.userId };
+  return { diff, leaderId: sorted[0].userId };
 }

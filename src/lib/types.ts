@@ -16,6 +16,8 @@ export type Challenge = {
   name: string;
   daily_point_limit: number;
   starts_on: string;
+  /** Último dia do desafio (inclusivo); null = sem data de fim. */
+  ends_on: string | null;
   is_active: boolean;
 };
 

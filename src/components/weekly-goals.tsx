@@ -7,6 +7,7 @@ import { pokePartner } from "@/app/actions/social";
 import { Avatar, Card } from "@/components/ui";
 import { cn } from "@/lib/cn";
 import { launchConfetti } from "@/lib/confetti";
+import { TONE, type Tone } from "@/lib/people";
 
 export type GoalRow = {
   userId: string;
@@ -16,6 +17,7 @@ export type GoalRow = {
   days: number;
   trainedToday: boolean;
   isMe: boolean;
+  tone: Tone;
 };
 
 /** Meta semanal de cada participante (dias com treino na semana) e o botão de cutucar. */
@@ -58,14 +60,14 @@ function GoalLine({ row }: { row: GoalRow }) {
   const pct = Math.min(100, Math.round((row.days / row.goal) * 100));
   return (
     <div className="flex items-start gap-3">
-      <Avatar name={row.name} src={row.avatarUrl} size={36} tone={row.isMe ? "accent" : "partner"} />
+      <Avatar name={row.name} src={row.avatarUrl} size={36} tone={row.tone} />
       <div className="min-w-0 flex-1">
         <div className="flex items-baseline justify-between gap-2 text-sm">
           <span className="min-w-0 truncate font-semibold">{row.isMe ? "Você" : row.name}</span>
           <span
             className={cn(
               "shrink-0 tabular-nums",
-              done ? cn("font-bold", row.isMe ? "text-accent" : "text-partner") : "text-muted",
+              done ? cn("font-bold", TONE[row.tone].text) : "text-muted",
             )}
             title={done ? "Meta da semana batida" : undefined}
           >
@@ -82,18 +84,18 @@ function GoalLine({ row }: { row: GoalRow }) {
           aria-label={`${row.isMe ? "Sua meta" : `Meta de ${row.name}`}: ${row.days} de ${row.goal} dias`}
         >
           <div
-            className={cn("h-full rounded-full transition-all", row.isMe ? "bg-accent" : "bg-partner")}
+            className={cn("h-full rounded-full transition-all", TONE[row.tone].bg)}
             style={{ width: `${pct}%` }}
           />
         </div>
         {/* Cutucar só faz sentido se a pessoa não treinou hoje e ainda não bateu a meta. */}
-        {!row.isMe && !row.trainedToday && !done ? <PokeButton name={row.name} /> : null}
+        {!row.isMe && !row.trainedToday && !done ? <PokeButton name={row.name} userId={row.userId} /> : null}
       </div>
     </div>
   );
 }
 
-function PokeButton({ name }: { name: string }) {
+function PokeButton({ name, userId }: { name: string; userId: string }) {
   const [pending, startTransition] = useTransition();
   const [message, setMessage] = useState<{ ok: boolean; text: string } | null>(null);
 
@@ -104,7 +106,7 @@ function PokeButton({ name }: { name: string }) {
         disabled={pending || message?.ok === true}
         onClick={() =>
           startTransition(async () => {
-            const result = await pokePartner();
+            const result = await pokePartner(userId);
             setMessage(
               result?.ok
                 ? { ok: true, text: result.message ?? "Enviado." }

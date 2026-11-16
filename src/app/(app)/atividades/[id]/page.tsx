@@ -6,6 +6,7 @@ import { ActivityDecisionPanel } from "@/components/activity-decision";
 import { ActivityComments, ReactionBar } from "@/components/activity-social";
 import { Avatar, Card, Notice, StatusBadge } from "@/components/ui";
 import { getViewer } from "@/lib/data/viewer";
+import { toneOf } from "@/lib/people";
 import { getActivityDetail, getPersonalRecords } from "@/lib/data/queries";
 import { displayName } from "@/lib/format";
 import { formatDatePtBr, formatDurationMinutes, formatTimeShort } from "@/lib/time";
@@ -42,7 +43,7 @@ export default async function ActivityDetailPage({
         <ArrowLeft className="h-4 w-4" aria-hidden /> Voltar
       </Link>
 
-      {criada ? <Notice kind="success">Atividade registrada! Aguardando a validação do(a) parceiro(a).</Notice> : null}
+      {criada ? <Notice kind="success">Atividade registrada! Aguardando a validação de alguém do desafio.</Notice> : null}
 
       <Card>
         <div className="flex items-start justify-between gap-3">
@@ -76,7 +77,7 @@ export default async function ActivityDetailPage({
 
         <dl className="mt-5 grid grid-cols-2 gap-4 text-sm">
           <div className="flex items-center gap-2">
-            <Avatar name={ownerName} size={28} tone={mine ? "accent" : "partner"} />
+            <Avatar name={ownerName} size={28} tone={toneOf(viewer.tones, activity.user_id)} />
             <div>
               <dt className="text-xs text-muted">Registrado por</dt>
               <dd className="font-medium">{mine ? "Você" : ownerName}</dd>
@@ -120,7 +121,7 @@ export default async function ActivityDetailPage({
         canEditOwn={mine && activity.status === "pending"}
       />
 
-      <ActivityComments activityId={activity.id} viewerId={viewer.user.id} comments={comments} />
+      <ActivityComments activityId={activity.id} viewerId={viewer.user.id} comments={comments} tones={viewer.tones} />
 
       {history.length > 0 ? (
         <Card>

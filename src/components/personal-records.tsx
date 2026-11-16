@@ -3,13 +3,14 @@ import { Card } from "@/components/ui";
 import type { PersonalRecord } from "@/lib/data/queries";
 import { formatDayMonth, formatDurationMinutes } from "@/lib/time";
 import { cn } from "@/lib/cn";
+import { TONE, type Tone } from "@/lib/people";
 
 /** Recordes de uma pessoa: maior duração e maior distância em cada modalidade. */
-export function RecordsCard({ title, isMe, records }: { title: string; isMe: boolean; records: PersonalRecord[] }) {
+export function RecordsCard({ title, tone, records }: { title: string; tone: Tone; records: PersonalRecord[] }) {
   const names = [...new Set(records.map((r) => r.category_name))];
   return (
     <Card className="flex flex-col gap-3">
-      <p className={cn("text-sm font-semibold", isMe ? "text-accent" : "text-partner")}>{title}</p>
+      <p className={cn("truncate text-sm font-semibold", TONE[tone].text)}>{title}</p>
       {names.length === 0 ? (
         <p className="text-sm text-muted">Nenhum recorde ainda.</p>
       ) : (

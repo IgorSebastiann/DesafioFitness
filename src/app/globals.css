@@ -11,7 +11,9 @@
   --muted: #8d949f;
   --accent: #c6ff3d;        /* verde-limão: pontuação e destaque */
   --accent-ink: #0b0c0e;
-  --partner: #ff7a3d;       /* laranja: parceiro(a) */
+  --partner: #ff7a3d;       /* laranja: 2ª pessoa do desafio */
+  --person-3: #b48cff;      /* lilás: 3ª pessoa */
+  --person-4: #3dcfff;      /* azul: 4ª pessoa */
   --danger: #ff5c6c;
   --success: #3ddc84;
   --warning: #ffc94d;
@@ -28,6 +30,8 @@
   --color-accent: var(--accent);
   --color-accent-ink: var(--accent-ink);
   --color-partner: var(--partner);
+  --color-person-3: var(--person-3);
+  --color-person-4: var(--person-4);
   --color-danger: var(--danger);
   --color-success: var(--success);
   --color-warning: var(--warning);

@@ -11,6 +11,7 @@ import { computeRecap } from "@/lib/domain/recap";
 import { displayName } from "@/lib/format";
 import { formatMonthTitle, isoToYearMonth, shiftMonth, todayIso } from "@/lib/time";
 import { cn } from "@/lib/cn";
+import { toneOf } from "@/lib/people";
 
 export const metadata: Metadata = { title: "Retrospectiva" };
 
@@ -19,7 +20,7 @@ const MONTH_RE = /^\d{4}-(0[1-9]|1[0-2])$/;
 /** Retrospectiva do mês (estilo "Wrapped"): números e curiosidades de cada um, só com aprovadas. */
 export default async function RecapPage({ searchParams }: { searchParams: Promise<{ mes?: string }> }) {
   const viewer = await getViewer();
-  const { challenge, user, participants } = viewer;
+  const { challenge, user } = viewer;
   if (!challenge) return <NoChallenge />;
 
   const current = isoToYearMonth(todayIso());
@@ -33,7 +34,7 @@ export default async function RecapPage({ searchParams }: { searchParams: Promis
     getStandings(user.id, challenge.id, range.start, range.end),
   ]);
 
-  const people = [...participants].sort((a, b) => Number(b.id === user.id) - Number(a.id === user.id));
+  const people = viewer.people;
   const points = (id: string) => Number(standings.find((s) => s.user_id === id)?.points ?? 0);
   const scores = people.map((p) => points(p.id));
   const top = Math.max(0, ...scores);
@@ -71,7 +72,7 @@ export default async function RecapPage({ searchParams }: { searchParams: Promis
             key={p.id}
             name={p.id === user.id ? "Você" : displayName(p)}
             avatarUrl={avatarUrlFor(p)}
-            isMe={p.id === user.id}
+            tone={toneOf(viewer.tones, p.id)}
             points={points(p.id)}
             recap={computeRecap(facts.filter((f) => f.user_id === p.id))}
           />

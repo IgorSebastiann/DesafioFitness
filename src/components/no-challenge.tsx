@@ -7,7 +7,7 @@ export function NoChallenge() {
     <Card className="mx-auto max-w-xl">
       <h1 className="text-xl font-bold">Você ainda não está em um desafio</h1>
       <p className="mt-2 text-sm text-muted">
-        Crie o seu desafio e convide seu parceiro(a) com um link, ou entre com um convite que você recebeu.
+        Crie o seu desafio e convide até 3 pessoas com um link, ou entre com um convite que você recebeu.
       </p>
       <div className="mt-5">
         <Link

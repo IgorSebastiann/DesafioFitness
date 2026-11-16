@@ -39,8 +39,9 @@ Para instalação e configuração completas, veja o `README.md`.
 ## 3. Decisões tomadas (não mudar sem conversar)
 
 - Desafio é de quem participa; admin só cuida de modalidades, papéis e auditoria.
-- Limite de 2 participantes e 1 desafio por pessoa.
-- Convite: um pendente por desafio, válido por 7 dias, aceito só pelo e-mail convidado.
+- Até 4 participantes por desafio (migration 0011) e 1 desafio por pessoa. Cores: você verde; os demais laranja, lilás e azul pela ordem de entrada (`src/lib/people.ts`).
+- Convite: vários pendentes (um por e-mail), cada um ocupa uma vaga até ser aceito, cancelado ou expirar (7 dias); aceito só pelo e-mail convidado. Qualquer participante cancela (`cancel_invitation`).
+- Duração (migration 0011): `challenges.ends_on` opcional (30/60/90 dias, 6 meses, outra data ou sem fim; inclusivo). Depois do fim não se registram atividades (trigger), mas pendentes ainda podem ser aprovadas; lembrete diário para. Ranking "Geral" vai do início até hoje ou até o fim.
 - Regra de pontos: 1 ponto por atividade aprovada (modalidades próprias podem valer de 1 a 10), limite diário configurável no desafio (padrão 2). Pendentes contam para o limite; rejeitadas não contam.
 - Duplicidade: mesma pessoa, modalidade, data e horário. Duas corridas no mesmo dia em horários diferentes são aceitas.
 - Semana de segunda a domingo; mês do dia 1 ao último dia; fuso America/Sao_Paulo.
@@ -52,9 +53,9 @@ Para instalação e configuração completas, veja o `README.md`.
 - Crons em `vercel.json`: fechamento de períodos 00h05 de Brasília e lembrete 19h. A Vercel manda `Authorization: Bearer CRON_SECRET` sozinha.
 - Sequência atual conta atividades aprovadas e pendentes, pela data da atividade (não da aprovação). "Maior sequência" e as estatísticas usam só aprovadas.
 - Meta semanal (migration 0010): dias distintos com treino na semana (aprovado ou pendente), de 1 a 7, padrão 4; cada um escolhe a sua no Perfil.
-- Cutucar: só pela função `poke_partner()`, no máximo uma vez a cada 4 horas para o mesmo parceiro; vira aviso + push.
+- Cutucar: só pela função `poke_partner(p_to)`, uma pessoa específica, no máximo uma vez a cada 4 horas para a mesma pessoa; vira aviso + push.
 - Recordes pessoais: calculados na consulta (sem tabela): maior duração e maior distância por pessoa e modalidade entre as aprovadas; empate fica com a mais antiga.
-- Compartilhar placar: imagem gerada em `/api/share/semana` (next/og, layout em `src/lib/week-card.tsx`), só para quem está logado; o celular abre a folha de compartilhar, o computador baixa o PNG.
+- Compartilhar placar: imagem em `/api/share/card?periodo=semana|mes|geral&fotos&modalidades&tempo` (next/og, layout `src/lib/share-card.tsx`, dados `src/lib/share-card-data.ts`), só para quem está logado, com prévia na folha de opções. O Satori não desenha WebP: fotos e avatares passam pelo `sharp` (vira JPEG) antes de entrar no card.
 - Missão da semana: escolhida pela própria semana (`missionForWeek` em `src/lib/domain/missions.ts`), sem tabela; não vale pontos. Conta aprovadas e pendentes.
 - Retrospectiva do mês (`/retrospectiva`) e mapa de treinos (Estatísticas): calculados na consulta. A retrospectiva usa só aprovadas; o mapa inclui pendentes.
 - O banco não guarda imagens; só o caminho no Blob.

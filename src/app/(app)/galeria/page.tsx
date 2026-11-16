@@ -8,40 +8,47 @@ import { getGallery, proofUrlFor } from "@/lib/data/queries";
 import { displayName } from "@/lib/format";
 import { formatDayMonth } from "@/lib/time";
 import { cn } from "@/lib/cn";
+import { TONE, toneOf } from "@/lib/people";
 
 export const metadata: Metadata = { title: "Galeria" };
 
-/** Todas as fotos e vídeos do desafio em grade, como um álbum do casal. */
+/** Todas as fotos e vídeos do desafio em grade, como um álbum do grupo. */
 export default async function GalleryPage({ searchParams }: { searchParams: Promise<{ quem?: string }> }) {
   const viewer = await getViewer();
-  const { challenge, user, partner } = viewer;
+  const { challenge, user, others, tones } = viewer;
   if (!challenge) return <NoChallenge />;
 
   const { quem } = await searchParams;
-  const filter = quem === "eu" || quem === "parceiro" ? quem : "todos";
+  // "eu", "todos" ou o id de outra pessoa ("parceiro" = primeira outra pessoa, links antigos).
+  const filter =
+    quem === "eu"
+      ? "eu"
+      : quem === "parceiro" && others[0]
+        ? others[0].id
+        : others.some((o) => o.id === quem)
+          ? (quem as string)
+          : "todos";
   const all = await getGallery(user.id, challenge.id);
-  const items = all.filter((i) =>
-    filter === "eu" ? i.user_id === user.id : filter === "parceiro" ? i.user_id !== user.id : true,
-  );
+  const items = all.filter((i) => (filter === "eu" ? i.user_id === user.id : filter === "todos" ? true : i.user_id === filter));
 
   const tabs = [
     { key: "todos", label: "Todos" },
     { key: "eu", label: "Você" },
-    ...(partner ? [{ key: "parceiro", label: displayName(partner) }] : []),
+    ...others.map((o) => ({ key: o.id, label: displayName(o) })),
   ];
 
   return (
     <div className="flex flex-col gap-6">
       <PageHeader title="Galeria" subtitle={`${all.length} ${all.length === 1 ? "registro" : "registros"} do desafio`} />
 
-      <nav aria-label="Filtrar por pessoa" className="inline-flex w-fit max-w-full rounded-full bg-surface-2 p-1">
+      <nav aria-label="Filtrar por pessoa" className="no-scrollbar inline-flex w-fit max-w-full overflow-x-auto rounded-full bg-surface-2 p-1">
         {tabs.map((t) => (
           <Link
             key={t.key}
             href={t.key === "todos" ? "/galeria" : `/galeria?quem=${t.key}`}
             aria-current={filter === t.key ? "true" : undefined}
             className={cn(
-              "truncate rounded-full px-4 py-1.5 text-xs font-semibold transition",
+              "max-w-[9rem] shrink-0 truncate rounded-full px-4 py-1.5 text-xs font-semibold transition",
               filter === t.key ? "bg-accent text-accent-ink" : "text-muted hover:text-foreground",
             )}
           >
@@ -84,7 +91,7 @@ export default async function GalleryPage({ searchParams }: { searchParams: Prom
                   <span
                     className={cn(
                       "absolute bottom-1.5 left-1.5 h-2.5 w-2.5 rounded-full ring-2 ring-black/40",
-                      item.user_id === user.id ? "bg-accent" : "bg-partner",
+                      TONE[toneOf(tones, item.user_id)].bg,
                     )}
                     aria-hidden
                   />

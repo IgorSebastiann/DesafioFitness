@@ -2,8 +2,9 @@ import { Sparkles } from "lucide-react";
 import { Card } from "@/components/ui";
 import type { Mission } from "@/lib/domain/missions";
 import { cn } from "@/lib/cn";
+import { TONE, type Tone } from "@/lib/people";
 
-export type MissionRow = { userId: string; name: string; isMe: boolean; progress: number };
+export type MissionRow = { userId: string; name: string; isMe: boolean; tone: Tone; progress: number };
 
 /** Missão da semana (muda toda segunda, não vale pontos) com o progresso de cada um. */
 export function WeeklyMission({ mission, rows }: { mission: Mission; rows: MissionRow[] }) {
@@ -24,7 +25,6 @@ export function WeeklyMission({ mission, rows }: { mission: Mission; rows: Missi
         {rows.map((r) => {
           const done = r.progress >= mission.target;
           const pct = Math.min(100, Math.round((r.progress / mission.target) * 100));
-          const color = r.isMe ? "accent" : "partner";
           return (
             <li key={r.userId}>
               <div className="flex items-baseline justify-between gap-2 text-sm">
@@ -32,7 +32,7 @@ export function WeeklyMission({ mission, rows }: { mission: Mission; rows: Missi
                 <span
                   className={cn(
                     "shrink-0 tabular-nums",
-                    done ? (r.isMe ? "font-bold text-accent" : "font-bold text-partner") : "text-muted",
+                    done ? cn("font-bold", TONE[r.tone].text) : "text-muted",
                   )}
                 >
                   {done ? "✓ Concluída" : `${fmt(Math.min(r.progress, mission.target))}/${fmt(mission.target)} ${mission.unit}`}
@@ -46,7 +46,7 @@ export function WeeklyMission({ mission, rows }: { mission: Mission; rows: Missi
                 aria-valuenow={Math.min(r.progress, mission.target)}
                 aria-label={`Missão de ${r.isMe ? "você" : r.name}`}
               >
-                <div className={cn("h-full rounded-full", color === "accent" ? "bg-accent" : "bg-partner")} style={{ width: `${pct}%` }} />
+                <div className={cn("h-full rounded-full", TONE[r.tone].bg)} style={{ width: `${pct}%` }} />
               </div>
             </li>
           );

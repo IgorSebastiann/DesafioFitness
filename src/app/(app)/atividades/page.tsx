@@ -30,13 +30,21 @@ export default async function ActivitiesPage({
   const status = (STATUS_TABS.find((t) => t.value === params.status)?.value ?? "todas") as
     | "todas"
     | ActivityStatus;
-  const quem = params.quem === "eu" || params.quem === "parceiro" ? params.quem : "todos";
-  const { challenge, user, partner } = viewer;
+  const { challenge, user, others } = viewer;
+  // "eu", "todos" ou o id de outra pessoa do desafio ("parceiro" = primeira outra pessoa, links antigos).
+  const quem =
+    params.quem === "eu"
+      ? "eu"
+      : params.quem === "parceiro" && others[0]
+        ? others[0].id
+        : others.some((o) => o.id === params.quem)
+          ? (params.quem as string)
+          : "todos";
 
   const [all, pending] = await Promise.all([
     listActivities(user.id, challenge.id, {
       status: status === "todas" ? undefined : status,
-      userId: quem === "eu" ? user.id : quem === "parceiro" && partner ? partner.id : undefined,
+      userId: quem === "eu" ? user.id : quem === "todos" ? undefined : quem,
       limit: 120,
     }),
     listActivities(user.id, challenge.id, { status: "pending", limit: 50 }),
@@ -48,7 +56,7 @@ export default async function ActivitiesPage({
     <div className="flex flex-col gap-6">
       <PageHeader
         title="Atividades"
-        subtitle="Histórico do casal, com comprovações."
+        subtitle="Histórico do desafio, com comprovações."
         action={
           <ButtonLink href="/atividades/nova" className="hidden lg:inline-flex">
             Nova atividade
@@ -61,7 +69,7 @@ export default async function ActivitiesPage({
           <SectionTitle>
             <span id="validar">Aguardando sua validação ({waitingMine.length})</span>
           </SectionTitle>
-          <ActivityList items={waitingMine} myId={user.id} />
+          <ActivityList items={waitingMine} myId={user.id} tones={viewer.tones} />
         </section>
       ) : null}
 
@@ -77,7 +85,7 @@ export default async function ActivitiesPage({
           {[
             { value: "todos", label: "Todos" },
             { value: "eu", label: "Eu" },
-            { value: "parceiro", label: partner ? displayName(partner) : "Parceiro(a)" },
+            ...others.map((o) => ({ value: o.id, label: displayName(o) })),
           ].map((o) => (
             <FilterChip key={o.value} href={buildHref({ status, quem: o.value })} active={quem === o.value}>
               {o.label}
@@ -91,7 +99,7 @@ export default async function ActivitiesPage({
           <ButtonLink href="/atividades/nova">Registrar atividade</ButtonLink>
         </EmptyState>
       ) : (
-        <ActivityList items={all} myId={user.id} />
+        <ActivityList items={all} myId={user.id} tones={viewer.tones} />
       )}
     </div>
   );

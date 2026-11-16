@@ -10,16 +10,17 @@ import { addDays, monthRange, weekRange } from "@/lib/domain/periods";
 import { displayName } from "@/lib/format";
 import { formatDurationMinutes, todayIso } from "@/lib/time";
 import { cn } from "@/lib/cn";
+import { TONE, toneOf, type Tone } from "@/lib/people";
 
 export const metadata: Metadata = { title: "Estatísticas" };
 
 type Period = "semana" | "mes" | "tudo";
 const PERIOD_LABEL: Record<Period, string> = { semana: "Semana", mes: "Mês", tudo: "Tudo" };
 
-/** Comparativo do casal: totais e cada modalidade (somente atividades aprovadas). */
+/** Comparativo do desafio: totais e cada modalidade (somente atividades aprovadas). */
 export default async function StatsPage({ searchParams }: { searchParams: Promise<{ periodo?: string }> }) {
   const viewer = await getViewer();
-  const { challenge, user, participants } = viewer;
+  const { challenge, user, tones } = viewer;
   if (!challenge) return <NoChallenge />;
 
   const { periodo } = await searchParams;
@@ -39,13 +40,14 @@ export default async function StatsPage({ searchParams }: { searchParams: Promis
       return acc;
     }, {});
 
-  // Você primeiro, depois o parceiro.
-  const people = [...participants].sort((a, b) => Number(b.id === user.id) - Number(a.id === user.id));
+  // Você primeiro, depois os demais na ordem de entrada.
+  const people = viewer.people;
   const totals = people.map((p) => {
     const mine = stats.filter((s) => s.user_id === p.id);
     return {
       person: p,
       isMe: p.id === user.id,
+      tone: toneOf(tones, p.id),
       activities: mine.reduce((n, s) => n + s.activities, 0),
       minutes: mine.reduce((n, s) => n + s.minutes, 0),
       km: mine.reduce((n, s) => n + s.km, 0),
@@ -84,9 +86,9 @@ export default async function StatsPage({ searchParams }: { searchParams: Promis
       <section aria-labelledby="totais" className="grid gap-3 sm:grid-cols-2">
         <h2 id="totais" className="sr-only">Totais</h2>
         {totals.map((t) => (
-          <Card key={t.person.id} className={cn("flex flex-col gap-4", t.isMe ? "border-accent/30" : "border-partner/30")}>
+          <Card key={t.person.id} className={cn("flex flex-col gap-4", TONE[t.tone].border)}>
             <div className="flex items-center gap-3">
-              <Avatar name={displayName(t.person)} src={avatarUrlFor(t.person)} size={40} tone={t.isMe ? "accent" : "partner"} ring />
+              <Avatar name={displayName(t.person)} src={avatarUrlFor(t.person)} size={40} tone={t.tone} ring />
               <div className="min-w-0">
                 <p className="truncate font-semibold">{t.isMe ? "Você" : displayName(t.person)}</p>
                 <p className="truncate text-xs text-muted">
@@ -121,7 +123,7 @@ export default async function StatsPage({ searchParams }: { searchParams: Promis
               counts={countsFor(p.id)}
               today={today}
               weeks={HEATMAP_WEEKS}
-              tone={p.id === user.id ? "accent" : "partner"}
+              tone={toneOf(tones, p.id)}
             />
           ))}
           <p className="text-xs text-muted">Cada quadrado é um dia; quanto mais forte, mais atividades. Inclui as que aguardam aprovação.</p>
@@ -138,7 +140,7 @@ export default async function StatsPage({ searchParams }: { searchParams: Promis
             <RecordsCard
               key={p.id}
               title={p.id === user.id ? "Você" : displayName(p)}
-              isMe={p.id === user.id}
+              tone={toneOf(tones, p.id)}
               records={records.filter((r) => r.user_id === p.id)}
             />
           ))}
@@ -158,7 +160,7 @@ export default async function StatsPage({ searchParams }: { searchParams: Promis
                 <p className="mb-2 text-sm font-semibold">{m.name}</p>
                 <div className="flex flex-col gap-1.5">
                   {m.byUser.map((s, i) => (
-                    <Bar key={people[i].id} stat={s} max={maxCount} isMe={people[i].id === user.id} name={displayName(people[i])} />
+                    <Bar key={people[i].id} stat={s} max={maxCount} tone={toneOf(tones, people[i].id)} name={people[i].id === user.id ? "Você" : displayName(people[i])} />
                   ))}
                 </div>
               </div>
@@ -183,7 +185,7 @@ function Metric({ label, value }: { label: string; value: string }) {
   );
 }
 
-function Bar({ stat, max, isMe, name }: { stat: ModalityStat | null; max: number; isMe: boolean; name: string }) {
+function Bar({ stat, max, tone, name }: { stat: ModalityStat | null; max: number; tone: Tone; name: string }) {
   const count = stat?.activities ?? 0;
   const detail = stat
     ? [formatDurationMinutes(stat.minutes), stat.km > 0 ? `${stat.km.toLocaleString("pt-BR", { maximumFractionDigits: 1 })} km` : null]
@@ -192,12 +194,10 @@ function Bar({ stat, max, isMe, name }: { stat: ModalityStat | null; max: number
     : "";
   return (
     <div className="flex items-center gap-3 text-xs">
-      <span className={cn("w-12 shrink-0 truncate font-semibold", isMe ? "text-accent" : "text-partner")}>
-        {isMe ? "Você" : name}
-      </span>
+      <span className={cn("w-14 shrink-0 truncate font-semibold", TONE[tone].text)}>{name}</span>
       <div className="h-2.5 flex-1 overflow-hidden rounded-full bg-surface-3" aria-hidden>
         <div
-          className={cn("h-full rounded-full", isMe ? "bg-accent" : "bg-partner")}
+          className={cn("h-full rounded-full", TONE[tone].bg)}
           style={{ width: `${(count / max) * 100}%` }}
         />
       </div>

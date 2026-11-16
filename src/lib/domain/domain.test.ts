@@ -5,6 +5,8 @@ import { gap, rank } from "./ranking";
 import {
   activeDays,
   addDays,
+  challengeProgress,
+  challengeRange,
   currentStreak,
   determineOutcome,
   longestStreak,
@@ -206,6 +208,56 @@ describe("gap", () => {
         { userId: "b", points: 2 },
       ]),
     ).toEqual({ diff: 0, leaderId: null });
+  });
+
+  it("com 4 pessoas, a diferença é para o 2º colocado", () => {
+    expect(
+      gap([
+        { userId: "a", points: 3 },
+        { userId: "b", points: 9 },
+        { userId: "c", points: 6 },
+        { userId: "d", points: 0 },
+      ]),
+    ).toEqual({ diff: 3, leaderId: "b" });
+  });
+
+  it("com 3 pessoas, empate no topo não tem líder mesmo com um 3º atrás", () => {
+    expect(
+      gap([
+        { userId: "a", points: 5 },
+        { userId: "b", points: 5 },
+        { userId: "c", points: 1 },
+      ]),
+    ).toEqual({ diff: 0, leaderId: null });
+  });
+});
+
+describe("challengeProgress e challengeRange", () => {
+  it("desafio de 30 dias no 12º dia", () => {
+    expect(challengeProgress("2026-11-01", "2026-11-30", "2026-11-12")).toEqual({
+      day: 12, totalDays: 30, daysLeft: 18, notStarted: false, ended: false,
+    });
+  });
+
+  it("último dia: falta 0 e ainda não acabou", () => {
+    expect(challengeProgress("2026-11-01", "2026-11-30", "2026-11-30")).toMatchObject({ day: 30, daysLeft: 0, ended: false });
+  });
+
+  it("depois do fim fica travado no último dia", () => {
+    expect(challengeProgress("2026-11-01", "2026-11-30", "2026-12-05")).toMatchObject({ day: 30, daysLeft: 0, ended: true });
+  });
+
+  it("antes do início e sem data de fim", () => {
+    expect(challengeProgress("2026-12-01", "2026-12-30", "2026-11-28")).toMatchObject({ day: 0, notStarted: true, daysLeft: 29 });
+    expect(challengeProgress("2026-11-01", null, "2026-11-10")).toEqual({
+      day: 10, totalDays: null, daysLeft: null, notStarted: false, ended: false,
+    });
+  });
+
+  it("intervalo do ranking geral vai até hoje ou até o fim", () => {
+    expect(challengeRange("2026-11-01", null, "2026-11-10")).toEqual({ start: "2026-11-01", end: "2026-11-10" });
+    expect(challengeRange("2026-11-01", "2026-11-30", "2026-11-10")).toEqual({ start: "2026-11-01", end: "2026-11-10" });
+    expect(challengeRange("2026-11-01", "2026-11-30", "2026-12-10")).toEqual({ start: "2026-11-01", end: "2026-11-30" });
   });
 });
 

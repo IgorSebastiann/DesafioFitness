@@ -103,13 +103,6 @@ describe("perfis e participantes", () => {
     expect(p).toEqual({ display_name: "Ana", role: "member" });
   });
 
-  it("impede um terceiro participante no mesmo desafio", async () => {
-    const err = await errorOf(
-      su(`insert into challenge_participants (challenge_id, user_id) values ($1, $2)`, [challengeId, CARLA]),
-    );
-    expect(err).toContain("já possui 2 participantes");
-  });
-
   it("impede que um usuário altere o próprio papel para admin", async () => {
     const err = await errorOf(
       as(ANA, `update profiles set role = 'admin' where id = $1`, [ANA]),

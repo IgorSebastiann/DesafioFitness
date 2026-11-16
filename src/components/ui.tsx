@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { TONE, type Tone } from "@/lib/people";
 import type { ReactNode } from "react";
 import { cn } from "@/lib/cn";
 import { initials } from "@/lib/format";
@@ -128,15 +129,15 @@ export function Avatar({
   name: string;
   src?: string | null;
   size?: number;
-  tone?: "accent" | "partner";
+  tone?: Tone;
   ring?: boolean;
 }) {
-  const color = tone === "accent" ? "text-accent" : "text-partner";
+  const color = TONE[tone].text;
   return (
     <div
       className={cn(
         "relative shrink-0 overflow-hidden rounded-full bg-surface-3 flex items-center justify-center font-semibold",
-        ring && (tone === "accent" ? "ring-2 ring-accent" : "ring-2 ring-partner"),
+        ring && cn("ring-2", TONE[tone].ring),
         color,
       )}
       style={{ width: size, height: size, fontSize: size * 0.36 }}

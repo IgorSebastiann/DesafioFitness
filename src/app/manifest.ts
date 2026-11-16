@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "Desafio Fitness",
     short_name: "Desafio",
-    description: "Competição fitness de casal: pontos por atividade e rankings.",
+    description: "Competição fitness para até 4 pessoas: pontos por atividade e rankings.",
     id: "/dashboard",
     lang: "pt-BR",
     start_url: "/dashboard",

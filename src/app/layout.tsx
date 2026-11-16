@@ -7,7 +7,7 @@ const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"]
 
 export const metadata: Metadata = {
   title: { default: "Desafio Fitness", template: "%s · Desafio Fitness" },
-  description: "Competição fitness de casal: pontos por atividade, rankings semanais e mensais.",
+  description: "Competição fitness para até 4 pessoas: pontos por atividade, rankings semanais, mensais e do desafio inteiro.",
   applicationName: "Desafio Fitness",
 };
 
