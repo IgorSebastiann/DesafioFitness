@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { cn } from "@/lib/cn";
 
-/** Sequência atual de dias com atividade aprovada (incentivo para não quebrar). */
+/** Sequência atual de dias com atividade aprovada ou aguardando aprovação (incentivo para não quebrar). */
 export function StreakBanner({ streak, trainedToday }: { streak: number; trainedToday: boolean }) {
   const title = streak === 0 ? "Comece uma sequência hoje" : `${streak} ${streak === 1 ? "dia seguido" : "dias seguidos"}`;
   const hint =

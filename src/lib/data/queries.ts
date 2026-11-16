@@ -103,14 +103,18 @@ export async function getDashboard(uid: string, challenge: Challenge) {
     const weekRows = (await sql.query<StandingRow>(`select * from standings($1,$2,$3)`, [challenge.id, week.start, week.end])).rows;
     const monthRows = (await sql.query<StandingRow>(`select * from standings($1,$2,$3)`, [challenge.id, month.start, month.end])).rows;
 
-    const mine = (
-      await sql.query<{ activity_date: string; points_awarded: number; category_name: string }>(
-        `select a.activity_date::text as activity_date, a.points_awarded, c.name as category_name
+    // Aprovadas e pendentes (rejeitadas ficam de fora). Estatísticas usam só as aprovadas;
+    // a sequência atual conta também as pendentes, pela data da atividade (não da aprovação).
+    const notRejected = (
+      await sql.query<{ activity_date: string; points_awarded: number; category_name: string; status: ActivityStatus }>(
+        `select a.activity_date::text as activity_date, a.points_awarded, c.name as category_name, a.status
            from activities a join activity_categories c on c.id = a.category_id
-          where a.challenge_id = $1 and a.user_id = $2 and a.status = 'approved'`,
+          where a.challenge_id = $1 and a.user_id = $2 and a.status <> 'rejected'`,
         [challenge.id, uid],
       )
     ).rows;
+    const mine = notRejected.filter((a) => a.status === "approved");
+    const streakDates = notRejected.map((a) => a.activity_date);
 
     const recent = (
       await sql.query<ActivityDbRow>(`${ACTIVITY_SQL} where a.challenge_id = $1 order by a.created_at desc limit 6`, [
@@ -132,8 +136,8 @@ export async function getDashboard(uid: string, challenge: Challenge) {
         strength: mine.filter((a) => a.category_name === "Musculação").length,
         activeDays: activeDays(dates),
         longestStreak: longestStreak(dates),
-        currentStreak: currentStreak(dates, today),
-        trainedToday: dates.includes(today),
+        currentStreak: currentStreak(streakDates, today),
+        trainedToday: streakDates.includes(today),
       },
       recent: recent.map((r) => ({ ...r, proofUrl: proofUrlFor(r.proof_path) })),
     };

@@ -74,7 +74,8 @@ export function activeDays(dates: string[]): number {
 }
 
 /**
- * Sequência atual: dias seguidos com atividade terminando hoje. Se hoje ainda não tem
+ * Sequência atual: dias seguidos com atividade (pela data da atividade, não da aprovação),
+ * terminando hoje. Se hoje ainda não tem
  * atividade, conta até ontem (a sequência só "quebra" quando o dia termina em branco).
  */
 export function currentStreak(dates: string[], today: string): number {
