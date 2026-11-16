@@ -27,7 +27,9 @@ const ACTIVITY_SQL = `
          a.duration_minutes, a.distance_km, a.description, a.proof_path, a.proof_kind,
          a.status, a.points_awarded, a.review_note, a.reviewed_at, a.created_at,
          c.name as category_name, c.icon as category_icon,
-         p.display_name as owner_display_name, p.avatar_path as owner_avatar_path
+         p.display_name as owner_display_name, p.avatar_path as owner_avatar_path,
+         (select count(*)::int from activity_reactions r where r.activity_id = a.id) as reaction_count,
+         (select count(*)::int from activity_comments m where m.activity_id = a.id) as comment_count
     from activities a
     join activity_categories c on c.id = a.category_id
     join profiles p on p.id = a.user_id`;
@@ -53,6 +55,8 @@ type ActivityDbRow = {
   category_icon: string;
   owner_display_name: string;
   owner_avatar_path: string | null;
+  reaction_count: number;
+  comment_count: number;
 };
 
 function toActivity(r: ActivityDbRow): ActivityRow {
@@ -75,6 +79,8 @@ function toActivity(r: ActivityDbRow): ActivityRow {
     created_at: new Date(r.created_at).toISOString(),
     category: { name: r.category_name, icon: r.category_icon },
     owner: { display_name: r.owner_display_name, avatar_path: r.owner_avatar_path },
+    reaction_count: Number(r.reaction_count ?? 0),
+    comment_count: Number(r.comment_count ?? 0),
   };
 }
 
@@ -116,6 +122,23 @@ export async function getDashboard(uid: string, challenge: Challenge) {
     const mine = notRejected.filter((a) => a.status === "approved");
     const streakDates = notRejected.map((a) => a.activity_date);
 
+    // Meta semanal: dias distintos com atividade (aprovada ou pendente) na semana, por participante.
+    const goals = (
+      await sql.query<{ user_id: string; weekly_goal: number; days: number; trained_today: boolean }>(
+        `select cp.user_id, pr.weekly_goal,
+                count(distinct a.activity_date)::int as days,
+                coalesce(bool_or(a.activity_date = $4::date), false) as trained_today
+           from challenge_participants cp
+           join profiles pr on pr.id = cp.user_id
+           left join activities a
+             on a.user_id = cp.user_id and a.challenge_id = cp.challenge_id
+            and a.status <> 'rejected' and a.activity_date between $2::date and $3::date
+          where cp.challenge_id = $1
+          group by cp.user_id, pr.weekly_goal`,
+        [challenge.id, week.start, week.end, today],
+      )
+    ).rows;
+
     const recent = (
       await sql.query<ActivityDbRow>(`${ACTIVITY_SQL} where a.challenge_id = $1 order by a.created_at desc limit 6`, [
         challenge.id,
@@ -129,6 +152,7 @@ export async function getDashboard(uid: string, challenge: Challenge) {
       month,
       weekRows,
       monthRows,
+      goals,
       stats: {
         totalActivities: mine.length,
         totalPoints: mine.reduce((sum, a) => sum + a.points_awarded, 0),
@@ -434,6 +458,49 @@ export async function listNotifications(uid: string) {
       read_at: n.read_at ? new Date(n.read_at).toISOString() : null,
       created_at: new Date(n.created_at).toISOString(),
     }));
+  });
+}
+
+/** Meta semanal de dias de treino (1 a 7, padrão 4). */
+export async function getWeeklyGoal(uid: string): Promise<number> {
+  return withUser(uid, async (sql) => {
+    const { rows } = await sql.query<{ weekly_goal: number }>(`select weekly_goal from profiles where id = $1`, [uid]);
+    return rows[0]?.weekly_goal ?? 4;
+  });
+}
+
+export type ModalityStat = {
+  user_id: string;
+  category_name: string;
+  activities: number;
+  minutes: number;
+  km: number;
+};
+
+/** Atividades aprovadas por pessoa e modalidade (intervalo opcional). */
+export async function getModalityStats(
+  uid: string,
+  challengeId: string,
+  range?: { start: string; end: string },
+): Promise<ModalityStat[]> {
+  return withUser(uid, async (sql) => {
+    const params: unknown[] = [challengeId];
+    let where = "a.challenge_id = $1 and a.status = 'approved'";
+    if (range) {
+      params.push(range.start, range.end);
+      where += " and a.activity_date between $2::date and $3::date";
+    }
+    const { rows } = await sql.query<ModalityStat>(
+      `select a.user_id, c.name as category_name, count(*)::int as activities,
+              coalesce(sum(a.duration_minutes), 0)::int as minutes,
+              coalesce(sum(a.distance_km), 0)::float8 as km
+         from activities a join activity_categories c on c.id = a.category_id
+        where ${where}
+        group by a.user_id, c.name
+        order by count(*) desc`,
+      params,
+    );
+    return rows.map((r) => ({ ...r, activities: Number(r.activities), minutes: Number(r.minutes), km: Number(r.km) }));
   });
 }
 

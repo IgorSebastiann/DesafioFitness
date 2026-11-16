@@ -6,6 +6,7 @@ import { Card, ButtonLink, PageHeader, SectionTitle } from "@/components/ui";
 import { NoChallenge } from "@/components/no-challenge";
 import { ScoreBoard } from "@/components/score-board";
 import { StreakBanner } from "@/components/streak-banner";
+import { WeeklyGoals, type GoalRow } from "@/components/weekly-goals";
 import { getViewer } from "@/lib/data/viewer";
 import { avatarUrlFor, getDashboard } from "@/lib/data/queries";
 import { displayName } from "@/lib/format";
@@ -34,6 +35,21 @@ export default async function DashboardPage({
   const avatarUrls = Object.fromEntries(
     viewer.participants.map((p) => [p.id, avatarUrlFor(p)]),
   );
+
+  const goalRows: GoalRow[] = data.goals
+    .map((g) => {
+      const p = viewer.participants.find((x) => x.id === g.user_id);
+      return {
+        userId: g.user_id,
+        name: p ? displayName(p) : "Participante",
+        avatarUrl: p ? avatarUrlFor(p) : null,
+        goal: g.weekly_goal,
+        days: g.days,
+        trainedToday: g.trained_today,
+        isMe: g.user_id === user.id,
+      };
+    })
+    .sort((a, b) => Number(b.isMe) - Number(a.isMe));
 
   const stats = [
     { label: "Atividades", value: data.stats.totalActivities, icon: Activity },
@@ -74,6 +90,8 @@ export default async function DashboardPage({
           <Link href="/ranking" className="text-accent hover:underline">Ver ranking e histórico →</Link>
         </p>
       </section>
+
+      <WeeklyGoals rows={goalRows} />
 
       <section aria-labelledby="estatisticas">
         <SectionTitle>

@@ -47,6 +47,8 @@ export type ActivityRow = {
   created_at: string;
   category: { name: string; icon: string } | null;
   owner: { display_name: string; avatar_path: string | null } | null;
+  reaction_count?: number;
+  comment_count?: number;
 };
 
 export type StandingRow = {

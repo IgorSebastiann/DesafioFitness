@@ -50,6 +50,9 @@ Para instalação e configuração completas, veja o `README.md`.
 - Reações e comentários (migration 0009): só quem participa do desafio vê e reage; reação avisa o dono no máximo uma vez a cada 30 min por atividade; comentário avisa o parceiro. Emojis aceitos: 🔥 💪 👏 😮 ❤️ (lista no banco e em `src/lib/reactions.ts`).
 - Lembrete diário às 19h (cron `/api/cron/daily-reminder`, 22h UTC): só para quem tem push ativo, deixou o lembrete ligado (Notificações) e não registrou nada no dia; uma vez por dia. Se o parceiro já treinou, o aviso cita o nome dele.
 - Crons em `vercel.json`: fechamento de períodos 00h05 de Brasília e lembrete 19h. A Vercel manda `Authorization: Bearer CRON_SECRET` sozinha.
+- Sequência atual conta atividades aprovadas e pendentes, pela data da atividade (não da aprovação). "Maior sequência" e as estatísticas usam só aprovadas.
+- Meta semanal (migration 0010): dias distintos com treino na semana (aprovado ou pendente), de 1 a 7, padrão 4; cada um escolhe a sua no Perfil.
+- Cutucar: só pela função `poke_partner()`, no máximo uma vez a cada 4 horas para o mesmo parceiro; vira aviso + push.
 - O banco não guarda imagens; só o caminho no Blob.
 - Projeto de referência: o repositório `ReservaQuadras` (Supabase) serviu de modelo para o push, a conversão de imagem e a câmera. O código foi adaptado, não copiado.
 

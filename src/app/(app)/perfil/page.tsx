@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Bell, CalendarDays, ChevronRight, Gift, LogOut, Medal, ShieldCheck, Swords } from "lucide-react";
+import { BarChart3, Bell, CalendarDays, ChevronRight, Gift, LogOut, Medal, ShieldCheck, Swords } from "lucide-react";
 import { AvatarUploader, ProfileForm } from "@/components/profile-forms";
+import { WeeklyGoalForm } from "@/components/weekly-goal-form";
 import { Card, PageHeader, SectionTitle } from "@/components/ui";
 import { getViewer } from "@/lib/data/viewer";
-import { avatarUrlFor, getDashboard } from "@/lib/data/queries";
+import { avatarUrlFor, getDashboard, getWeeklyGoal } from "@/lib/data/queries";
 import { displayName } from "@/lib/format";
 import { SignOutForm } from "@/components/signout-form";
 import { NoChallenge } from "@/components/no-challenge";
@@ -17,6 +18,7 @@ export default async function ProfilePage() {
   const name = displayName(profile);
   const photo = avatarUrlFor(profile);
 
+  const weeklyGoal = await getWeeklyGoal(user.id);
   let totalPoints = 0;
   let totalActivities = 0;
   if (challenge) {
@@ -28,6 +30,7 @@ export default async function ProfilePage() {
   const links = [
     { href: "/desafio", label: "Meu desafio", icon: Swords },
     { href: "/calendario", label: "Calendário", icon: CalendarDays },
+    { href: "/estatisticas", label: "Estatísticas", icon: BarChart3 },
     { href: "/premiacoes", label: "Premiações", icon: Gift },
     { href: "/conquistas", label: "Conquistas", icon: Medal },
     { href: "/notificacoes", label: "Notificações", icon: Bell },
@@ -53,9 +56,14 @@ export default async function ProfilePage() {
       </Card>
 
       {challenge ? (
-        <Card>
-          <ProfileForm displayName={profile.display_name} nickname={profile.nickname} />
-        </Card>
+        <>
+          <Card>
+            <WeeklyGoalForm goal={weeklyGoal} />
+          </Card>
+          <Card>
+            <ProfileForm displayName={profile.display_name} nickname={profile.nickname} />
+          </Card>
+        </>
       ) : (
         <NoChallenge />
       )}

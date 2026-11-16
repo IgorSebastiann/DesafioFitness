@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import {
+  BarChart3,
   Bell,
   CalendarDays,
   Download,
@@ -34,6 +35,7 @@ const MOBILE_TABS = [
 const MORE_LINKS = [
   { href: "/desafio", label: "Meu desafio", icon: Swords },
   { href: "/calendario", label: "Calendário", icon: CalendarDays },
+  { href: "/estatisticas", label: "Estatísticas", icon: BarChart3 },
   { href: "/premiacoes", label: "Premiações", icon: Gift },
   { href: "/conquistas", label: "Conquistas", icon: Medal },
   { href: "/notificacoes", label: "Notificações", icon: Bell },
@@ -48,6 +50,7 @@ const SIDE_LINKS = [
   { href: "/atividades/nova", label: "Registrar atividade", icon: Plus },
   { href: "/calendario", label: "Calendário", icon: CalendarDays },
   { href: "/ranking", label: "Ranking", icon: Trophy },
+  { href: "/estatisticas", label: "Estatísticas", icon: BarChart3 },
   { href: "/premiacoes", label: "Premiações", icon: Gift },
   { href: "/conquistas", label: "Conquistas", icon: Medal },
   { href: "/notificacoes", label: "Notificações", icon: Bell },

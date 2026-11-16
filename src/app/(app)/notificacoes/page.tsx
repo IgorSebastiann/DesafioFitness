@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { AlarmClock, Bell, CheckCircle2, Medal, Crown, Flag, Circle, MessageCircle, Settings2, Smile, XCircle } from "lucide-react";
+import { AlarmClock, Bell, Hand, CheckCircle2, Medal, Crown, Flag, Circle, MessageCircle, Settings2, Smile, XCircle } from "lucide-react";
 import { DailyReminderToggle } from "@/components/daily-reminder";
 import { MarkAllReadButton } from "@/components/profile-forms";
 import { PushSettings } from "@/components/push-settings";
@@ -22,6 +22,7 @@ const KIND_ICON: Record<string, typeof Bell> = {
   reaction: Smile,
   comment: MessageCircle,
   daily_reminder: AlarmClock,
+  poke: Hand,
 };
 
 export default async function NotificationsPage() {

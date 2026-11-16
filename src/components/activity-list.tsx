@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Camera, Clock, Video } from "lucide-react";
+import { Camera, Clock, MessageCircle, Video } from "lucide-react";
 import { Avatar, StatusBadge } from "@/components/ui";
 import { displayName } from "@/lib/format";
 import { formatDayMonth, formatDurationMinutes, formatTimeShort } from "@/lib/time";
@@ -51,6 +51,21 @@ export function ActivityList({
                   <StatusBadge status={a.status} />
                   {a.status === "approved" ? (
                     <span className="text-xs font-semibold text-accent tabular-nums">+{a.points_awarded}</span>
+                  ) : null}
+                  {a.reaction_count ? (
+                    <span className="ml-auto inline-flex items-center gap-1 text-xs text-muted tabular-nums" aria-label={`${a.reaction_count} reações`}>
+                      <span aria-hidden>🔥</span>
+                      {a.reaction_count}
+                    </span>
+                  ) : null}
+                  {a.comment_count ? (
+                    <span
+                      className={cn("inline-flex items-center gap-1 text-xs text-muted tabular-nums", !a.reaction_count && "ml-auto")}
+                      aria-label={`${a.comment_count} comentários`}
+                    >
+                      <MessageCircle className="h-3.5 w-3.5" aria-hidden />
+                      {a.comment_count}
+                    </span>
                   ) : null}
                 </div>
               </div>

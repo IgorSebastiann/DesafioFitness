@@ -96,3 +96,32 @@ export async function setDailyReminder(enabled: boolean): Promise<ActionState> {
   revalidatePath("/notificacoes");
   return success(enabled ? "Lembrete diário ligado." : "Lembrete diário desligado.");
 }
+
+/** Cutuca o parceiro (aviso + push). O limite de uma a cada 4 horas fica no banco. */
+export async function pokePartner(): Promise<ActionState> {
+  const viewer = await getViewer();
+  try {
+    await withUser(viewer.userId, (sql) => sql.query(`select poke_partner()`));
+  } catch (error) {
+    return fail(friendlyDbError(error as { code?: string; message?: string }));
+  }
+  after(() => safeDispatchPush());
+  return success("Cutucada enviada! 👉");
+}
+
+/** Meta semanal de dias de treino (1 a 7). */
+export async function setWeeklyGoal(days: number): Promise<ActionState> {
+  const viewer = await getViewer();
+  const parsed = z.number().int().min(1).max(7).safeParse(days);
+  if (!parsed.success) return fail("Escolha de 1 a 7 dias.");
+  try {
+    await withUser(viewer.userId, (sql) =>
+      sql.query(`update profiles set weekly_goal = $1 where id = $2`, [parsed.data, viewer.userId]),
+    );
+  } catch (error) {
+    return fail(friendlyDbError(error as { code?: string; message?: string }));
+  }
+  revalidatePath("/dashboard");
+  revalidatePath("/perfil");
+  return success("Meta atualizada.");
+}
