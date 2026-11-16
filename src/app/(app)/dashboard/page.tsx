@@ -9,7 +9,9 @@ import { ShareWeekButton } from "@/components/share-week";
 import { StreakBanner } from "@/components/streak-banner";
 import { WeeklyGoals, type GoalRow } from "@/components/weekly-goals";
 import { getViewer } from "@/lib/data/viewer";
-import { avatarUrlFor, getDashboard } from "@/lib/data/queries";
+import { avatarUrlFor, getActivityFacts, getDashboard } from "@/lib/data/queries";
+import { missionForWeek } from "@/lib/domain/missions";
+import { WeeklyMission, type MissionRow } from "@/components/weekly-mission";
 import { displayName } from "@/lib/format";
 import { formatDayMonth, formatMonthTitle } from "@/lib/time";
 import { cn } from "@/lib/cn";
@@ -28,6 +30,16 @@ export default async function DashboardPage({
   const { periodo } = await searchParams;
   const isMonth = periodo === "mes";
   const data = await getDashboard(user.id, challenge);
+  const weekFacts = await getActivityFacts(user.id, challenge.id, data.week);
+  const mission = missionForWeek(data.week.start);
+  const missionRows: MissionRow[] = [...viewer.participants]
+    .sort((a, b) => Number(b.id === user.id) - Number(a.id === user.id))
+    .map((p) => ({
+      userId: p.id,
+      name: displayName(p),
+      isMe: p.id === user.id,
+      progress: mission.progress(weekFacts.filter((f) => f.user_id === p.id)),
+    }));
   const rows = isMonth ? data.monthRows : data.weekRows;
   const periodLabel = isMonth
     ? formatMonthTitle(data.month.start)
@@ -94,6 +106,8 @@ export default async function DashboardPage({
       </section>
 
       <WeeklyGoals rows={goalRows} weekStart={data.week.start} />
+
+      <WeeklyMission mission={mission} rows={missionRows} />
 
       <section aria-labelledby="estatisticas">
         <SectionTitle>

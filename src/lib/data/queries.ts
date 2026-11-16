@@ -560,6 +560,39 @@ export async function getGallery(uid: string, challengeId: string, limit = 120):
   });
 }
 
+export type ActivityFact = {
+  user_id: string;
+  activity_date: string;
+  activity_time: string;
+  duration_minutes: number;
+  distance_km: number | null;
+  category_name: string;
+};
+
+/**
+ * Atividades "cruas" de um intervalo, para missões, mapa de treinos e retrospectiva.
+ * `approvedOnly` = só aprovadas; senão aprovadas e pendentes (rejeitadas sempre de fora).
+ */
+export async function getActivityFacts(
+  uid: string,
+  challengeId: string,
+  range: { start: string; end: string },
+  approvedOnly = false,
+): Promise<ActivityFact[]> {
+  return withUser(uid, async (sql) => {
+    const { rows } = await sql.query<ActivityFact & { distance_km: string | null }>(
+      `select a.user_id, a.activity_date::text as activity_date, a.activity_time::text as activity_time,
+              a.duration_minutes, a.distance_km, c.name as category_name
+         from activities a join activity_categories c on c.id = a.category_id
+        where a.challenge_id = $1 and a.activity_date between $2::date and $3::date
+          and ${approvedOnly ? "a.status = 'approved'" : "a.status <> 'rejected'"}
+        order by a.activity_date, a.activity_time`,
+      [challengeId, range.start, range.end],
+    );
+    return rows.map((r) => ({ ...r, distance_km: r.distance_km === null ? null : Number(r.distance_km) }));
+  });
+}
+
 /** Lembrete diário das 19h ligado? (padrão: sim) */
 export async function getDailyReminder(uid: string): Promise<boolean> {
   return withUser(uid, async (sql) => {

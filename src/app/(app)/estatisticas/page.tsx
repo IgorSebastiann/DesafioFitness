@@ -3,9 +3,10 @@ import Link from "next/link";
 import { Avatar, Card, EmptyState, PageHeader, SectionTitle } from "@/components/ui";
 import { NoChallenge } from "@/components/no-challenge";
 import { getViewer } from "@/lib/data/viewer";
-import { avatarUrlFor, getModalityStats, getPersonalRecords, type ModalityStat } from "@/lib/data/queries";
+import { avatarUrlFor, getActivityFacts, getModalityStats, getPersonalRecords, type ModalityStat } from "@/lib/data/queries";
 import { RecordsCard } from "@/components/personal-records";
-import { monthRange, weekRange } from "@/lib/domain/periods";
+import { TrainingHeatmap } from "@/components/training-heatmap";
+import { addDays, monthRange, weekRange } from "@/lib/domain/periods";
 import { displayName } from "@/lib/format";
 import { formatDurationMinutes, todayIso } from "@/lib/time";
 import { cn } from "@/lib/cn";
@@ -25,10 +26,18 @@ export default async function StatsPage({ searchParams }: { searchParams: Promis
   const period: Period = periodo === "semana" || periodo === "tudo" ? periodo : "mes";
   const today = todayIso();
   const range = period === "semana" ? weekRange(today) : period === "mes" ? monthRange(today) : undefined;
-  const [stats, records] = await Promise.all([
+  const HEATMAP_WEEKS = 16;
+  const heatmapStart = addDays(weekRange(today).start, -7 * (HEATMAP_WEEKS - 1));
+  const [stats, records, facts] = await Promise.all([
     getModalityStats(user.id, challenge.id, range),
     getPersonalRecords(user.id, challenge.id),
+    getActivityFacts(user.id, challenge.id, { start: heatmapStart, end: today }),
   ]);
+  const countsFor = (id: string) =>
+    facts.filter((f) => f.user_id === id).reduce<Record<string, number>>((acc, f) => {
+      acc[f.activity_date] = (acc[f.activity_date] ?? 0) + 1;
+      return acc;
+    }, {});
 
   // Você primeiro, depois o parceiro.
   const people = [...participants].sort((a, b) => Number(b.id === user.id) - Number(a.id === user.id));
@@ -92,6 +101,31 @@ export default async function StatsPage({ searchParams }: { searchParams: Promis
             </dl>
           </Card>
         ))}
+      </section>
+
+      <section aria-labelledby="mapa">
+        <SectionTitle
+          action={
+            <Link href="/retrospectiva" className="text-xs font-semibold text-accent hover:underline">
+              Retrospectiva do mês →
+            </Link>
+          }
+        >
+          <span id="mapa">Mapa de treinos</span>
+        </SectionTitle>
+        <Card className="flex flex-col gap-6">
+          {people.map((p) => (
+            <TrainingHeatmap
+              key={p.id}
+              title={p.id === user.id ? "Você" : displayName(p)}
+              counts={countsFor(p.id)}
+              today={today}
+              weeks={HEATMAP_WEEKS}
+              tone={p.id === user.id ? "accent" : "partner"}
+            />
+          ))}
+          <p className="text-xs text-muted">Cada quadrado é um dia; quanto mais forte, mais atividades. Inclui as que aguardam aprovação.</p>
+        </Card>
       </section>
 
       <section aria-labelledby="recordes">
