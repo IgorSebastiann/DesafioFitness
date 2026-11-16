@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { formatRelativeTime } from "../time";
 import { validateActivityRules, validPointsFor, type ActivityRuleInput } from "./rules";
 import { gap, rank } from "./ranking";
 import {
@@ -219,5 +220,23 @@ describe("currentStreak", () => {
 
   it("um dia em branco antes de ontem zera a sequência", () => {
     expect(currentStreak(["2026-11-10", "2026-11-11"], "2026-11-14")).toBe(0);
+  });
+});
+
+describe("formatRelativeTime", () => {
+  // 15/11/2026 20:00 em Brasília (23:00 UTC)
+  const now = new Date("2026-11-15T23:00:00Z");
+
+  it("minutos e horas no mesmo dia", () => {
+    expect(formatRelativeTime("2026-11-15T22:59:40Z", now)).toBe("agora");
+    expect(formatRelativeTime("2026-11-15T22:55:00Z", now)).toBe("há 5 min");
+    expect(formatRelativeTime("2026-11-15T20:00:00Z", now)).toBe("há 3 h");
+  });
+
+  it("ontem e dias anteriores no fuso de Brasília", () => {
+    // 02:30 UTC do dia 15 ainda é dia 14 em Brasília (23:30)
+    expect(formatRelativeTime("2026-11-15T02:30:00Z", now)).toBe("ontem às 23:30");
+    expect(formatRelativeTime("2026-11-12T11:05:00Z", now)).toBe("12/11 às 08:05");
+    expect(formatRelativeTime("2025-12-31T15:00:00Z", now)).toBe("31/12/2025 às 12:00");
   });
 });

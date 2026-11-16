@@ -66,3 +66,25 @@ export function shiftMonth(yearMonth: string, delta: number): string {
 export function isoToYearMonth(iso: string): string {
   return iso.slice(0, 7);
 }
+
+/**
+ * Hora relativa para feeds ("agora", "há 5 min", "há 3 h", "ontem às 17:32", "12/11 às 08:05").
+ * Dias contados no fuso do desafio; ano só aparece quando não é o atual.
+ */
+export function formatRelativeTime(iso: string, now: Date = new Date()): string {
+  const date = new Date(iso);
+  const diffMin = Math.floor((now.getTime() - date.getTime()) / 60000);
+  if (diffMin < 1) return "agora";
+  if (diffMin < 60) return `há ${diffMin} min`;
+
+  const day = todayIso(date);
+  const today = todayIso(now);
+  if (day === today) return `há ${Math.floor(diffMin / 60)} h`;
+
+  const time = nowHourMinute(date);
+  const yesterday = todayIso(new Date(now.getTime() - 24 * 60 * 60 * 1000));
+  if (day === yesterday) return `ontem às ${time}`;
+
+  const [y, m, d] = day.split("-");
+  return y === today.slice(0, 4) ? `${d}/${m} às ${time}` : `${d}/${m}/${y} às ${time}`;
+}

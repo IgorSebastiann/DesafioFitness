@@ -5,6 +5,7 @@ import {
   useEffect,
   useOptimistic,
   useRef,
+  useState,
   useTransition,
 } from "react";
 import { Loader2, MessageCircle, Send, Trash2 } from "lucide-react";
@@ -17,6 +18,26 @@ import { Avatar, Card, Notice } from "@/components/ui";
 import { REACTIONS } from "@/lib/reactions";
 import { displayName } from "@/lib/format";
 import { cn } from "@/lib/cn";
+import { formatRelativeTime } from "@/lib/time";
+
+/** Hora relativa que se atualiza a cada minuto; a data completa fica no title. */
+function RelativeTime({ iso }: { iso: string }) {
+  const [now, setNow] = useState(() => new Date());
+  useEffect(() => {
+    const timer = window.setInterval(() => setNow(new Date()), 60_000);
+    return () => window.clearInterval(timer);
+  }, []);
+  const full = new Date(iso).toLocaleString("pt-BR", {
+    timeZone: "America/Sao_Paulo",
+    dateStyle: "short",
+    timeStyle: "short",
+  });
+  return (
+    <time dateTime={iso} title={full} suppressHydrationWarning className="text-xs text-muted">
+      {formatRelativeTime(iso, now)}
+    </time>
+  );
+}
 
 type ReactionRow = { emoji: string; user_id: string };
 type CommentRow = {
@@ -140,13 +161,7 @@ export function ActivityComments({
                       <span className="font-semibold">
                         {mine ? "Você" : name}
                       </span>
-                      <span className="text-xs text-muted">
-                        {new Date(c.created_at).toLocaleString("pt-BR", {
-                          timeZone: "America/Sao_Paulo",
-                          dateStyle: "short",
-                          timeStyle: "short",
-                        })}
-                      </span>
+                      <RelativeTime iso={c.created_at} />
                     </p>
                     <p className="mt-0.5 whitespace-pre-line break-words text-sm text-foreground/90">
                       {c.body}
