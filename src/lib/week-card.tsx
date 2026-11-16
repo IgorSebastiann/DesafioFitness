@@ -40,6 +40,15 @@ export function WeekCard({
       : first.points === 0
         ? "Semana começando"
         : "Empate na semana";
+  const gap = second ? Math.abs(first.points - second.points) : 0;
+  const highlight = !second
+    ? "Convide alguém para o desafio"
+    : leader
+      ? `${gap} ${gap === 1 ? "ponto" : "pontos"} de vantagem`
+      : first.points === 0
+        ? "Ninguém pontuou ainda"
+        : `Tudo igual: ${first.points} a ${second.points}`;
+  const highlightColor = leader ? (leader.id === viewerId ? ACCENT : PARTNER) : MUTED;
 
   return (
     <div
@@ -51,7 +60,7 @@ export function WeekCard({
         background: BG,
         color: "#f4f5f7",
         padding: 80,
-        fontFamily: "sans-serif",
+        fontFamily: "Geist",
       }}
     >
       <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
@@ -102,12 +111,34 @@ export function WeekCard({
         </div>
       </div>
 
+      {/* Destaque centralizado no espaço entre o título e o placar. */}
+      <div
+        style={{
+          display: "flex",
+          flex: 1,
+          alignItems: "center",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            fontSize: 44,
+            fontWeight: 800,
+            color: highlightColor,
+            border: `3px solid ${highlightColor}`,
+            borderRadius: 999,
+            padding: "14px 36px",
+          }}
+        >
+          {highlight}
+        </div>
+      </div>
+
       <div
         style={{
           display: "flex",
           flexDirection: "column",
           gap: 32,
-          marginTop: "auto",
         }}
       >
         {people.map((p) => {
@@ -154,19 +185,26 @@ export function WeekCard({
                     : "atividades aprovadas"}
                 </div>
               </div>
-              <div style={{ display: "flex", alignItems: "baseline", gap: 12 }}>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-end",
+                }}
+              >
                 <div
                   style={{
                     display: "flex",
                     fontSize: 120,
                     fontWeight: 800,
                     color,
+                    lineHeight: 1,
                   }}
                 >
                   {p.points}
                 </div>
-                <div style={{ display: "flex", fontSize: 32, color: MUTED }}>
-                  pts
+                <div style={{ display: "flex", fontSize: 28, color: MUTED, marginTop: 8 }}>
+                  {p.points === 1 ? "ponto" : "pontos"}
                 </div>
               </div>
             </div>

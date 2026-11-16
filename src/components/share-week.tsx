@@ -44,7 +44,7 @@ export function ShareWeekButton() {
   }
 
   return (
-    <span className="inline-flex flex-col items-end">
+    <span className="inline-flex flex-col items-start">
       <button
         type="button"
         onClick={share}

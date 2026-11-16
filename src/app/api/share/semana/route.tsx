@@ -4,6 +4,7 @@ import { withUser } from "@/lib/db";
 import { weekRange } from "@/lib/domain/periods";
 import { todayIso } from "@/lib/time";
 import { WeekCard } from "@/lib/week-card";
+import { weekCardFonts } from "@/lib/week-card-fonts";
 import type { StandingRow } from "@/lib/types";
 
 /**
@@ -35,6 +36,6 @@ export async function GET() {
 
   return new ImageResponse(
     <WeekCard viewerId={user.id} challengeName={data.challenge.name} week={week} people={people} />,
-    { width: 1080, height: 1350, headers: { "Cache-Control": "private, no-store" } },
+    { width: 1080, height: 1350, fonts: await weekCardFonts(), headers: { "Cache-Control": "private, no-store" } },
   );
 }
