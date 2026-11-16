@@ -53,6 +53,8 @@ Para instalação e configuração completas, veja o `README.md`.
 - Sequência atual conta atividades aprovadas e pendentes, pela data da atividade (não da aprovação). "Maior sequência" e as estatísticas usam só aprovadas.
 - Meta semanal (migration 0010): dias distintos com treino na semana (aprovado ou pendente), de 1 a 7, padrão 4; cada um escolhe a sua no Perfil.
 - Cutucar: só pela função `poke_partner()`, no máximo uma vez a cada 4 horas para o mesmo parceiro; vira aviso + push.
+- Recordes pessoais: calculados na consulta (sem tabela): maior duração e maior distância por pessoa e modalidade entre as aprovadas; empate fica com a mais antiga.
+- Compartilhar placar: imagem gerada em `/api/share/semana` (next/og, layout em `src/lib/week-card.tsx`), só para quem está logado; o celular abre a folha de compartilhar, o computador baixa o PNG.
 - O banco não guarda imagens; só o caminho no Blob.
 - Projeto de referência: o repositório `ReservaQuadras` (Supabase) serviu de modelo para o push, a conversão de imagem e a câmera. O código foi adaptado, não copiado.
 

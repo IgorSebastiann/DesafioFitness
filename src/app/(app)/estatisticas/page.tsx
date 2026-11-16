@@ -3,7 +3,8 @@ import Link from "next/link";
 import { Avatar, Card, EmptyState, PageHeader, SectionTitle } from "@/components/ui";
 import { NoChallenge } from "@/components/no-challenge";
 import { getViewer } from "@/lib/data/viewer";
-import { avatarUrlFor, getModalityStats, type ModalityStat } from "@/lib/data/queries";
+import { avatarUrlFor, getModalityStats, getPersonalRecords, type ModalityStat } from "@/lib/data/queries";
+import { RecordsCard } from "@/components/personal-records";
 import { monthRange, weekRange } from "@/lib/domain/periods";
 import { displayName } from "@/lib/format";
 import { formatDurationMinutes, todayIso } from "@/lib/time";
@@ -24,7 +25,10 @@ export default async function StatsPage({ searchParams }: { searchParams: Promis
   const period: Period = periodo === "semana" || periodo === "tudo" ? periodo : "mes";
   const today = todayIso();
   const range = period === "semana" ? weekRange(today) : period === "mes" ? monthRange(today) : undefined;
-  const stats = await getModalityStats(user.id, challenge.id, range);
+  const [stats, records] = await Promise.all([
+    getModalityStats(user.id, challenge.id, range),
+    getPersonalRecords(user.id, challenge.id),
+  ]);
 
   // Você primeiro, depois o parceiro.
   const people = [...participants].sort((a, b) => Number(b.id === user.id) - Number(a.id === user.id));
@@ -88,6 +92,23 @@ export default async function StatsPage({ searchParams }: { searchParams: Promis
             </dl>
           </Card>
         ))}
+      </section>
+
+      <section aria-labelledby="recordes">
+        <SectionTitle>
+          <span id="recordes">Recordes pessoais</span>
+        </SectionTitle>
+        <p className="-mt-2 mb-3 text-xs text-muted">Desde o início do desafio, por modalidade.</p>
+        <div className="grid gap-3 sm:grid-cols-2">
+          {people.map((p) => (
+            <RecordsCard
+              key={p.id}
+              title={p.id === user.id ? "Você" : displayName(p)}
+              isMe={p.id === user.id}
+              records={records.filter((r) => r.user_id === p.id)}
+            />
+          ))}
+        </div>
       </section>
 
       <section aria-labelledby="por-modalidade">

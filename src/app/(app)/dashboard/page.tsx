@@ -5,6 +5,7 @@ import { ActivityList } from "@/components/activity-list";
 import { Card, ButtonLink, PageHeader, SectionTitle } from "@/components/ui";
 import { NoChallenge } from "@/components/no-challenge";
 import { ScoreBoard } from "@/components/score-board";
+import { ShareWeekButton } from "@/components/share-week";
 import { StreakBanner } from "@/components/streak-banner";
 import { WeeklyGoals, type GoalRow } from "@/components/weekly-goals";
 import { getViewer } from "@/lib/data/viewer";
@@ -86,12 +87,13 @@ export default async function DashboardPage({
           periodLabel={periodLabel}
           avatarUrls={avatarUrls}
         />
-        <p className="mt-2 text-right text-xs">
-          <Link href="/ranking" className="text-accent hover:underline">Ver ranking e histórico →</Link>
-        </p>
+        <div className="mt-2 flex items-start justify-between gap-3 text-xs">
+          <ShareWeekButton />
+          <Link href="/ranking" className="font-semibold text-accent hover:underline">Ver ranking e histórico →</Link>
+        </div>
       </section>
 
-      <WeeklyGoals rows={goalRows} />
+      <WeeklyGoals rows={goalRows} weekStart={data.week.start} />
 
       <section aria-labelledby="estatisticas">
         <SectionTitle>

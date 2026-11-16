@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 import Link from "next/link";
 import { Loader2, Target } from "lucide-react";
 import { pokePartner } from "@/app/actions/social";
 import { Avatar, Card } from "@/components/ui";
 import { cn } from "@/lib/cn";
+import { launchConfetti } from "@/lib/confetti";
 
 export type GoalRow = {
   userId: string;
@@ -18,7 +19,23 @@ export type GoalRow = {
 };
 
 /** Meta semanal de cada participante (dias com treino na semana) e o botão de cutucar. */
-export function WeeklyGoals({ rows }: { rows: GoalRow[] }) {
+export function WeeklyGoals({ rows, weekStart }: { rows: GoalRow[]; weekStart: string }) {
+  const me = rows.find((r) => r.isMe);
+  const myGoalDone = !!me && me.days >= me.goal;
+
+  // Comemora uma vez por semana neste aparelho quando a sua meta é batida.
+  useEffect(() => {
+    if (!myGoalDone) return;
+    const key = `meta-comemorada:${weekStart}`;
+    try {
+      if (localStorage.getItem(key)) return;
+      localStorage.setItem(key, "1");
+    } catch {
+      // Sem armazenamento (aba anônima etc.): comemora mesmo assim.
+    }
+    launchConfetti();
+  }, [myGoalDone, weekStart]);
+
   return (
     <Card className="flex flex-col gap-5">
       <div className="flex items-center justify-between gap-3">

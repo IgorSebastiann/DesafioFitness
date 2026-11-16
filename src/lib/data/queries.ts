@@ -504,6 +504,62 @@ export async function getModalityStats(
   });
 }
 
+export type PersonalRecord = {
+  user_id: string;
+  category_name: string;
+  kind: "duration" | "distance";
+  value: number;
+  activity_id: string;
+  activity_date: string;
+};
+
+/**
+ * Recordes pessoais por modalidade: maior duração e maior distância entre as atividades
+ * aprovadas (em empate vale a mais antiga, quem chegou primeiro).
+ */
+export async function getPersonalRecords(uid: string, challengeId: string): Promise<PersonalRecord[]> {
+  return withUser(uid, async (sql) => {
+    const { rows } = await sql.query<PersonalRecord>(
+      `select * from (
+         select distinct on (a.user_id, a.category_id)
+                a.user_id, c.name as category_name, 'duration' as kind, a.duration_minutes::float8 as value,
+                a.id as activity_id, a.activity_date::text as activity_date
+           from activities a join activity_categories c on c.id = a.category_id
+          where a.challenge_id = $1 and a.status = 'approved'
+          order by a.user_id, a.category_id, a.duration_minutes desc, a.activity_date, a.created_at
+       ) d
+       union all
+       select * from (
+         select distinct on (a.user_id, a.category_id)
+                a.user_id, c.name as category_name, 'distance' as kind, a.distance_km::float8 as value,
+                a.id as activity_id, a.activity_date::text as activity_date
+           from activities a join activity_categories c on c.id = a.category_id
+          where a.challenge_id = $1 and a.status = 'approved' and a.distance_km > 0
+          order by a.user_id, a.category_id, a.distance_km desc, a.activity_date, a.created_at
+       ) k`,
+      [challengeId],
+    );
+    return rows.map((r) => ({ ...r, value: Number(r.value) }));
+  });
+}
+
+export type GalleryItem = { id: string; proof_path: string; proof_kind: "image" | "video"; user_id: string; activity_date: string; category_name: string };
+
+/** Fotos e vídeos das atividades do desafio (exceto rejeitadas), mais recentes primeiro. */
+export async function getGallery(uid: string, challengeId: string, limit = 120): Promise<GalleryItem[]> {
+  return withUser(uid, async (sql) => {
+    const { rows } = await sql.query<GalleryItem>(
+      `select a.id, a.proof_path, a.proof_kind, a.user_id, a.activity_date::text as activity_date, c.name as category_name
+         from activities a join activity_categories c on c.id = a.category_id
+        where a.challenge_id = $1 and a.status <> 'rejected'
+        order by a.activity_date desc, a.activity_time desc
+        limit $2`,
+      [challengeId, limit],
+    );
+    return rows;
+  });
+}
+
 /** Lembrete diário das 19h ligado? (padrão: sim) */
 export async function getDailyReminder(uid: string): Promise<boolean> {
   return withUser(uid, async (sql) => {

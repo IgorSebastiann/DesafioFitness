@@ -6,7 +6,7 @@ import { ActivityDecisionPanel } from "@/components/activity-decision";
 import { ActivityComments, ReactionBar } from "@/components/activity-social";
 import { Avatar, Card, Notice, StatusBadge } from "@/components/ui";
 import { getViewer } from "@/lib/data/viewer";
-import { getActivityDetail } from "@/lib/data/queries";
+import { getActivityDetail, getPersonalRecords } from "@/lib/data/queries";
 import { displayName } from "@/lib/format";
 import { formatDatePtBr, formatDurationMinutes, formatTimeShort } from "@/lib/time";
 
@@ -28,6 +28,13 @@ export default async function ActivityDetailPage({
   const { activity, proofUrl, history, reactions, comments } = detail;
   const mine = activity.user_id === viewer.user.id;
   const ownerName = activity.owner ? displayName(activity.owner) : "Participante";
+  // Esta atividade é recorde pessoal (maior duração/distância da pessoa nesta modalidade)?
+  const recordKinds =
+    activity.status === "approved"
+      ? (await getPersonalRecords(viewer.userId, activity.challenge_id))
+          .filter((r) => r.activity_id === activity.id)
+          .map((r) => (r.kind === "duration" ? "maior duração" : "maior distância"))
+      : [];
 
   return (
     <div className="mx-auto flex max-w-2xl flex-col gap-6">
@@ -47,6 +54,12 @@ export default async function ActivityDetailPage({
           </div>
           <StatusBadge status={activity.status} />
         </div>
+
+        {recordKinds.length > 0 ? (
+          <p className="mt-4 inline-flex items-center gap-2 rounded-full bg-warning/15 px-3 py-1.5 text-sm font-semibold text-warning">
+            <span aria-hidden>🏆</span> Recorde pessoal: {recordKinds.join(" e ")}
+          </p>
+        ) : null}
 
         <div className="mt-5 overflow-hidden rounded-2xl bg-surface-2">
           {proofUrl ? (

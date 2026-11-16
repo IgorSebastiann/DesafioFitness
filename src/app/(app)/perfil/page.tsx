@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { BarChart3, Bell, CalendarDays, ChevronRight, Gift, LogOut, Medal, ShieldCheck, Swords } from "lucide-react";
+import { BarChart3, Bell, CalendarDays, ChevronRight, Gift, Images, LogOut, Medal, ShieldCheck, Swords } from "lucide-react";
 import { AvatarUploader, ProfileForm } from "@/components/profile-forms";
 import { WeeklyGoalForm } from "@/components/weekly-goal-form";
 import { Card, PageHeader, SectionTitle } from "@/components/ui";
@@ -31,6 +31,7 @@ export default async function ProfilePage() {
     { href: "/desafio", label: "Meu desafio", icon: Swords },
     { href: "/calendario", label: "Calendário", icon: CalendarDays },
     { href: "/estatisticas", label: "Estatísticas", icon: BarChart3 },
+    { href: "/galeria", label: "Galeria", icon: Images },
     { href: "/premiacoes", label: "Premiações", icon: Gift },
     { href: "/conquistas", label: "Conquistas", icon: Medal },
     { href: "/notificacoes", label: "Notificações", icon: Bell },
