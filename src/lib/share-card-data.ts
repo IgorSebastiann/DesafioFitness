@@ -105,11 +105,19 @@ export async function loadShareCard(userId: string, today: string, options: Shar
       ? (
           await sql.query<{ user_id: string; proof_path: string }>(
             `select user_id, proof_path from (
-               select a.user_id, a.proof_path,
-                      row_number() over (partition by a.user_id order by a.activity_date desc, a.activity_time desc) as rn
-                 from activities a
-                where a.challenge_id = $1 and a.status = 'approved' and a.proof_kind = 'image'
-                  and a.activity_date between $2::date and $3::date
+               select p.user_id, p.proof_path,
+                      row_number() over (partition by p.user_id order by p.d desc, p.t desc, p.pos) as rn
+                 from (
+                   select a.user_id, a.proof_path, a.activity_date as d, a.activity_time as t, 0 as pos
+                     from activities a
+                    where a.challenge_id = $1 and a.status = 'approved' and a.proof_kind = 'image'
+                      and a.activity_date between $2::date and $3::date
+                   union all
+                   select a.user_id, x.proof_path, a.activity_date, a.activity_time, x.position
+                     from activity_extra_proofs x join activities a on a.id = x.activity_id
+                    where a.challenge_id = $1 and a.status = 'approved' and x.proof_kind = 'image'
+                      and a.activity_date between $2::date and $3::date
+                 ) p
              ) x where rn <= 3`,
             [challenge.id, range.start, range.end],
           )

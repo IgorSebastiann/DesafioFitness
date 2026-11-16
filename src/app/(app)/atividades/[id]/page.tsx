@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowLeft, Clock, Ruler } from "lucide-react";
 import { ActivityDecisionPanel } from "@/components/activity-decision";
 import { ActivityComments, ReactionBar } from "@/components/activity-social";
+import { ProofGallery } from "@/components/proof-gallery";
 import { Avatar, Card, Notice, StatusBadge } from "@/components/ui";
 import { getViewer } from "@/lib/data/viewer";
 import { toneOf } from "@/lib/people";
@@ -26,7 +27,7 @@ export default async function ActivityDetailPage({
   const detail = await getActivityDetail(viewer.userId, id);
   if (!detail) notFound();
 
-  const { activity, proofUrl, history, reactions, comments } = detail;
+  const { activity, proofs, history, reactions, comments } = detail;
   const mine = activity.user_id === viewer.user.id;
   const ownerName = activity.owner ? displayName(activity.owner) : "Participante";
   // Esta atividade é recorde pessoal (maior duração/distância da pessoa nesta modalidade)?
@@ -62,18 +63,7 @@ export default async function ActivityDetailPage({
           </p>
         ) : null}
 
-        <div className="mt-5 overflow-hidden rounded-2xl bg-surface-2">
-          {proofUrl ? (
-            activity.proof_kind === "video" ? (
-              <video src={proofUrl} controls playsInline preload="metadata" className="max-h-[70vh] w-full bg-black" />
-            ) : (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={proofUrl} alt="Comprovação da atividade" className="max-h-[70vh] w-full object-contain" />
-            )
-          ) : (
-            <div className="flex h-48 items-center justify-center text-sm text-muted">Comprovação indisponível</div>
-          )}
-        </div>
+        <ProofGallery proofs={proofs} />
 
         <dl className="mt-5 grid grid-cols-2 gap-4 text-sm">
           <div className="flex items-center gap-2">

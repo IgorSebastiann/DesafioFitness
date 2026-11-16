@@ -51,6 +51,8 @@ export type ActivityRow = {
   owner: { display_name: string; avatar_path: string | null } | null;
   reaction_count?: number;
   comment_count?: number;
+  /** Comprovações além da capa (0 a 4). */
+  extra_proof_count?: number;
 };
 
 export type StandingRow = {

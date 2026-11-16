@@ -65,7 +65,7 @@ export default async function GalleryPage({ searchParams }: { searchParams: Prom
             const url = proofUrlFor(item.proof_path) ?? "";
             const label = `${item.category_name} em ${formatDayMonth(item.activity_date)}`;
             return (
-              <li key={item.id}>
+              <li key={item.proof_path}>
                 <Link
                   href={`/atividades/${item.id}`}
                   aria-label={label}

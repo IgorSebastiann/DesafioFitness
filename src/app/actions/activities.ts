@@ -11,6 +11,8 @@ import { withUser } from "@/lib/db";
 import { fail, friendlyDbError, type ActionState } from "@/lib/action-state";
 
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
+/** Comprovações por atividade: a capa + até 4 extras (tabela activity_extra_proofs). */
+const MAX_PROOFS = 5;
 const TIME_RE = /^\d{2}:\d{2}$/;
 
 const createSchema = z.object({
@@ -38,18 +40,32 @@ const createSchema = z.object({
     .trim()
     .max(500, { error: "A descrição pode ter até 500 caracteres." })
     .optional(),
-  proofPath: z.string().min(3).max(300),
-  proofKind: z.enum(["image", "video"]),
+  proofs: z
+    .array(z.object({ path: z.string().min(3).max(300), kind: z.enum(["image", "video"]) }), {
+      error: "Envie uma foto ou um vídeo como comprovação.",
+    })
+    .min(1, { error: "Envie uma foto ou um vídeo como comprovação." })
+    .max(MAX_PROOFS, { error: `Envie no máximo ${MAX_PROOFS} arquivos.` }),
 });
+
+function readProofs(value: FormDataEntryValue | null): unknown {
+  if (typeof value !== "string") return undefined;
+  try {
+    return JSON.parse(value);
+  } catch {
+    return undefined;
+  }
+}
 
 /** Comprovações ficam em proofs/{user_id}/... no Blob privado. */
 function ownProofPath(userId: string, value: FormDataEntryValue | null): string | null {
   return typeof value === "string" && value.startsWith(`proofs/${userId}/`) ? value : null;
 }
 
-/** Remove a comprovação quando a atividade não é salva (evita arquivos órfãos). */
-async function discardProof(path: string | null) {
-  if (path) await del(path).catch(() => undefined);
+/** Remove comprovações quando a atividade não é salva ou é excluída (evita arquivos órfãos). */
+async function discardProof(path: string | string[] | null) {
+  const paths = (Array.isArray(path) ? path : [path]).filter((p): p is string => !!p);
+  if (paths.length) await del(paths).catch(() => undefined);
 }
 
 /**
@@ -60,7 +76,12 @@ export async function createActivity(_prev: ActionState, formData: FormData): Pr
   const viewer = await getViewer();
   if (!viewer.challenge) return fail("Você ainda não faz parte de um desafio.");
 
-  const orphan = ownProofPath(viewer.userId, formData.get("proofPath"));
+  const rawProofs = readProofs(formData.get("proofs"));
+  const orphans = Array.isArray(rawProofs)
+    ? rawProofs
+        .map((p) => ownProofPath(viewer.userId, (p as { path?: string })?.path ?? null))
+        .filter((p): p is string => !!p)
+    : [];
   const parsed = createSchema.safeParse({
     categoryId: formData.get("categoryId"),
     activityDate: formData.get("activityDate"),
@@ -68,21 +89,21 @@ export async function createActivity(_prev: ActionState, formData: FormData): Pr
     durationMinutes: formData.get("durationMinutes"),
     distanceKm: formData.get("distanceKm") ?? undefined,
     description: formData.get("description") ?? undefined,
-    proofPath: formData.get("proofPath"),
-    proofKind: formData.get("proofKind"),
+    proofs: rawProofs,
   });
 
   if (!parsed.success) {
-    await discardProof(orphan);
+    await discardProof(orphans);
     const issue = parsed.error.issues[0];
     return fail(issue.message, { [String(issue.path[0])]: issue.message });
   }
   const input = parsed.data;
 
-  if (!ownProofPath(viewer.userId, input.proofPath)) {
-    await discardProof(orphan);
+  if (!input.proofs.every((p) => ownProofPath(viewer.userId, p.path))) {
+    await discardProof(orphans);
     return fail("Comprovação inválida. Envie o arquivo novamente.");
   }
+  const [cover, ...extras] = input.proofs;
 
   let activityId: string;
   try {
@@ -102,15 +123,21 @@ export async function createActivity(_prev: ActionState, formData: FormData): Pr
           input.durationMinutes,
           input.distanceKm,
           input.description ? input.description : null,
-          input.proofPath,
-          input.proofKind,
+          cover.path,
+          cover.kind,
         ],
       );
+      for (const [i, extra] of extras.entries()) {
+        await sql.query(
+          `insert into activity_extra_proofs (activity_id, position, proof_path, proof_kind) values ($1, $2, $3, $4)`,
+          [rows[0].id, i + 1, extra.path, extra.kind],
+        );
+      }
       return rows;
     });
     activityId = rows[0].id;
   } catch (error) {
-    await discardProof(input.proofPath);
+    await discardProof(input.proofs.map((p) => p.path));
     return fail(friendlyDbError(error as { code?: string; message?: string }));
   }
 
@@ -166,20 +193,25 @@ export async function decideActivity(_prev: ActionState, formData: FormData): Pr
 export async function deleteOwnPendingActivity(activityId: string): Promise<ActionState> {
   const viewer = await getViewer();
 
-  let proofPath: string | null;
+  let proofPaths: string[] = [];
   try {
-    proofPath = await withUser(viewer.userId, async (sql) => {
+    proofPaths = await withUser(viewer.userId, async (sql) => {
+      const extras = await sql.query<{ proof_path: string }>(
+        `select e.proof_path from activity_extra_proofs e join activities a on a.id = e.activity_id
+          where a.id = $1 and a.user_id = $2 and a.status = 'pending'`,
+        [activityId, viewer.userId],
+      );
       const { rows } = await sql.query<{ proof_path: string }>(
         `delete from activities where id = $1 and user_id = $2 and status = 'pending' returning proof_path`,
         [activityId, viewer.userId],
       );
-      return rows[0]?.proof_path ?? null;
+      return rows[0] ? [rows[0].proof_path, ...extras.rows.map((r) => r.proof_path)] : [];
     });
   } catch (error) {
     return fail(friendlyDbError(error as { code?: string; message?: string }));
   }
-  if (!proofPath) return fail("Só é possível excluir atividades pendentes suas.");
-  await discardProof(proofPath);
+  if (proofPaths.length === 0) return fail("Só é possível excluir atividades pendentes suas.");
+  await discardProof(proofPaths);
 
   revalidatePath("/dashboard");
   revalidatePath("/atividades");

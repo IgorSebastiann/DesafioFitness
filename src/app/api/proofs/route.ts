@@ -15,7 +15,10 @@ export async function GET(request: NextRequest) {
   if (!pathname.startsWith("proofs/")) return new Response("Não encontrado.", { status: 404 });
 
   const visible = await withUser(user.id, async (sql) => {
-    const { rows } = await sql.query(`select 1 from activities where proof_path = $1`, [pathname]);
+    const { rows } = await sql.query(`select 1 from activities where proof_path = $1
+       union all
+       select 1 from activity_extra_proofs where proof_path = $1
+       limit 1`, [pathname]);
     return rows.length > 0;
   });
   if (!visible) return new Response("Não encontrado.", { status: 404 });

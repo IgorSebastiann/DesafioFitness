@@ -59,6 +59,8 @@ Para instalação e configuração completas, veja o `README.md`.
 - Missão da semana: escolhida pela própria semana (`missionForWeek` em `src/lib/domain/missions.ts`), sem tabela; não vale pontos. Conta aprovadas e pendentes.
 - Retrospectiva do mês (`/retrospectiva`) e mapa de treinos (Estatísticas): calculados na consulta. A retrospectiva usa só aprovadas; o mapa inclui pendentes.
 - O banco não guarda imagens; só o caminho no Blob.
+- Várias comprovações (migration 0012): até 5 por atividade. A primeira (capa) fica em `activities.proof_path`; as outras em `activity_extra_proofs` (posição 1–4). Só o dono adiciona/remove e só enquanto a atividade está pendente; a rota `/api/proofs` aceita as duas tabelas. Galeria e card de compartilhar usam todas.
+- Formulário de atividade sem controles nativos do iOS para modalidade e data: `src/components/activity-pickers.tsx` (folha com grade de modalidades; atalhos Hoje/Ontem + calendário abaixo do campo). O saldo do limite diário é o da data escolhida.
 - Projeto de referência: o repositório `ReservaQuadras` (Supabase) serviu de modelo para o push, a conversão de imagem e a câmera. O código foi adaptado, não copiado.
 
 ## 4. Infra e variáveis (nomes, não valores)

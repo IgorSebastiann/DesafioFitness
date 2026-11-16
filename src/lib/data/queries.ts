@@ -29,7 +29,8 @@ const ACTIVITY_SQL = `
          c.name as category_name, c.icon as category_icon,
          p.display_name as owner_display_name, p.avatar_path as owner_avatar_path,
          (select count(*)::int from activity_reactions r where r.activity_id = a.id) as reaction_count,
-         (select count(*)::int from activity_comments m where m.activity_id = a.id) as comment_count
+         (select count(*)::int from activity_comments m where m.activity_id = a.id) as comment_count,
+         (select count(*)::int from activity_extra_proofs x where x.activity_id = a.id) as extra_proof_count
     from activities a
     join activity_categories c on c.id = a.category_id
     join profiles p on p.id = a.user_id`;
@@ -57,6 +58,7 @@ type ActivityDbRow = {
   owner_avatar_path: string | null;
   reaction_count: number;
   comment_count: number;
+  extra_proof_count: number;
 };
 
 function toActivity(r: ActivityDbRow): ActivityRow {
@@ -81,6 +83,7 @@ function toActivity(r: ActivityDbRow): ActivityRow {
     owner: { display_name: r.owner_display_name, avatar_path: r.owner_avatar_path },
     reaction_count: Number(r.reaction_count ?? 0),
     comment_count: Number(r.comment_count ?? 0),
+    extra_proof_count: Number(r.extra_proof_count ?? 0),
   };
 }
 
@@ -224,6 +227,13 @@ export async function getActivityDetail(uid: string, id: string) {
       )
     ).rows;
 
+    const extraProofs = (
+      await sql.query<{ proof_path: string; proof_kind: "image" | "video" }>(
+        `select proof_path, proof_kind from activity_extra_proofs where activity_id = $1 order by position`,
+        [id],
+      )
+    ).rows;
+
     const reactions = (
       await sql.query<{ emoji: string; user_id: string }>(
         `select emoji, user_id from activity_reactions where activity_id = $1 order by created_at`,
@@ -251,6 +261,10 @@ export async function getActivityDetail(uid: string, id: string) {
     return {
       activity,
       proofUrl: proofUrlFor(activity.proof_path),
+      proofs: [
+        { url: proofUrlFor(activity.proof_path)!, kind: activity.proof_kind },
+        ...extraProofs.map((p) => ({ url: proofUrlFor(p.proof_path)!, kind: p.proof_kind })),
+      ],
       reactions,
       comments: comments.map((c) => ({
         id: c.id,
@@ -318,15 +332,24 @@ export async function getChallengeCategories(uid: string, challengeId: string): 
 }
 
 /** Pontos já usados hoje pelo usuário (atividades não rejeitadas). */
-export async function pointsUsedOn(uid: string, challengeId: string, userId: string, date: string): Promise<number> {
+/** Pontos já usados (aprovadas e pendentes) em cada dia de um intervalo, para o saldo do limite diário. */
+export async function pointsUsedByDate(
+  uid: string,
+  challengeId: string,
+  userId: string,
+  from: string,
+  to: string,
+): Promise<Record<string, number>> {
   return withUser(uid, async (sql) => {
-    const { rows } = await sql.query<{ total: number }>(
-      `select coalesce(sum(c.points), 0)::int as total
+    const { rows } = await sql.query<{ day: string; total: number }>(
+      `select a.activity_date::text as day, coalesce(sum(c.points), 0)::int as total
          from activities a join activity_categories c on c.id = a.category_id
-        where a.challenge_id = $1 and a.user_id = $2 and a.activity_date = $3 and a.status <> 'rejected'`,
-      [challengeId, userId, date],
+        where a.challenge_id = $1 and a.user_id = $2 and a.status <> 'rejected'
+          and a.activity_date between $3::date and $4::date
+        group by a.activity_date`,
+      [challengeId, userId, from, to],
     );
-    return rows[0]?.total ?? 0;
+    return Object.fromEntries(rows.map((r) => [r.day, Number(r.total)]));
   });
 }
 
@@ -568,11 +591,21 @@ export type GalleryItem = { id: string; proof_path: string; proof_kind: "image" 
 export async function getGallery(uid: string, challengeId: string, limit = 120): Promise<GalleryItem[]> {
   return withUser(uid, async (sql) => {
     const { rows } = await sql.query<GalleryItem>(
-      `select a.id, a.proof_path, a.proof_kind, a.user_id, a.activity_date::text as activity_date, c.name as category_name
-         from activities a join activity_categories c on c.id = a.category_id
-        where a.challenge_id = $1 and a.status <> 'rejected'
-        order by a.activity_date desc, a.activity_time desc
-        limit $2`,
+      `select * from (
+         select a.id, a.proof_path, a.proof_kind, a.user_id, a.activity_date::text as activity_date, c.name as category_name,
+                a.activity_date as d, a.activity_time as t, 0 as pos
+           from activities a join activity_categories c on c.id = a.category_id
+          where a.challenge_id = $1 and a.status <> 'rejected'
+         union all
+         select a.id, x.proof_path, x.proof_kind, a.user_id, a.activity_date::text, c.name,
+                a.activity_date, a.activity_time, x.position
+           from activity_extra_proofs x
+           join activities a on a.id = x.activity_id
+           join activity_categories c on c.id = a.category_id
+          where a.challenge_id = $1 and a.status <> 'rejected'
+       ) g
+       order by d desc, t desc, pos
+       limit $2`,
       [challengeId, limit],
     );
     return rows;

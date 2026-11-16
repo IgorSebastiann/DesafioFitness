@@ -39,7 +39,7 @@ export function ActivityList({
               href={`/atividades/${a.id}`}
               className="flex gap-3 rounded-2xl border border-border bg-surface p-3 transition hover:border-accent/40"
             >
-              <ProofThumb url={a.proofUrl ?? proofUrl(a.proof_path)} kind={a.proof_kind} />
+              <ProofThumb url={a.proofUrl ?? proofUrl(a.proof_path)} kind={a.proof_kind} extra={a.extra_proof_count ?? 0} />
               <div className="min-w-0 flex-1">
                 <div className="flex items-center gap-2">
                   {showOwner ? (
@@ -82,7 +82,24 @@ export function ActivityList({
   );
 }
 
-export function ProofThumb({ url, kind }: { url: string | null; kind: "image" | "video" }) {
+/** Miniatura da capa; com mais arquivos, mostra quantos a mais ("+2"). */
+export function ProofThumb({ url, kind, extra = 0 }: { url: string | null; kind: "image" | "video"; extra?: number }) {
+  return (
+    <div className="relative shrink-0">
+      <ThumbImage url={url} kind={kind} />
+      {extra > 0 ? (
+        <span
+          className="absolute bottom-1 right-1 rounded-full bg-black/70 px-1.5 py-0.5 text-[10px] font-bold text-white tabular-nums"
+          aria-label={`mais ${extra} ${extra === 1 ? "arquivo" : "arquivos"}`}
+        >
+          +{extra}
+        </span>
+      ) : null}
+    </div>
+  );
+}
+
+function ThumbImage({ url, kind }: { url: string | null; kind: "image" | "video" }) {
   const box = "flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-surface-3 text-muted";
   if (!url) {
     return (
