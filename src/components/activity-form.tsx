@@ -6,7 +6,7 @@ import { createActivity } from "@/app/actions/activities";
 import { DatePicker, ModalityPicker } from "@/components/activity-pickers";
 import { Field, Notice, inputClass } from "@/components/ui";
 import { upload } from "@vercel/blob/client";
-import { ImageConversionError } from "@/lib/image";
+import { ensureViewableImage, ImageConversionError } from "@/lib/image";
 import {
   compressImageIfNeeded,
   contentTypeFor,
@@ -47,6 +47,7 @@ export function ActivityForm({
   const [uploading, startTransition] = useTransition();
   const [uploadError, setUploadError] = useState<string | null>(null);
   const [picked, setPicked] = useState<Picked[]>([]);
+  const [preparing, setPreparing] = useState(false);
   const [categoryId, setCategoryId] = useState(categories[0]?.id ?? "");
   const [activityDate, setActivityDate] = useState(today);
   const formRef = useRef<HTMLFormElement>(null);
@@ -63,23 +64,39 @@ export function ActivityForm({
     if (galleryRef.current) galleryRef.current.value = "";
   }
 
-  function addFiles(list: FileList | null) {
+  async function addFiles(list: FileList | null) {
     setUploadError(null);
     const chosen = Array.from(list ?? []);
     clearInputs();
     if (chosen.length === 0) return;
     const room = MAX_PROOFS - picked.length;
     const accepted: Picked[] = [];
-    for (const file of chosen.slice(0, room)) {
-      const error = validateProofFile(file);
-      if (error) {
-        setUploadError(error);
-        continue;
+    let lastError: string | null = chosen.length > room ? `Dá para enviar até ${MAX_PROOFS} arquivos por atividade.` : null;
+    setPreparing(true);
+    try {
+      for (const original of chosen.slice(0, room)) {
+        const error = validateProofFile(original);
+        if (error) {
+          lastError = error;
+          continue;
+        }
+        let file = original;
+        if (proofKindFor(original) === "image") {
+          // HEIC (galeria Samsung com "alta eficiência") não aparece no Chrome: vira JPEG aqui.
+          try {
+            file = await ensureViewableImage(original);
+          } catch (e) {
+            lastError = e instanceof ImageConversionError ? e.message : "Falha ao abrir a foto. Tente outra.";
+            continue;
+          }
+        }
+        accepted.push({ id: crypto.randomUUID(), file, url: URL.createObjectURL(file), kind: proofKindFor(file) });
       }
-      accepted.push({ id: crypto.randomUUID(), file, url: URL.createObjectURL(file), kind: proofKindFor(file) });
+    } finally {
+      setPreparing(false);
     }
-    if (chosen.length > room) setUploadError(`Dá para enviar até ${MAX_PROOFS} arquivos por atividade.`);
-    setPicked((old) => [...old, ...accepted]);
+    if (lastError) setUploadError(lastError);
+    setPicked((old) => [...old, ...accepted].slice(0, MAX_PROOFS));
   }
 
   function removeFile(id: string) {
@@ -135,7 +152,7 @@ export function ActivityForm({
     });
   }
 
-  const pending = uploading || isSaving;
+  const pending = uploading || isSaving || preparing;
 
   return (
     <form ref={formRef} onSubmit={onSubmit} className="flex flex-col gap-6" noValidate>
@@ -209,12 +226,14 @@ export function ActivityForm({
           aria-hidden
           onChange={(e) => addFiles(e.target.files)}
         />
+        {/* Só tipos MIME: extensões (.heic etc.) fazem o Chrome do Android trocar a galeria
+            de fotos por "Escolha uma ação" (Câmera/Arquivos). HEIC já entra em image/*. */}
         <input
           ref={galleryRef}
           name="proofGallery"
           type="file"
           multiple
-          accept="image/*,video/*,.heic,.heif,.avif"
+          accept="image/*,video/*"
           className="sr-only"
           tabIndex={-1}
           aria-hidden
@@ -303,7 +322,7 @@ export function ActivityForm({
       >
         {pending ? (
           <>
-            <Loader2 className="h-5 w-5 animate-spin" aria-hidden /> {uploading ? "Enviando comprovação..." : "Registrando..."}
+            <Loader2 className="h-5 w-5 animate-spin" aria-hidden /> {preparing ? "Preparando foto..." : uploading ? "Enviando comprovação..." : "Registrando..."}
           </>
         ) : (
           "Registrar atividade"

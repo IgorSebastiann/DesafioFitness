@@ -115,7 +115,7 @@ export function AvatarUploader({
         <input
           ref={galleryRef}
           type="file"
-          accept="image/*,.heic,.heif,.avif"
+          accept="image/*"
           className="sr-only"
           tabIndex={-1}
           aria-hidden
