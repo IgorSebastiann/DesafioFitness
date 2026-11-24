@@ -25,10 +25,9 @@ Para instalação e configuração completas, veja o `README.md`.
 
 ## 2. Pendências, em ordem de prioridade
 
-0. **Módulo de treinos, Fase 1 (biblioteca de exercícios + mapa corporal) — pronta localmente, NÃO publicada.** Pedido completo em `docs/PROMPT_MODULO_TREINOS.md`. Para publicar (só com ok do usuário):
-   - Criar um store de Blob **público** só para mídias de exercícios e cadastrar `MEDIA_READ_WRITE_TOKEN` na Vercel (todos os ambientes).
-   - Aplicar as migrations `0013_exercise_library.sql` e `0014_exercise_catalog.sql` no Neon (`npm run db:migrate`).
-   - Rodar `node --env-file=.env.local scripts/import-exercise-media.mjs --apply` (antes, sem `--apply`, para ver o resumo).
+0. **Módulo de treinos, Fase 1 (biblioteca de exercícios + mapa corporal) — publicada em 24/11/2026.** Pedido completo em `docs/PROMPT_MODULO_TREINOS.md` (arquivo só local: contém o plano pago e o repositório é público).
+   - Store de Blob público `desafio-fitness-exercise-media` conectado com prefixo `MEDIA` → variável `MEDIA_READ_WRITE_TOKEN` (todos os ambientes). Para uso local: `vercel env pull` em arquivo à parte e passar como segundo `--env-file`.
+   - Migrations 0013 e 0014 aplicadas no Neon; mídias importadas com `scripts/import-exercise-media.mjs --apply` (rodar de novo é seguro: pula o que já existe).
    - Gravar os vídeos próprios da lista "falta gravar" (filtro "Sem mídia" em /exercicios, visível só para admin).
    - Próxima fase: Fase 2 (fichas de musculação + executar treino).
 

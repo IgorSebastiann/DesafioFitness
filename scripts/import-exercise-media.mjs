@@ -39,7 +39,8 @@ const args = Object.fromEntries(
 const APPLY = Boolean(args.apply);
 const ONLY = args.only ? new Set(String(args.only).split(",")) : null;
 const SOURCES = new Set(String(args.sources ?? "wger,everkinetic,wikimedia").split(","));
-const UA = "DesafioFitness-media-import/1.0 (importação de mídias com licença aberta)";
+// A política do Wikimedia exige um contato (URL) no User-Agent; sem ele, o Commons responde 429.
+const UA = "DesafioFitnessMediaImport/1.0 (https://desafio-fitness-brown.vercel.app)";
 
 /** Exercícios do treino do usuário: precisam de mídia ou entram na lista "falta gravar". */
 const TRAINING = [
@@ -263,11 +264,26 @@ async function convert(c, dir) {
     }
   }
 
+  // O ffmpeg não decodifica WebP animado: passa antes para GIF pelo sharp (com fundo branco se
+  // tiver transparência, como nas imagens estáticas; a mídia fica marcada como editada).
+  let input = src;
+  let edited = false;
+  if (c.kind === "image" || c.kind === "gif") {
+    const meta = await sharp(src, { animated: true }).metadata();
+    if (meta.format === "webp") {
+      input = join(dir, "src.gif");
+      edited = Boolean(meta.hasAlpha);
+      let pipeline = sharp(src, { animated: true });
+      if (edited) pipeline = pipeline.flatten({ background: "#ffffff" });
+      await pipeline.gif().toFile(input);
+    }
+  }
+
   // Vídeo ou GIF animado → MP4 H.264 sem som + poster.
   const ffmpeg = await ffmpegPath();
   const out = join(dir, "out.mp4");
   await run(ffmpeg, [
-    "-y", "-i", src, "-t", "10", "-an",
+    "-y", "-i", input, "-t", "10", "-an",
     "-vf", "scale='min(720,iw)':-2:flags=lanczos,format=yuv420p",
     "-c:v", "libx264", "-preset", "slow", "-crf", "28", "-movflags", "+faststart", out,
   ]);
@@ -278,7 +294,7 @@ async function convert(c, dir) {
   const { stderr } = await run(ffmpeg, ["-i", out], { encoding: "utf8" }).catch((e) => e);
   const dur = String(stderr).match(/Duration: (\d+):(\d+):(\d+\.\d+)/);
   const durationMs = dur ? Math.round((Number(dur[1]) * 3600 + Number(dur[2]) * 60 + Number(dur[3])) * 1000) : null;
-  return { file: out, contentType: "video/mp4", ext: "mp4", poster, width: pinfo.width, height: pinfo.height, durationMs, kind: "video" };
+  return { file: out, contentType: "video/mp4", ext: "mp4", poster, width: pinfo.width, height: pinfo.height, durationMs, kind: "video", edited };
 }
 
 async function main() {
@@ -343,7 +359,8 @@ async function main() {
         } catch (error) {
           failures.push(`${c.slug} ← ${c.sourceKey}: ${error.message}`);
         } finally {
-          await rm(dir, { recursive: true, force: true });
+          // No Windows o antivírus pode segurar o arquivo por um instante; a sobra no temp não impede a importação.
+          await rm(dir, { recursive: true, force: true, maxRetries: 5, retryDelay: 500 }).catch(() => {});
         }
       }
     } finally {
