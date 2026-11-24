@@ -17,7 +17,7 @@ export const getViewer = cache(async () => {
   const userId = sessionUser.id;
   const { profile, challenge, participants } = await withUser(userId, async (sql) => {
     const profileRows = await sql.query<Profile>(
-      `select id, display_name, nickname, avatar_path, role from profiles where id = $1`,
+      `select id, display_name, nickname, avatar_path, role, body_figure from profiles where id = $1`,
       [userId],
     );
     const membership = await sql.query<Challenge>(

@@ -8,6 +8,7 @@ import {
   Bell,
   CalendarDays,
   Download,
+  Dumbbell,
   Flame,
   Gift,
   Images,
@@ -37,6 +38,7 @@ const MORE_LINKS = [
   { href: "/desafio", label: "Meu desafio", icon: Swords },
   { href: "/calendario", label: "Calendário", icon: CalendarDays },
   { href: "/estatisticas", label: "Estatísticas", icon: BarChart3 },
+  { href: "/exercicios", label: "Exercícios", icon: Dumbbell },
   { href: "/galeria", label: "Galeria", icon: Images },
   { href: "/premiacoes", label: "Premiações", icon: Gift },
   { href: "/conquistas", label: "Conquistas", icon: Medal },
@@ -53,6 +55,7 @@ const SIDE_LINKS = [
   { href: "/calendario", label: "Calendário", icon: CalendarDays },
   { href: "/ranking", label: "Ranking", icon: Trophy },
   { href: "/estatisticas", label: "Estatísticas", icon: BarChart3 },
+  { href: "/exercicios", label: "Exercícios", icon: Dumbbell },
   { href: "/galeria", label: "Galeria", icon: Images },
   { href: "/premiacoes", label: "Premiações", icon: Gift },
   { href: "/conquistas", label: "Conquistas", icon: Medal },
@@ -62,6 +65,7 @@ const SIDE_LINKS = [
 ] as const;
 
 function isActive(pathname: string, href: string) {
+  if (href === "/exercicios" && pathname === "/creditos") return true;
   if (href === "/atividades") return pathname.startsWith("/atividades") && pathname !== "/atividades/nova";
   return pathname === href || pathname.startsWith(`${href}/`);
 }

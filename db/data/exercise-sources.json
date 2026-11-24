@@ -1,0 +1,705 @@
+{
+  "flexao-de-braco": {
+    "wger": [
+      1551
+    ],
+    "everkinetic": [
+      {
+        "file": "dist/png/0077-relaxation.png",
+        "angle": "side"
+      },
+      {
+        "file": "dist/png/0077-tension.png",
+        "angle": "side"
+      }
+    ]
+  },
+  "flexao-militar": {
+    "wger": []
+  },
+  "supino-reto-com-barra": {
+    "wger": [
+      73
+    ],
+    "everkinetic": [
+      {
+        "file": "dist/png/0082-relaxation.png",
+        "angle": "side"
+      },
+      {
+        "file": "dist/png/0082-tension.png",
+        "angle": "side"
+      }
+    ]
+  },
+  "supino-inclinado-com-halteres": {
+    "wger": [
+      537
+    ],
+    "everkinetic": [
+      {
+        "file": "dist/png/0061-relaxation.png",
+        "angle": "side"
+      },
+      {
+        "file": "dist/png/0061-tension.png",
+        "angle": "side"
+      }
+    ]
+  },
+  "supino-reto-com-halteres": {
+    "wger": [
+      75
+    ]
+  },
+  "supino-declinado-com-barra": {
+    "wger": [
+      185
+    ]
+  },
+  "supino-inclinado-com-barra": {
+    "wger": [
+      538
+    ]
+  },
+  "crucifixo-reto-com-halteres": {
+    "wger": [
+      238
+    ]
+  },
+  "crucifixo-inclinado-com-halteres": {
+    "wger": [
+      308
+    ]
+  },
+  "voador-polia-alta": {
+    "wger": [
+      323
+    ],
+    "everkinetic": [
+      {
+        "file": "dist/png/0048-relaxation.png",
+        "angle": "side"
+      },
+      {
+        "file": "dist/png/0048-tension.png",
+        "angle": "side"
+      }
+    ]
+  },
+  "voador-maquina": {
+    "wger": [
+      135
+    ]
+  },
+  "paralelas-peitoral": {
+    "wger": []
+  },
+  "elevacao-lateral-com-halteres": {
+    "wger": [
+      348
+    ],
+    "everkinetic": [
+      {
+        "file": "dist/png/0018-relaxation.png",
+        "angle": "side"
+      },
+      {
+        "file": "dist/png/0018-tension.png",
+        "angle": "side"
+      }
+    ]
+  },
+  "elevacao-frontal-com-halteres": {
+    "wger": [
+      256
+    ],
+    "everkinetic": [
+      {
+        "file": "dist/png/0033-relaxation.png",
+        "angle": "side"
+      },
+      {
+        "file": "dist/png/0033-tension.png",
+        "angle": "side"
+      }
+    ]
+  },
+  "crucifixo-invertido-com-halteres": {
+    "wger": [
+      82,
+      487,
+      1098
+    ],
+    "everkinetic": [
+      {
+        "file": "dist/png/0032-relaxation.png",
+        "angle": "side"
+      },
+      {
+        "file": "dist/png/0032-tension.png",
+        "angle": "side"
+      }
+    ]
+  },
+  "desenvolvimento-com-halteres": {
+    "wger": [
+      567
+    ]
+  },
+  "desenvolvimento-militar-com-barra-em-pe": {
+    "wger": [
+      1893
+    ]
+  },
+  "desenvolvimento-na-maquina": {
+    "wger": [
+      543
+    ]
+  },
+  "desenvolvimento-arnold": {
+    "wger": []
+  },
+  "face-pull-na-polia": {
+    "wger": [
+      222
+    ]
+  },
+  "crucifixo-invertido-na-polia": {
+    "wger": [
+      822
+    ]
+  },
+  "remada-alta-com-barra": {
+    "wger": []
+  },
+  "crucifixo-invertido-sentado-polia-baixa": {
+    "wger": []
+  },
+  "elevacao-lateral-com-elastico": {
+    "wger": []
+  },
+  "abertura-de-bracos-com-elastico": {
+    "wger": []
+  },
+  "encolhimento-com-barra": {
+    "wger": [
+      571
+    ]
+  },
+  "encolhimento-com-halteres": {
+    "wger": [
+      572
+    ]
+  },
+  "biceps-martelo": {
+    "wger": [
+      272
+    ],
+    "everkinetic": [
+      {
+        "file": "dist/png/0227-relaxation.png",
+        "angle": "side"
+      },
+      {
+        "file": "dist/png/0227-tension.png",
+        "angle": "side"
+      }
+    ]
+  },
+  "rosca-direta-com-barra": {
+    "wger": [
+      91
+    ]
+  },
+  "rosca-direta-com-halteres": {
+    "wger": [
+      92
+    ]
+  },
+  "rosca-scott": {
+    "wger": [
+      465
+    ]
+  },
+  "rosca-concentrada": {
+    "wger": []
+  },
+  "rosca-martelo-na-polia-com-corda": {
+    "wger": [
+      275
+    ]
+  },
+  "rosca-direta-com-barra-w": {
+    "wger": [
+      94
+    ]
+  },
+  "rosca-inclinada-com-halteres": {
+    "wger": [
+      204
+    ]
+  },
+  "triceps-coice-com-halteres": {
+    "wger": [
+      655
+    ],
+    "everkinetic": [
+      {
+        "file": "dist/png/0204-relaxation.png",
+        "angle": "side"
+      },
+      {
+        "file": "dist/png/0204-tension.png",
+        "angle": "side"
+      }
+    ]
+  },
+  "triceps-na-polia-com-barra": {
+    "wger": [
+      1185,
+      659
+    ]
+  },
+  "triceps-na-polia-com-corda": {
+    "wger": [
+      1900,
+      805
+    ]
+  },
+  "triceps-testa-com-barra-w": {
+    "wger": [
+      246
+    ]
+  },
+  "triceps-frances-com-halter": {
+    "wger": [
+      211
+    ]
+  },
+  "mergulho-no-banco": {
+    "wger": []
+  },
+  "supino-fechado-com-barra": {
+    "wger": [
+      76
+    ]
+  },
+  "mergulho-nas-paralelas-para-triceps": {
+    "wger": [
+      194
+    ]
+  },
+  "rosca-de-punho-com-barra": {
+    "wger": [
+      51
+    ]
+  },
+  "rosca-de-punho-inversa-com-barra": {
+    "wger": []
+  },
+  "rosca-inversa-com-barra": {
+    "wger": [
+      1290
+    ]
+  },
+  "caminhada-do-fazendeiro": {
+    "wger": []
+  },
+  "abdominal-crunch": {
+    "wger": [
+      167
+    ],
+    "everkinetic": [
+      {
+        "file": "dist/png/0291-relaxation.png",
+        "angle": "side"
+      },
+      {
+        "file": "dist/png/0291-tension.png",
+        "angle": "side"
+      }
+    ]
+  },
+  "prancha-abdominal": {
+    "wger": [
+      458
+    ],
+    "wikimedia": [
+      {
+        "title": "File:Plank exercise.svg",
+        "angle": "side"
+      }
+    ]
+  },
+  "elevacao-de-pernas-joelho-flexionado": {
+    "wger": [],
+    "everkinetic": [
+      {
+        "file": "dist/png/0287-relaxation.png",
+        "angle": "side"
+      },
+      {
+        "file": "dist/png/0287-tension.png",
+        "angle": "side"
+      }
+    ]
+  },
+  "abdominal-crunch-grupado": {
+    "wger": []
+  },
+  "abdominal-canivete": {
+    "wger": []
+  },
+  "elevacao-de-pernas-suspenso-na-barra": {
+    "wger": []
+  },
+  "elevacao-de-pernas-no-banco": {
+    "wger": [
+      377
+    ]
+  },
+  "abdominal-russo": {
+    "wger": []
+  },
+  "prancha-lateral": {
+    "wger": []
+  },
+  "abdominal-crunch-na-polia": {
+    "wger": []
+  },
+  "abdominal-com-rodinha": {
+    "wger": [
+      1573
+    ]
+  },
+  "abdominal-bicicleta": {
+    "wger": []
+  },
+  "escalador": {
+    "wger": []
+  },
+  "inseto-morto": {
+    "wger": []
+  },
+  "abdominal-obliquo-no-chao": {
+    "wger": []
+  },
+  "abdominal-remador": {
+    "wger": []
+  },
+  "puxada-alta": {
+    "wger": [],
+    "wikimedia": [
+      {
+        "title": "File:Wide grip lat pull down 1.svg",
+        "angle": "side"
+      },
+      {
+        "title": "File:Wide grip lat pull down 2.svg",
+        "angle": "side"
+      }
+    ]
+  },
+  "puxada-alta-pegada-fechada": {
+    "wger": [
+      158
+    ]
+  },
+  "barra-fixa": {
+    "wger": [
+      475
+    ]
+  },
+  "barra-fixa-supinada": {
+    "wger": [
+      152
+    ]
+  },
+  "pulldown-bracos-estendidos": {
+    "wger": [
+      1726
+    ]
+  },
+  "remada-cavalinho": {
+    "wger": [
+      513
+    ],
+    "everkinetic": [
+      {
+        "file": "dist/png/0029-relaxation.png",
+        "angle": "side"
+      },
+      {
+        "file": "dist/png/0029-tension.png",
+        "angle": "side"
+      }
+    ]
+  },
+  "remada-com-halteres": {
+    "wger": [],
+    "everkinetic": [
+      {
+        "file": "dist/png/0024-relaxation.png",
+        "angle": "side"
+      },
+      {
+        "file": "dist/png/0024-tension.png",
+        "angle": "side"
+      }
+    ]
+  },
+  "remada-baixa": {
+    "wger": [
+      1117
+    ],
+    "everkinetic": [
+      {
+        "file": "dist/png/0025-relaxation.png",
+        "angle": "side"
+      },
+      {
+        "file": "dist/png/0025-tension.png",
+        "angle": "side"
+      }
+    ]
+  },
+  "remada-curvada-com-barra": {
+    "wger": [
+      83
+    ]
+  },
+  "remada-curvada-com-halteres": {
+    "wger": []
+  },
+  "remada-invertida": {
+    "wger": [
+      1198
+    ]
+  },
+  "extensao-lombar": {
+    "wger": [
+      301
+    ]
+  },
+  "levantamento-terra": {
+    "wger": [
+      184
+    ]
+  },
+  "levantamento-terra-romeno": {
+    "wger": [
+      507
+    ]
+  },
+  "super-homem": {
+    "wger": []
+  },
+  "bom-dia-com-barra": {
+    "wger": []
+  },
+  "swing-unilateral-com-kettlebell": {
+    "wger": []
+  },
+  "levantamento-terra-sumo": {
+    "wger": [
+      630
+    ]
+  },
+  "stiff-unilateral-com-kettlebell": {
+    "wger": [
+      1641
+    ]
+  },
+  "pular-corda": {
+    "wger": []
+  },
+  "burpee": {
+    "wger": []
+  },
+  "polichinelo": {
+    "wger": []
+  },
+  "agachamento-peso-do-corpo": {
+    "wger": [],
+    "wikimedia": [
+      {
+        "title": "File:Squats 01.gif",
+        "angle": "side"
+      }
+    ]
+  },
+  "agachamento-livre-com-barra": {
+    "wger": [
+      1801
+    ]
+  },
+  "agachamento-goblet-com-kettlebell": {
+    "wger": []
+  },
+  "agachamento-frontal-com-barra": {
+    "wger": [
+      257
+    ]
+  },
+  "agachamento-no-smith": {
+    "wger": [
+      1747,
+      341
+    ]
+  },
+  "cadeira-extensora": {
+    "wger": [
+      369
+    ],
+    "everkinetic": [
+      {
+        "file": "dist/png/0142-relaxation.png",
+        "angle": "side"
+      },
+      {
+        "file": "dist/png/0142-tension.png",
+        "angle": "side"
+      }
+    ]
+  },
+  "leg-press-45": {
+    "wger": [
+      371
+    ],
+    "everkinetic": [
+      {
+        "file": "dist/png/0127-relaxation.png",
+        "angle": "side"
+      },
+      {
+        "file": "dist/png/0127-tension.png",
+        "angle": "side"
+      }
+    ]
+  },
+  "agachamento-hack": {
+    "wger": [
+      375
+    ],
+    "everkinetic": [
+      {
+        "file": "dist/png/0123-relaxation.png",
+        "angle": "side"
+      },
+      {
+        "file": "dist/png/0123-tension.png",
+        "angle": "side"
+      }
+    ]
+  },
+  "avanco-com-halteres": {
+    "wger": [
+      205
+    ]
+  },
+  "avanco-caminhando": {
+    "wger": []
+  },
+  "afundo-com-salto": {
+    "wger": []
+  },
+  "subida-no-banco-com-halteres": {
+    "wger": []
+  },
+  "mesa-flexora": {
+    "wger": [
+      365
+    ],
+    "everkinetic": [
+      {
+        "file": "dist/png/0117-relaxation.png",
+        "angle": "side"
+      },
+      {
+        "file": "dist/png/0117-tension.png",
+        "angle": "side"
+      }
+    ]
+  },
+  "cadeira-flexora": {
+    "wger": [
+      366
+    ]
+  },
+  "stiff-com-halteres": {
+    "wger": []
+  },
+  "elevacao-gluteo-isquiotibial": {
+    "wger": []
+  },
+  "elevacao-pelvica-com-barra": {
+    "wger": [
+      294
+    ]
+  },
+  "ponte-de-gluteos": {
+    "wger": [
+      265
+    ]
+  },
+  "ponte-de-gluteos-com-barra": {
+    "wger": []
+  },
+  "coice-de-gluteo-no-solo": {
+    "wger": []
+  },
+  "coice-de-gluteo-na-polia": {
+    "wger": [
+      1131
+    ]
+  },
+  "cadeira-abdutora": {
+    "wger": [
+      1748
+    ],
+    "everkinetic": [
+      {
+        "file": "dist/png/0156-relaxation.png",
+        "angle": "side"
+      },
+      {
+        "file": "dist/png/0156-tension.png",
+        "angle": "side"
+      }
+    ]
+  },
+  "cadeira-adutora": {
+    "wger": [
+      12
+    ]
+  },
+  "caminhada-monstro-com-elastico": {
+    "wger": []
+  },
+  "panturrilha-em-pe": {
+    "wger": [
+      622
+    ],
+    "everkinetic": [
+      {
+        "file": "dist/png/0282-relaxation.png",
+        "angle": "side"
+      },
+      {
+        "file": "dist/png/0282-tension.png",
+        "angle": "side"
+      }
+    ]
+  },
+  "panturrilha-sentado": {
+    "wger": [
+      590
+    ]
+  },
+  "panturrilha-no-leg-press": {
+    "wger": [
+      146
+    ]
+  }
+}

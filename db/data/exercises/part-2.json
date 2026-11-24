@@ -1,0 +1,1053 @@
+[
+  {
+    "slug": "biceps-martelo",
+    "name": "Bíceps martelo",
+    "name_en": "Hammer Curls",
+    "primary_muscle": "biceps",
+    "secondary_muscles": ["forearms"],
+    "equipment": "dumbbell",
+    "level": "beginner",
+    "mechanic": "isolation",
+    "category": "strength",
+    "steps": [
+      "Fique em pé com o tronco ereto e um halter em cada mão, braços estendidos ao lado do corpo.",
+      "Mantenha as palmas das mãos voltadas para o corpo e os cotovelos próximos ao tronco.",
+      "Sem mover a parte de cima dos braços, suba os halteres dobrando os cotovelos até a altura dos ombros.",
+      "Segure a contração por um instante, apertando o bíceps.",
+      "Desça os halteres devagar até estender os braços."
+    ],
+    "common_mistakes": [
+      "Afastar os cotovelos do tronco durante a subida.",
+      "Balançar o corpo para ganhar impulso.",
+      "Girar o punho e perder a pegada neutra."
+    ],
+    "tips": [
+      "Solte o ar ao subir e puxe o ar ao descer.",
+      "Mantenha o abdome firme e os ombros parados.",
+      "Controle a descida, sem deixar o peso cair."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "rosca-direta-com-barra",
+    "name": "Rosca direta com barra",
+    "name_en": "Barbell Curl",
+    "primary_muscle": "biceps",
+    "secondary_muscles": ["forearms"],
+    "equipment": "barbell",
+    "level": "beginner",
+    "mechanic": "isolation",
+    "category": "strength",
+    "steps": [
+      "Fique em pé com o tronco ereto segurando a barra com as mãos na largura dos ombros.",
+      "Deixe as palmas voltadas para a frente e os cotovelos junto ao tronco.",
+      "Sem mover a parte de cima dos braços, suba a barra dobrando os cotovelos.",
+      "Continue até a barra chegar perto dos ombros e aperte o bíceps por um segundo.",
+      "Desça a barra devagar até estender os braços."
+    ],
+    "common_mistakes": [
+      "Jogar o tronco para trás para levantar a barra.",
+      "Levar os cotovelos para a frente na subida.",
+      "Descer a barra rápido demais."
+    ],
+    "tips": [
+      "Solte o ar ao subir e puxe o ar ao descer.",
+      "Só os antebraços devem se mover.",
+      "Mantenha os joelhos levemente destravados e o abdome contraído."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "rosca-direta-com-halteres",
+    "name": "Rosca direta com halteres",
+    "name_en": "Dumbbell Bicep Curl",
+    "primary_muscle": "biceps",
+    "secondary_muscles": ["forearms"],
+    "equipment": "dumbbell",
+    "level": "beginner",
+    "mechanic": "isolation",
+    "category": "strength",
+    "steps": [
+      "Fique em pé com um halter em cada mão e os braços estendidos ao lado do corpo.",
+      "Mantenha os cotovelos junto ao tronco e gire as palmas para a frente.",
+      "Sem mover a parte de cima dos braços, suba os halteres até a altura dos ombros.",
+      "Aperte o bíceps por um instante no alto.",
+      "Desça os halteres devagar até a posição inicial."
+    ],
+    "common_mistakes": [
+      "Balançar o tronco para subir o peso.",
+      "Afastar os cotovelos do corpo.",
+      "Não estender totalmente os braços na descida."
+    ],
+    "tips": [
+      "Solte o ar ao subir e puxe o ar ao descer.",
+      "Mantenha os ombros para trás e o peito aberto.",
+      "Use uma carga que permita controlar todo o movimento."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "rosca-scott",
+    "name": "Rosca Scott",
+    "name_en": "Preacher Curl",
+    "primary_muscle": "biceps",
+    "secondary_muscles": ["forearms"],
+    "equipment": "ez_bar",
+    "level": "beginner",
+    "mechanic": "isolation",
+    "category": "strength",
+    "steps": [
+      "Sente no banco Scott e apoie a parte de trás dos braços e o peito no apoio.",
+      "Segure a barra W na pegada interna, com as palmas para a frente.",
+      "Comece com a barra na altura dos ombros.",
+      "Desça a barra devagar até quase estender os braços, sentindo o bíceps alongar.",
+      "Suba a barra dobrando os cotovelos até a altura dos ombros.",
+      "Aperte o bíceps por um segundo no alto e repita."
+    ],
+    "common_mistakes": [
+      "Tirar os braços do apoio durante a subida.",
+      "Deixar a barra cair no fim da descida.",
+      "Travar os cotovelos com força na extensão."
+    ],
+    "tips": [
+      "Puxe o ar ao descer e solte o ar ao subir.",
+      "Controle bem a parte final da descida.",
+      "Mantenha o peito encostado no apoio o tempo todo."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "rosca-concentrada",
+    "name": "Rosca concentrada",
+    "name_en": "Concentration Curls",
+    "primary_muscle": "biceps",
+    "secondary_muscles": ["forearms"],
+    "equipment": "dumbbell",
+    "level": "beginner",
+    "mechanic": "isolation",
+    "category": "strength",
+    "steps": [
+      "Sente na ponta de um banco com as pernas afastadas e os pés no chão.",
+      "Pegue o halter com uma mão e apoie a parte de trás do braço na parte interna da coxa.",
+      "Deixe o braço estendido, com a palma voltada para a frente e o halter acima do chão.",
+      "Sem mover o braço, suba o halter dobrando o cotovelo até perto do ombro.",
+      "Aperte o bíceps por um instante e desça devagar.",
+      "Complete as repetições e troque de lado."
+    ],
+    "common_mistakes": [
+      "Usar o tronco para ajudar a subir o peso.",
+      "Tirar o braço do apoio na coxa.",
+      "Encurtar a descida."
+    ],
+    "tips": [
+      "Solte o ar ao subir e puxe o ar ao descer.",
+      "Mantenha as costas retas, inclinando o tronco a partir do quadril.",
+      "Faça o movimento devagar para sentir o bíceps trabalhar."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "rosca-martelo-na-polia-com-corda",
+    "name": "Rosca martelo na polia com corda",
+    "name_en": "Cable Hammer Curls - Rope Attachment",
+    "primary_muscle": "biceps",
+    "secondary_muscles": ["forearms"],
+    "equipment": "cable",
+    "level": "beginner",
+    "mechanic": "isolation",
+    "category": "strength",
+    "steps": [
+      "Prenda a corda na polia baixa e fique de frente para o aparelho, a cerca de 30 cm.",
+      "Segure a corda com as palmas voltadas uma para a outra.",
+      "Fique ereto com os cotovelos junto ao corpo.",
+      "Sem mover a parte de cima dos braços, suba a corda dobrando os cotovelos até o bíceps encostar nos antebraços.",
+      "Segure a contração por um instante.",
+      "Volte devagar até estender os braços."
+    ],
+    "common_mistakes": [
+      "Mover os cotovelos para a frente.",
+      "Inclinar o tronco para trás para puxar.",
+      "Deixar o cabo voltar sem controle."
+    ],
+    "tips": [
+      "Solte o ar ao subir e puxe o ar ao descer.",
+      "Mantenha a curvatura natural das costas e o tronco parado.",
+      "Só os antebraços devem se mover."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "rosca-direta-com-barra-w",
+    "name": "Rosca direta com barra W",
+    "name_en": "EZ-Bar Curl",
+    "primary_muscle": "biceps",
+    "secondary_muscles": ["forearms"],
+    "equipment": "ez_bar",
+    "level": "beginner",
+    "mechanic": "isolation",
+    "category": "strength",
+    "steps": [
+      "Fique em pé segurando a barra W na pegada externa, com as palmas para a frente.",
+      "Mantenha os cotovelos junto ao tronco.",
+      "Sem mover a parte de cima dos braços, suba a barra dobrando os cotovelos.",
+      "Continue até a barra chegar perto dos ombros e aperte o bíceps.",
+      "Desça a barra devagar até estender os braços."
+    ],
+    "common_mistakes": [
+      "Balançar o corpo para levantar a barra.",
+      "Afastar os cotovelos do tronco.",
+      "Descer sem controle."
+    ],
+    "tips": [
+      "Solte o ar ao subir e puxe o ar ao descer.",
+      "Mantenha o abdome firme e o tronco parado.",
+      "Pense em mover apenas os antebraços."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "rosca-inclinada-com-halteres",
+    "name": "Rosca inclinada com halteres",
+    "name_en": "Incline Dumbbell Curl",
+    "primary_muscle": "biceps",
+    "secondary_muscles": ["forearms"],
+    "equipment": "dumbbell",
+    "level": "beginner",
+    "mechanic": "isolation",
+    "category": "strength",
+    "steps": [
+      "Sente em um banco inclinado com um halter em cada mão e os braços estendidos.",
+      "Mantenha os cotovelos junto ao tronco e as palmas voltadas para a frente.",
+      "Sem mover a parte de cima dos braços, suba os halteres até a altura dos ombros.",
+      "Aperte o bíceps por um instante no alto.",
+      "Desça os halteres devagar até estender os braços."
+    ],
+    "common_mistakes": [
+      "Tirar as costas do banco ao subir o peso.",
+      "Levar os cotovelos para a frente.",
+      "Usar carga alta demais e perder a amplitude."
+    ],
+    "tips": [
+      "Solte o ar ao subir e puxe o ar ao descer.",
+      "Mantenha a cabeça e as costas apoiadas no banco.",
+      "Aproveite o alongamento do bíceps na descida, sem pressa."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "triceps-coice-com-halteres",
+    "name": "Tríceps coice com halteres",
+    "name_en": "Tricep Dumbbell Kickback",
+    "primary_muscle": "triceps",
+    "secondary_muscles": [],
+    "equipment": "dumbbell",
+    "level": "beginner",
+    "mechanic": "isolation",
+    "category": "strength",
+    "steps": [
+      "Segure um halter em cada mão com as palmas voltadas para o corpo.",
+      "Dobre levemente os joelhos e incline o tronco à frente, quase paralelo ao chão, com as costas retas.",
+      "Mantenha a parte de cima dos braços junto ao tronco e paralela ao chão, com os antebraços apontando para baixo.",
+      "Sem mover a parte de cima dos braços, estenda os cotovelos levando os halteres para trás.",
+      "Segure um instante com os braços estendidos.",
+      "Volte devagar à posição inicial."
+    ],
+    "common_mistakes": [
+      "Deixar os cotovelos caírem durante o movimento.",
+      "Balançar os halteres em vez de estender os braços.",
+      "Arredondar as costas."
+    ],
+    "tips": [
+      "Solte o ar ao estender os braços e puxe o ar ao voltar.",
+      "Mantenha a cabeça alinhada com a coluna.",
+      "Use carga leve para manter os cotovelos parados."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "triceps-na-polia-com-barra",
+    "name": "Tríceps na polia com barra",
+    "name_en": "Triceps Pushdown",
+    "primary_muscle": "triceps",
+    "secondary_muscles": [],
+    "equipment": "cable",
+    "level": "beginner",
+    "mechanic": "isolation",
+    "category": "strength",
+    "steps": [
+      "Prenda uma barra reta ou angulada na polia alta e segure com as palmas para baixo, na largura dos ombros.",
+      "Fique ereto, com leve inclinação do tronco à frente e os cotovelos junto ao corpo.",
+      "Comece com os antebraços apontando para cima.",
+      "Sem mover a parte de cima dos braços, empurre a barra para baixo até estender os cotovelos.",
+      "Segure um instante e volte devagar até os antebraços ficarem um pouco acima da linha do cotovelo."
+    ],
+    "common_mistakes": [
+      "Afastar os cotovelos do corpo.",
+      "Usar o peso do corpo para empurrar a barra.",
+      "Deixar a barra subir rápido demais."
+    ],
+    "tips": [
+      "Solte o ar ao empurrar e puxe o ar ao voltar.",
+      "Mantenha os ombros baixos e o abdome firme.",
+      "Só os antebraços devem se mover."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "triceps-na-polia-com-corda",
+    "name": "Tríceps na polia com corda",
+    "name_en": "Triceps Pushdown - Rope Attachment",
+    "primary_muscle": "triceps",
+    "secondary_muscles": [],
+    "equipment": "cable",
+    "level": "beginner",
+    "mechanic": "isolation",
+    "category": "strength",
+    "steps": [
+      "Prenda a corda na polia alta e segure com as palmas voltadas uma para a outra.",
+      "Fique ereto, com leve inclinação do tronco à frente e os cotovelos junto ao corpo.",
+      "Sem mover a parte de cima dos braços, empurre a corda para baixo até estender os cotovelos.",
+      "No fim, afaste levemente as pontas da corda para os lados.",
+      "Volte devagar até os antebraços ficarem um pouco acima da linha do cotovelo."
+    ],
+    "common_mistakes": [
+      "Abrir os cotovelos durante o movimento.",
+      "Inclinar demais o tronco para empurrar.",
+      "Não estender totalmente os braços."
+    ],
+    "tips": [
+      "Solte o ar ao empurrar e puxe o ar ao voltar.",
+      "Mantenha os punhos firmes e alinhados aos antebraços.",
+      "Controle a volta da corda."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "triceps-testa-com-barra-w",
+    "name": "Tríceps testa com barra W",
+    "name_en": "Lying Triceps Press",
+    "primary_muscle": "triceps",
+    "secondary_muscles": [],
+    "equipment": "ez_bar",
+    "level": "intermediate",
+    "mechanic": "isolation",
+    "category": "strength",
+    "steps": [
+      "Deite no banco reto com os pés apoiados no chão.",
+      "Segure a barra W com as palmas para baixo e as mãos na largura média.",
+      "Estenda os braços acima do peito, perpendiculares ao chão, com os cotovelos fechados.",
+      "Sem mover a parte de cima dos braços, desça a barra devagar até quase tocar a testa.",
+      "Estenda os cotovelos e volte à posição inicial."
+    ],
+    "common_mistakes": [
+      "Abrir os cotovelos para os lados.",
+      "Mover os ombros e transformar o exercício em supino.",
+      "Descer a barra rápido demais em direção à cabeça."
+    ],
+    "tips": [
+      "Puxe o ar ao descer e solte o ar ao subir.",
+      "Mantenha os cotovelos apontando para o teto.",
+      "Use carga que permita total controle perto do rosto."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "triceps-frances-com-halter",
+    "name": "Tríceps francês com halter",
+    "name_en": "Standing Dumbbell Triceps Extension",
+    "primary_muscle": "triceps",
+    "secondary_muscles": [],
+    "equipment": "dumbbell",
+    "level": "beginner",
+    "mechanic": "isolation",
+    "category": "strength",
+    "steps": [
+      "Fique em pé com os pés na largura dos ombros e segure um halter com as duas mãos.",
+      "Eleve o halter acima da cabeça até estender os braços, apoiando o peso nas palmas.",
+      "Mantenha os braços junto à cabeça e os cotovelos apontando para cima.",
+      "Desça o halter atrás da cabeça em arco, dobrando apenas os cotovelos.",
+      "Estenda os cotovelos e volte à posição inicial."
+    ],
+    "common_mistakes": [
+      "Abrir os cotovelos para os lados.",
+      "Arquear a lombar ao estender os braços.",
+      "Mover a parte de cima dos braços."
+    ],
+    "tips": [
+      "Puxe o ar ao descer e solte o ar ao subir.",
+      "Contraia o abdome e os glúteos para proteger a lombar.",
+      "Segure o halter com firmeza, com os polegares em volta dele."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "mergulho-no-banco",
+    "name": "Mergulho no banco",
+    "name_en": "Bench Dips",
+    "primary_muscle": "triceps",
+    "secondary_muscles": ["chest", "front_delts"],
+    "equipment": "body_weight",
+    "level": "beginner",
+    "mechanic": "compound",
+    "category": "strength",
+    "steps": [
+      "Fique de costas para um banco e apoie as mãos na borda, na largura dos ombros.",
+      "Estenda as pernas à frente e mantenha os braços estendidos.",
+      "Dobre os cotovelos e desça o corpo devagar até formar cerca de 90 graus nos cotovelos.",
+      "Mantenha o tronco próximo ao banco durante a descida.",
+      "Empurre com os braços e volte à posição inicial."
+    ],
+    "common_mistakes": [
+      "Descer além de 90 graus e forçar os ombros.",
+      "Abrir os cotovelos para os lados.",
+      "Afastar o corpo do banco."
+    ],
+    "tips": [
+      "Puxe o ar ao descer e solte o ar ao subir.",
+      "Mantenha os ombros para trás e o peito aberto.",
+      "Para facilitar, dobre os joelhos."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "supino-fechado-com-barra",
+    "name": "Supino fechado com barra",
+    "name_en": "Close-Grip Barbell Bench Press",
+    "primary_muscle": "triceps",
+    "secondary_muscles": ["chest", "front_delts"],
+    "equipment": "barbell",
+    "level": "beginner",
+    "mechanic": "compound",
+    "category": "strength",
+    "steps": [
+      "Deite no banco reto com os pés apoiados no chão.",
+      "Segure a barra com as mãos na largura dos ombros e tire-a do suporte.",
+      "Posicione a barra acima do peito com os braços estendidos.",
+      "Desça a barra devagar até o meio do peito, mantendo os cotovelos junto ao corpo.",
+      "Empurre a barra para cima até estender os braços."
+    ],
+    "common_mistakes": [
+      "Abrir os cotovelos como no supino comum.",
+      "Fechar demais a pegada e forçar os punhos.",
+      "Tirar o quadril do banco ao empurrar."
+    ],
+    "tips": [
+      "Puxe o ar ao descer e solte o ar ao empurrar.",
+      "Mantenha as escápulas apoiadas e firmes no banco.",
+      "Use alguém para ajudar quando a carga for alta."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "mergulho-nas-paralelas-para-triceps",
+    "name": "Mergulho nas paralelas para tríceps",
+    "name_en": "Dips - Triceps Version",
+    "primary_muscle": "triceps",
+    "secondary_muscles": ["chest", "front_delts"],
+    "equipment": "body_weight",
+    "level": "beginner",
+    "mechanic": "compound",
+    "category": "strength",
+    "steps": [
+      "Segure as barras paralelas e sustente o corpo com os braços quase estendidos.",
+      "Mantenha o tronco ereto e os cotovelos junto ao corpo.",
+      "Desça devagar dobrando os cotovelos até formar cerca de 90 graus.",
+      "Empurre com os braços e volte à posição inicial."
+    ],
+    "common_mistakes": [
+      "Inclinar o tronco à frente e tirar o foco do tríceps.",
+      "Descer além do confortável e forçar os ombros.",
+      "Balançar as pernas para subir."
+    ],
+    "tips": [
+      "Puxe o ar ao descer e solte o ar ao subir.",
+      "Mantenha os ombros longe das orelhas.",
+      "Cruze os pés atrás para manter o corpo estável."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "rosca-de-punho-com-barra",
+    "name": "Rosca de punho com barra",
+    "name_en": "Palms-Up Barbell Wrist Curl Over A Bench",
+    "primary_muscle": "forearms",
+    "secondary_muscles": [],
+    "equipment": "barbell",
+    "level": "beginner",
+    "mechanic": "isolation",
+    "category": "strength",
+    "steps": [
+      "Ajoelhe de frente para um banco reto com a barra ao lado.",
+      "Segure a barra com as palmas para cima.",
+      "Apoie os antebraços no banco, deixando os punhos para fora da borda.",
+      "Dobre os punhos para cima, levantando a barra.",
+      "Desça os punhos devagar até a posição inicial."
+    ],
+    "common_mistakes": [
+      "Tirar os antebraços do banco.",
+      "Usar os braços para ajudar a levantar.",
+      "Fazer o movimento curto e rápido."
+    ],
+    "tips": [
+      "Solte o ar ao subir e puxe o ar ao descer.",
+      "Só os punhos devem se mover.",
+      "Use carga leve e amplitude completa."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "rosca-de-punho-inversa-com-barra",
+    "name": "Rosca de punho inversa com barra",
+    "name_en": "Palms-Down Wrist Curl Over A Bench",
+    "primary_muscle": "forearms",
+    "secondary_muscles": [],
+    "equipment": "barbell",
+    "level": "beginner",
+    "mechanic": "isolation",
+    "category": "strength",
+    "steps": [
+      "Ajoelhe de frente para um banco reto com a barra ao lado.",
+      "Segure a barra com as palmas para baixo.",
+      "Apoie os antebraços no banco, deixando os punhos para fora da borda.",
+      "Estenda os punhos para cima, levantando a barra.",
+      "Desça os punhos devagar até a posição inicial."
+    ],
+    "common_mistakes": [
+      "Tirar os antebraços do banco.",
+      "Usar carga alta demais e encurtar o movimento.",
+      "Soltar a barra na descida."
+    ],
+    "tips": [
+      "Solte o ar ao subir e puxe o ar ao descer.",
+      "Mantenha os antebraços parados.",
+      "Faça o movimento devagar e controlado."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "rosca-inversa-com-barra",
+    "name": "Rosca inversa com barra",
+    "name_en": "Reverse Barbell Curl",
+    "primary_muscle": "biceps",
+    "secondary_muscles": ["forearms"],
+    "equipment": "barbell",
+    "level": "beginner",
+    "mechanic": "isolation",
+    "category": "strength",
+    "steps": [
+      "Fique em pé com o tronco ereto e segure a barra na largura dos ombros, com as palmas para baixo.",
+      "Mantenha os cotovelos junto ao tronco.",
+      "Sem mover a parte de cima dos braços, suba a barra dobrando os cotovelos.",
+      "Continue até a barra chegar perto dos ombros e segure um instante.",
+      "Desça a barra devagar até estender os braços."
+    ],
+    "common_mistakes": [
+      "Deixar os punhos dobrarem para baixo.",
+      "Balançar o corpo para subir a barra.",
+      "Afastar os cotovelos do tronco."
+    ],
+    "tips": [
+      "Solte o ar ao subir e puxe o ar ao descer.",
+      "Mantenha os punhos alinhados com os antebraços.",
+      "Use carga menor do que na rosca direta."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "caminhada-do-fazendeiro",
+    "name": "Caminhada do fazendeiro",
+    "name_en": "Farmer's Walk",
+    "primary_muscle": "forearms",
+    "secondary_muscles": ["traps", "abs", "glutes", "quadriceps", "lower_back"],
+    "equipment": "other",
+    "level": "intermediate",
+    "mechanic": "compound",
+    "category": "strength",
+    "steps": [
+      "Fique em pé entre os dois implementos de carga.",
+      "Agache, segure as alças com firmeza e mantenha as costas retas.",
+      "Levante os pesos empurrando o chão com os calcanhares, com a cabeça erguida.",
+      "Caminhe com passos curtos e rápidos pela distância definida.",
+      "Ao final, apoie os pesos no chão agachando com as costas retas."
+    ],
+    "common_mistakes": [
+      "Arredondar as costas ao pegar ou soltar os pesos.",
+      "Inclinar o tronco para um dos lados.",
+      "Prender a respiração durante toda a caminhada."
+    ],
+    "tips": [
+      "Respire de forma curta e constante enquanto caminha.",
+      "Mantenha os ombros para trás e o abdome firme.",
+      "Olhe para a frente, não para os pés."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "abdominal-crunch",
+    "name": "Abdominal crunch",
+    "name_en": "Crunches",
+    "primary_muscle": "abs",
+    "secondary_muscles": [],
+    "equipment": "body_weight",
+    "level": "beginner",
+    "mechanic": "isolation",
+    "category": "strength",
+    "steps": [
+      "Deite de costas com os joelhos dobrados e os pés apoiados no chão.",
+      "Apoie as mãos de leve ao lado da cabeça, sem entrelaçar os dedos.",
+      "Contraia o abdome e tire os ombros do chão, aproximando as costelas do quadril.",
+      "Segure a contração por um instante no alto.",
+      "Desça devagar até apoiar os ombros novamente."
+    ],
+    "common_mistakes": [
+      "Puxar a cabeça com as mãos.",
+      "Subir o tronco inteiro e tirar a lombar do chão.",
+      "Fazer o movimento com impulso."
+    ],
+    "tips": [
+      "Solte o ar ao subir e puxe o ar ao descer.",
+      "Mantenha um espaço entre o queixo e o peito.",
+      "Pense em encurtar o abdome, não em sentar."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "prancha-abdominal",
+    "name": "Prancha abdominal",
+    "name_en": "Plank",
+    "primary_muscle": "abs",
+    "secondary_muscles": ["obliques"],
+    "equipment": "body_weight",
+    "level": "beginner",
+    "mechanic": "isolation",
+    "category": "strength",
+    "steps": [
+      "Deite de barriga para baixo e apoie os antebraços no chão, com os cotovelos abaixo dos ombros.",
+      "Apoie as pontas dos pés e eleve o corpo do chão.",
+      "Mantenha o corpo reto da cabeça aos calcanhares.",
+      "Segure a posição pelo tempo definido.",
+      "Apoie os joelhos no chão para sair da posição."
+    ],
+    "common_mistakes": [
+      "Deixar o quadril cair e arquear a lombar.",
+      "Elevar demais o quadril.",
+      "Prender a respiração."
+    ],
+    "tips": [
+      "Respire de forma calma e contínua durante a prancha.",
+      "Contraia o abdome e os glúteos o tempo todo.",
+      "Mantenha o olhar para o chão, com o pescoço alinhado."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "elevacao-de-pernas-joelho-flexionado",
+    "name": "Elevação de pernas com joelho flexionado",
+    "name_en": "Bent-Knee Hip Raise",
+    "primary_muscle": "abs",
+    "secondary_muscles": [],
+    "equipment": "body_weight",
+    "level": "beginner",
+    "mechanic": "compound",
+    "category": "strength",
+    "steps": [
+      "Deite de costas com os braços ao lado do corpo.",
+      "Dobre os joelhos e tire os pés alguns centímetros do chão.",
+      "Usando o abdome, traga os joelhos em direção ao peito, mantendo o ângulo dos joelhos.",
+      "Continue até o quadril sair do chão, enrolando a pelve para trás.",
+      "Aperte o abdome por um segundo no alto.",
+      "Volte devagar à posição inicial."
+    ],
+    "common_mistakes": [
+      "Usar impulso das pernas em vez do abdome.",
+      "Empurrar o chão com as mãos para subir.",
+      "Deixar as pernas caírem rápido na volta."
+    ],
+    "tips": [
+      "Solte o ar ao subir e puxe o ar ao descer.",
+      "Mantenha o movimento controlado o tempo todo.",
+      "Deixe a lombar apoiada no chão na volta."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "abdominal-crunch-grupado",
+    "name": "Abdominal crunch grupado",
+    "name_en": "Tuck Crunch",
+    "primary_muscle": "abs",
+    "secondary_muscles": [],
+    "equipment": "body_weight",
+    "level": "beginner",
+    "mechanic": "isolation",
+    "category": "strength",
+    "steps": [
+      "Deite de costas com a lombar apoiada no chão.",
+      "Cruze os tornozelos e eleve as pernas até as coxas ficarem perpendiculares ao chão, com os joelhos dobrados.",
+      "Cruze os braços sobre o peito.",
+      "Mantendo a lombar no chão, tire os ombros do chão contraindo o abdome.",
+      "Desça o tronco devagar até a posição inicial."
+    ],
+    "common_mistakes": [
+      "Balançar as pernas durante o movimento.",
+      "Puxar o pescoço para a frente.",
+      "Tirar a lombar do chão."
+    ],
+    "tips": [
+      "Solte o ar ao subir e puxe o ar ao descer.",
+      "Mantenha as pernas paradas na mesma posição.",
+      "Suba pouco e com controle, focando no abdome."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "abdominal-canivete",
+    "name": "Abdominal canivete",
+    "name_en": "Jackknife Sit-Up",
+    "primary_muscle": "abs",
+    "secondary_muscles": [],
+    "equipment": "body_weight",
+    "level": "beginner",
+    "mechanic": "compound",
+    "category": "strength",
+    "steps": [
+      "Deite de costas com os braços estendidos acima da cabeça e as pernas estendidas.",
+      "Dobre o quadril e eleve ao mesmo tempo as pernas e o tronco.",
+      "Leve os braços estendidos em direção às pernas, que sobem até cerca de 35 a 45 graus do chão.",
+      "Mantenha a parte de cima do tronco fora do chão no ponto mais alto.",
+      "Desça braços e pernas devagar até a posição inicial."
+    ],
+    "common_mistakes": [
+      "Usar impulso dos braços para subir.",
+      "Deixar braços e pernas caírem de uma vez.",
+      "Arquear a lombar na volta."
+    ],
+    "tips": [
+      "Solte o ar ao subir e puxe o ar ao descer.",
+      "Mantenha as pernas estendidas e unidas.",
+      "Se for difícil, dobre levemente os joelhos."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "elevacao-de-pernas-suspenso-na-barra",
+    "name": "Elevação de pernas suspenso na barra",
+    "name_en": "Hanging Leg Raise",
+    "primary_muscle": "abs",
+    "secondary_muscles": ["forearms"],
+    "equipment": "body_weight",
+    "level": "advanced",
+    "mechanic": "isolation",
+    "category": "strength",
+    "steps": [
+      "Pendure-se na barra fixa com os braços estendidos e pegada média ou aberta.",
+      "Deixe as pernas retas para baixo, com a pelve levemente rodada para trás.",
+      "Eleve as pernas até formarem cerca de 90 graus com o tronco.",
+      "Segure a contração por um instante no alto.",
+      "Desça as pernas devagar até a posição inicial."
+    ],
+    "common_mistakes": [
+      "Balançar o corpo para elevar as pernas.",
+      "Deixar as pernas caírem rápido.",
+      "Encolher os ombros perto das orelhas."
+    ],
+    "tips": [
+      "Solte o ar ao subir e puxe o ar ao descer.",
+      "Mantenha o tronco parado e os ombros ativos.",
+      "Se for difícil, faça com os joelhos dobrados."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "elevacao-de-pernas-no-banco",
+    "name": "Elevação de pernas no banco",
+    "name_en": "Flat Bench Lying Leg Raise",
+    "primary_muscle": "abs",
+    "secondary_muscles": [],
+    "equipment": "bench",
+    "level": "beginner",
+    "mechanic": "isolation",
+    "category": "strength",
+    "steps": [
+      "Deite de costas em um banco reto com as pernas estendidas para fora da ponta.",
+      "Segure nas laterais do banco ou coloque as mãos sob os glúteos.",
+      "Com as pernas quase retas, eleve-as até formarem 90 graus com o chão.",
+      "Segure a contração por um segundo no alto.",
+      "Desça as pernas devagar sem encostá-las no chão."
+    ],
+    "common_mistakes": [
+      "Arquear a lombar ao descer as pernas.",
+      "Usar impulso para subir.",
+      "Dobrar muito os joelhos."
+    ],
+    "tips": [
+      "Solte o ar ao subir e puxe o ar ao descer.",
+      "Mantenha a lombar apoiada no banco.",
+      "Controle bem a descida."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "abdominal-russo",
+    "name": "Abdominal russo",
+    "name_en": "Russian Twist",
+    "primary_muscle": "obliques",
+    "secondary_muscles": ["abs", "lower_back"],
+    "equipment": "body_weight",
+    "level": "intermediate",
+    "mechanic": "compound",
+    "category": "strength",
+    "steps": [
+      "Sente no chão com os joelhos dobrados e os pés presos sob um apoio firme ou segurados por alguém.",
+      "Incline o tronco para trás formando um V com as coxas.",
+      "Estenda os braços à frente com as mãos unidas.",
+      "Gire o tronco para a direita até os braços ficarem paralelos ao chão.",
+      "Volte ao centro e gire para a esquerda.",
+      "Alterne os lados até completar as repetições."
+    ],
+    "common_mistakes": [
+      "Girar só os braços sem girar o tronco.",
+      "Arredondar as costas.",
+      "Fazer o movimento rápido e sem controle."
+    ],
+    "tips": [
+      "Solte o ar ao girar e puxe o ar ao voltar ao centro.",
+      "Mantenha o peito aberto e as costas retas.",
+      "Contraia o abdome durante todo o exercício."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "prancha-lateral",
+    "name": "Prancha lateral",
+    "name_en": "Side Bridge",
+    "primary_muscle": "obliques",
+    "secondary_muscles": ["abs", "side_delts"],
+    "equipment": "body_weight",
+    "level": "beginner",
+    "mechanic": "isolation",
+    "category": "strength",
+    "steps": [
+      "Deite de lado com as pernas estendidas e uma sobre a outra.",
+      "Apoie o antebraço no chão com o cotovelo abaixo do ombro.",
+      "Eleve o quadril do chão até o corpo ficar reto da cabeça aos pés.",
+      "Segure a posição pelo tempo definido.",
+      "Desça o quadril devagar e troque de lado."
+    ],
+    "common_mistakes": [
+      "Deixar o quadril cair em direção ao chão.",
+      "Girar o tronco para a frente ou para trás.",
+      "Afundar o ombro de apoio."
+    ],
+    "tips": [
+      "Respire de forma calma e contínua durante a posição.",
+      "Mantenha o abdome e os glúteos contraídos.",
+      "Para facilitar, apoie o joelho de baixo no chão."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "abdominal-crunch-na-polia",
+    "name": "Abdominal crunch na polia",
+    "name_en": "Cable Crunch",
+    "primary_muscle": "abs",
+    "secondary_muscles": [],
+    "equipment": "cable",
+    "level": "beginner",
+    "mechanic": "isolation",
+    "category": "strength",
+    "steps": [
+      "Prenda a corda na polia alta e ajoelhe-se de frente para o aparelho.",
+      "Segure a corda e traga as mãos para perto do rosto.",
+      "Dobre levemente o quadril e deixe o peso alongar o abdome.",
+      "Com o quadril parado, flexione o tronco levando os cotovelos em direção ao meio das coxas.",
+      "Segure a contração por um segundo.",
+      "Volte devagar à posição inicial."
+    ],
+    "common_mistakes": [
+      "Sentar para trás e usar o peso do corpo.",
+      "Puxar a corda com os braços.",
+      "Mover o quadril durante o exercício."
+    ],
+    "tips": [
+      "Solte o ar ao descer o tronco e puxe o ar ao voltar.",
+      "Mantenha as mãos paradas junto ao rosto.",
+      "Pense em enrolar a coluna, aproximando costelas e quadril."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "abdominal-com-rodinha",
+    "name": "Abdominal com rodinha",
+    "name_en": "Ab Roller",
+    "primary_muscle": "abs",
+    "secondary_muscles": ["lats", "front_delts"],
+    "equipment": "other",
+    "level": "intermediate",
+    "mechanic": "compound",
+    "category": "strength",
+    "steps": [
+      "Ajoelhe no chão e segure a rodinha com as duas mãos.",
+      "Apoie a rodinha no chão à frente, ficando em quatro apoios.",
+      "Role a rodinha para a frente devagar, estendendo o corpo.",
+      "Vá até onde conseguir sem encostar o corpo no chão e sem arquear a lombar.",
+      "Faça uma pausa e puxe a rodinha de volta usando o abdome."
+    ],
+    "common_mistakes": [
+      "Arquear a lombar na parte mais longa.",
+      "Ir além do que consegue controlar.",
+      "Voltar puxando com o quadril em vez do abdome."
+    ],
+    "tips": [
+      "Puxe o ar ao rolar para a frente e solte o ar ao voltar.",
+      "Mantenha o abdome firme e o quadril encaixado.",
+      "Aumente a distância aos poucos."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "abdominal-bicicleta",
+    "name": "Abdominal bicicleta",
+    "name_en": "Air Bike",
+    "primary_muscle": "abs",
+    "secondary_muscles": ["obliques"],
+    "equipment": "body_weight",
+    "level": "beginner",
+    "mechanic": "compound",
+    "category": "strength",
+    "steps": [
+      "Deite de costas com a lombar apoiada no chão e as mãos ao lado da cabeça.",
+      "Tire os ombros do chão como no abdominal crunch.",
+      "Eleve os joelhos até ficarem acima do quadril, com as canelas paralelas ao chão.",
+      "Estenda uma perna enquanto aproxima o cotovelo oposto do joelho que vem em sua direção.",
+      "Troque de lado em um movimento de pedalar.",
+      "Alterne os lados de forma contínua e controlada."
+    ],
+    "common_mistakes": [
+      "Puxar o pescoço com as mãos.",
+      "Pedalar rápido demais e perder o controle.",
+      "Tirar a lombar do chão."
+    ],
+    "tips": [
+      "Solte o ar a cada giro do tronco.",
+      "Gire o tronco, não apenas os cotovelos.",
+      "Mantenha os ombros fora do chão durante a série."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "escalador",
+    "name": "Escalador",
+    "name_en": "Mountain Climbers",
+    "primary_muscle": "quadriceps",
+    "secondary_muscles": ["abs", "chest", "hamstrings", "front_delts"],
+    "equipment": "body_weight",
+    "level": "beginner",
+    "mechanic": "compound",
+    "category": "plyometrics",
+    "steps": [
+      "Fique em posição de flexão, com o peso apoiado nas mãos e nas pontas dos pés.",
+      "Traga um joelho para baixo do quadril, dobrando a perna.",
+      "Troque as pernas de forma rápida, estendendo a dobrada e trazendo a outra à frente.",
+      "Continue alternando por 20 a 30 segundos."
+    ],
+    "common_mistakes": [
+      "Elevar demais o quadril.",
+      "Deixar os ombros passarem muito à frente das mãos.",
+      "Perder o ritmo e apoiar o pé inteiro no chão."
+    ],
+    "tips": [
+      "Respire de forma rápida e ritmada, sem prender o ar.",
+      "Mantenha o abdome firme e as costas retas.",
+      "Deixe as mãos alinhadas abaixo dos ombros."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "inseto-morto",
+    "name": "Inseto morto",
+    "name_en": "Dead Bug",
+    "primary_muscle": "abs",
+    "secondary_muscles": ["obliques"],
+    "equipment": "body_weight",
+    "level": "beginner",
+    "mechanic": "compound",
+    "category": "strength",
+    "steps": [
+      "Deite de costas com os braços estendidos em direção ao teto.",
+      "Eleve as pernas com quadril e joelhos dobrados a 90 graus.",
+      "Solte o ar com força, aproxime as costelas do quadril e cole a lombar no chão.",
+      "Estenda uma perna até deixá-la logo acima do chão, sem tirar a lombar do chão.",
+      "Volte a perna à posição inicial e repita com a outra."
+    ],
+    "common_mistakes": [
+      "Deixar a lombar sair do chão ao estender a perna.",
+      "Fazer o movimento rápido demais.",
+      "Prender a respiração."
+    ],
+    "tips": [
+      "Solte o ar ao estender a perna e puxe o ar ao voltar.",
+      "Mantenha os glúteos contraídos durante todo o exercício.",
+      "Desça a perna só até onde conseguir manter a lombar apoiada."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "abdominal-obliquo-no-chao",
+    "name": "Abdominal oblíquo no chão",
+    "name_en": "Oblique Crunches - On The Floor",
+    "primary_muscle": "obliques",
+    "secondary_muscles": ["abs"],
+    "equipment": "body_weight",
+    "level": "beginner",
+    "mechanic": "isolation",
+    "category": "strength",
+    "steps": [
+      "Deite sobre o lado direito com as pernas uma sobre a outra e os joelhos levemente dobrados.",
+      "Coloque a mão esquerda atrás da cabeça.",
+      "Eleve o cotovelo esquerdo em direção ao quadril, contraindo a lateral do abdome.",
+      "Suba o máximo que conseguir e segure por um segundo.",
+      "Desça devagar até a posição inicial.",
+      "Complete as repetições e troque de lado."
+    ],
+    "common_mistakes": [
+      "Puxar a cabeça com a mão.",
+      "Usar impulso para subir.",
+      "Girar o tronco para trás em vez de flexionar para o lado."
+    ],
+    "tips": [
+      "Solte o ar ao subir e puxe o ar ao descer.",
+      "Faça o movimento curto e controlado.",
+      "Mantenha o pescoço relaxado e alinhado."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "abdominal-remador",
+    "name": "Abdominal remador",
+    "name_en": null,
+    "primary_muscle": "abs",
+    "secondary_muscles": ["obliques"],
+    "equipment": "body_weight",
+    "level": "beginner",
+    "mechanic": "compound",
+    "category": "strength",
+    "steps": [
+      "Deite de costas com os braços estendidos acima da cabeça e as pernas estendidas.",
+      "Contraia o abdome para preparar o movimento.",
+      "Suba o tronco ao mesmo tempo em que dobra os joelhos e os traz em direção ao peito.",
+      "Leve os braços à frente, ao lado das pernas, como no movimento de remar.",
+      "Volte de forma controlada, estendendo pernas, tronco e braços até a posição inicial."
+    ],
+    "common_mistakes": [
+      "Jogar os braços para ganhar impulso.",
+      "Deixar o corpo cair de uma vez na volta.",
+      "Arquear a lombar ao estender as pernas."
+    ],
+    "tips": [
+      "Solte o ar ao subir e puxe o ar ao voltar.",
+      "Mantenha o ritmo constante e controlado.",
+      "Se a lombar sair do chão, não estenda tanto as pernas na volta."
+    ],
+    "text_source": "own"
+  }
+]

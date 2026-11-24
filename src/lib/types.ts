@@ -9,6 +9,8 @@ export type Profile = {
   nickname: string | null;
   avatar_path: string | null;
   role: Role;
+  /** Desenho do corpo no mapa muscular (só vem no perfil do próprio usuário). */
+  body_figure?: "male" | "female" | null;
 };
 
 export type Challenge = {

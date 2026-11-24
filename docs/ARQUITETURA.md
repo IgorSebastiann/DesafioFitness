@@ -132,3 +132,27 @@ e `CRON_SECRET` são exclusivamente do servidor.
 
 Itens da imagem de referência (feed de atividades, disputa em tempo real com
 animações de placar, retrospectiva mensal) ficam para etapas futuras.
+
+## 9. Módulo de treinos — Fase 1: biblioteca de exercícios e mapa corporal
+
+> Infra atual: Neon Postgres + Better Auth + Vercel Blob (não Supabase). Consultas via `withUser()` (`src/lib/db.ts`), que roda como `app_user` para o RLS valer.
+
+**Banco (migrations 0013 e 0014)**
+
+| Tabela | Papel |
+|---|---|
+| `muscle_groups` | 19 grupos = áreas clicáveis do mapa (código, nome, vista) |
+| `exercises` | Exercício em pt-BR: músculo principal, equipamento, nível, tipo, categoria, `steps[]`, `common_mistakes[]`, `tips[]`, origem do texto, `search_text` (sem acento, `fold_text`) |
+| `exercise_secondary_muscles` | Músculos secundários (trigger impede repetir o principal; trocar o principal remove a duplicata) |
+| `exercise_media` | Mídias no Blob **público** de mídias: tipo, ângulo, ordem, origem, autor, licença, versão, fonte, `source_key` (idempotência), `is_edited`, `is_primary` |
+| `profiles.body_figure` | Desenho do corpo (masculino/feminino) que o mapa abre primeiro |
+
+Regras no banco: licença é enum obrigatório (CC0, CC BY, CC BY-SA, própria); origem própria ⇔ licença própria; terceiros exigem link e chave da fonte; CC BY/BY-SA exigem autor; uma única mídia principal por exercício; URL só do Blob público em `exercises/`. RLS: catálogo lido por quem está logado (inativos só para admin); escrita só admin.
+
+O catálogo (112 exercícios) fica em `db/data/exercises/*.json` e vira a migration 0014 por `node scripts/build-exercise-catalog.mjs` (`on conflict do nothing`: não sobrescreve edições do admin). Textos do free-exercise-db (Unlicense), traduzidos; "own" = escritos para o app.
+
+**Telas**: `/exercicios` (mapa + busca + filtros na URL, `#resultados`, 40 por vez), `/exercicios/[slug]` (player, mapa com principal/secundários, passo a passo, erros, dicas), `/exercicios/novo` e `/exercicios/[slug]/editar` (admin, upload de mídia própria), `/creditos`. Escolha do desenho no Perfil.
+
+**Mapa corporal** (`src/lib/body-map/figures.ts` + `src/components/body-map.tsx`): desenho próprio; cada forma é a metade esquerda em pontos (dx, y) espelhada, com spline Catmull-Rom. O corpo feminino aplica um perfil de largura por altura sobre os mesmos pontos. Cada músculo é um `<a>` focável com `aria-label` (Tab + Enter).
+
+**Mídias**: Blob público separado (`MEDIA_READ_WRITE_TOKEN`); comprovações continuam no Blob privado. Upload do admin por `/api/exercise-media/upload` (só admin, `exercises/{slug}/own-*`, vídeo até 10 s/20 MB checado no navegador, poster gerado no navegador). Importação de terceiros por `scripts/import-exercise-media.mjs` (simulação por padrão; `--apply` grava), vínculos em `db/data/exercise-sources.json`. Ordem de exibição: própria → principal → vídeo → ordem (`sortMedia`).

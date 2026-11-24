@@ -1,0 +1,808 @@
+[
+  {
+    "slug": "agachamento-peso-do-corpo",
+    "name": "Agachamento com peso do corpo",
+    "name_en": "Bodyweight Squat",
+    "primary_muscle": "quadriceps",
+    "secondary_muscles": ["glutes", "hamstrings", "adductors"],
+    "equipment": "body_weight",
+    "level": "beginner",
+    "mechanic": "compound",
+    "category": "strength",
+    "steps": [
+      "Fique em pé com os pés na largura dos ombros e as pontas levemente para fora.",
+      "Estenda os braços à frente ou coloque as mãos atrás da cabeça.",
+      "Dobre joelhos e quadril ao mesmo tempo, levando o quadril para trás como se fosse sentar.",
+      "Desça até onde conseguir manter a coluna neutra e os calcanhares no chão.",
+      "Mantenha o peito aberto e os joelhos apontando na direção dos pés.",
+      "Empurre o chão com o pé inteiro e volte à posição inicial."
+    ],
+    "common_mistakes": [
+      "Deixar os joelhos caírem para dentro na subida.",
+      "Tirar os calcanhares do chão.",
+      "Arredondar as costas no fundo do movimento."
+    ],
+    "tips": [
+      "Puxe o ar ao descer e solte ao subir.",
+      "Distribua o peso entre calcanhar e meio do pé.",
+      "Contraia o abdômen para manter o tronco firme."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "agachamento-livre-com-barra",
+    "name": "Agachamento livre com barra",
+    "name_en": "Barbell Squat",
+    "primary_muscle": "quadriceps",
+    "secondary_muscles": ["glutes", "hamstrings", "adductors", "lower_back"],
+    "equipment": "barbell",
+    "level": "beginner",
+    "mechanic": "compound",
+    "category": "strength",
+    "steps": [
+      "Ajuste a barra no rack um pouco abaixo da altura dos ombros.",
+      "Entre sob a barra e apoie-a no alto das costas, logo abaixo do pescoço.",
+      "Segure a barra com as duas mãos e retire-a do rack estendendo pernas e tronco.",
+      "Dê um ou dois passos para trás e posicione os pés na largura dos ombros, pontas levemente para fora.",
+      "Desça dobrando joelhos e quadril, com o peito aberto e as costas retas, até as coxas passarem um pouco da linha paralela ao chão.",
+      "Empurre o chão com o pé inteiro e suba até estender as pernas.",
+      "Ao terminar a série, devolva a barra ao rack com cuidado."
+    ],
+    "common_mistakes": [
+      "Arredondar a lombar na descida.",
+      "Deixar os joelhos caírem para dentro.",
+      "Inclinar demais o tronco à frente e transformar o movimento em um bom-dia.",
+      "Tirar os calcanhares do chão."
+    ],
+    "tips": [
+      "Puxe o ar e trave o abdômen antes de descer; solte o ar ao passar a parte mais difícil da subida.",
+      "Use as travas de segurança do rack.",
+      "Mantenha o olhar à frente para ajudar a manter o tronco firme."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "agachamento-goblet-com-kettlebell",
+    "name": "Agachamento goblet com kettlebell",
+    "name_en": "Goblet Squat",
+    "primary_muscle": "quadriceps",
+    "secondary_muscles": ["glutes", "hamstrings", "adductors", "abs"],
+    "equipment": "kettlebell",
+    "level": "beginner",
+    "mechanic": "compound",
+    "category": "strength",
+    "steps": [
+      "Fique em pé com os pés um pouco mais abertos que os ombros.",
+      "Segure o kettlebell pelas alças, junto ao peito, com os cotovelos apontando para baixo.",
+      "Desça dobrando joelhos e quadril, mantendo o peito aberto e as costas retas.",
+      "No fundo, faça uma breve pausa e use os cotovelos para afastar levemente os joelhos.",
+      "Empurre o chão e volte à posição inicial."
+    ],
+    "common_mistakes": [
+      "Afastar o kettlebell do peito e curvar o tronco.",
+      "Deixar os joelhos fecharem para dentro.",
+      "Tirar os calcanhares do chão no fundo."
+    ],
+    "tips": [
+      "Puxe o ar ao descer e solte ao subir.",
+      "Mantenha o kettlebell colado ao corpo durante todo o movimento.",
+      "Comece com carga leve até dominar a profundidade."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "agachamento-frontal-com-barra",
+    "name": "Agachamento frontal com barra",
+    "name_en": "Front Barbell Squat",
+    "primary_muscle": "quadriceps",
+    "secondary_muscles": ["glutes", "hamstrings", "abs", "lower_back"],
+    "equipment": "barbell",
+    "level": "advanced",
+    "mechanic": "compound",
+    "category": "strength",
+    "steps": [
+      "Ajuste a barra no rack na altura do peito.",
+      "Apoie a barra na frente dos ombros, com os cotovelos altos e os braços quase paralelos ao chão.",
+      "Segure a barra com as mãos cruzadas ou com a pegada frontal e retire-a do rack.",
+      "Afaste-se do rack e posicione os pés na largura dos ombros, pontas levemente para fora.",
+      "Desça dobrando os joelhos, com o tronco o mais vertical possível, até as coxas passarem da linha paralela.",
+      "Empurre o chão com o meio do pé e suba mantendo os cotovelos altos.",
+      "Ao terminar, devolva a barra ao rack."
+    ],
+    "common_mistakes": [
+      "Deixar os cotovelos caírem e a barra rolar para frente.",
+      "Inclinar o tronco à frente na subida.",
+      "Olhar para baixo e perder o equilíbrio."
+    ],
+    "tips": [
+      "Puxe o ar e trave o abdômen antes de descer; solte o ar ao subir.",
+      "Pense em levar os cotovelos para cima ao sair do fundo.",
+      "Use as travas de segurança do rack."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "agachamento-no-smith",
+    "name": "Agachamento no Smith",
+    "name_en": "Smith Machine Squat",
+    "primary_muscle": "quadriceps",
+    "secondary_muscles": ["glutes", "hamstrings", "adductors"],
+    "equipment": "smith",
+    "level": "beginner",
+    "mechanic": "compound",
+    "category": "strength",
+    "steps": [
+      "Ajuste a barra do Smith na altura dos ombros.",
+      "Entre sob a barra e apoie-a no alto das costas, logo abaixo do pescoço.",
+      "Segure a barra com as palmas para frente, destrave-a girando os punhos e estenda as pernas.",
+      "Posicione os pés na largura dos ombros, levemente à frente da linha do corpo.",
+      "Desça dobrando joelhos e quadril até as coxas ficarem um pouco abaixo da paralela.",
+      "Empurre a plataforma do chão e suba até estender as pernas.",
+      "Ao terminar, trave a barra girando os punhos."
+    ],
+    "common_mistakes": [
+      "Colocar os pés muito para trás e sobrecarregar os joelhos.",
+      "Arredondar a lombar no fundo.",
+      "Esquecer de travar a barra ao final da série."
+    ],
+    "tips": [
+      "Puxe o ar ao descer e solte ao subir.",
+      "Mantenha as costas apoiadas na barra e o abdômen firme.",
+      "Ajuste os batentes de segurança logo abaixo da sua profundidade."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "cadeira-extensora",
+    "name": "Cadeira extensora",
+    "name_en": "Leg Extensions",
+    "primary_muscle": "quadriceps",
+    "secondary_muscles": [],
+    "equipment": "machine",
+    "level": "beginner",
+    "mechanic": "isolation",
+    "category": "strength",
+    "steps": [
+      "Ajuste o encosto para que os joelhos fiquem alinhados ao eixo da máquina.",
+      "Ajuste o rolo para que fique sobre a parte de baixo da canela, logo acima dos pés.",
+      "Sente-se com as costas apoiadas e segure as alças laterais.",
+      "Estenda as pernas até ficarem retas, sem tirar o quadril do banco.",
+      "Segure um segundo com o quadríceps contraído.",
+      "Desça devagar até a posição inicial, sem deixar o peso bater."
+    ],
+    "common_mistakes": [
+      "Dar impulso com o corpo para subir o peso.",
+      "Deixar a carga cair rápido na volta.",
+      "Tirar o quadril do banco no final da extensão."
+    ],
+    "tips": [
+      "Solte o ar ao estender as pernas e puxe ao descer.",
+      "Controle a descida em cerca de dois segundos.",
+      "Mantenha as pontas dos pés voltadas para cima."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "leg-press-45",
+    "name": "Leg press 45°",
+    "name_en": "Leg Press",
+    "primary_muscle": "quadriceps",
+    "secondary_muscles": ["glutes", "hamstrings", "adductors"],
+    "equipment": "machine",
+    "level": "beginner",
+    "mechanic": "compound",
+    "category": "strength",
+    "steps": [
+      "Sente-se no leg press com as costas e o quadril bem apoiados no encosto.",
+      "Coloque os pés na plataforma na largura dos ombros.",
+      "Empurre a plataforma e solte as travas de segurança, sem travar os joelhos.",
+      "Desça a plataforma devagar até os joelhos formarem cerca de 90 graus.",
+      "Empurre com o pé inteiro, com mais força nos calcanhares, e volte à posição inicial.",
+      "Ao terminar, recoloque as travas de segurança antes de sair."
+    ],
+    "common_mistakes": [
+      "Travar os joelhos no topo do movimento.",
+      "Descer demais e tirar o quadril do encosto.",
+      "Deixar os joelhos fecharem para dentro ao empurrar."
+    ],
+    "tips": [
+      "Puxe o ar ao descer e solte ao empurrar.",
+      "Mantenha a lombar colada no encosto o tempo todo.",
+      "Segure as alças laterais para estabilizar o corpo."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "agachamento-hack",
+    "name": "Agachamento hack",
+    "name_en": "Hack Squat",
+    "primary_muscle": "quadriceps",
+    "secondary_muscles": ["glutes", "hamstrings", "adductors"],
+    "equipment": "machine",
+    "level": "beginner",
+    "mechanic": "compound",
+    "category": "strength",
+    "steps": [
+      "Apoie as costas no encosto da máquina e encaixe os ombros sob as almofadas.",
+      "Posicione os pés na plataforma na largura dos ombros, pontas levemente para fora.",
+      "Segure as alças laterais e solte as travas de segurança.",
+      "Estenda as pernas sem travar os joelhos; esta é a posição inicial.",
+      "Desça devagar dobrando os joelhos até as coxas passarem um pouco da paralela.",
+      "Empurre a plataforma com o pé inteiro e volte à posição inicial.",
+      "Ao terminar, recoloque as travas de segurança."
+    ],
+    "common_mistakes": [
+      "Tirar as costas ou o quadril do encosto no fundo.",
+      "Travar os joelhos no topo.",
+      "Tirar os calcanhares da plataforma."
+    ],
+    "tips": [
+      "Puxe o ar ao descer e solte ao subir.",
+      "Mantenha a cabeça apoiada e o olhar à frente.",
+      "Controle a descida em vez de deixar a máquina cair."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "avanco-com-halteres",
+    "name": "Avanço com halteres",
+    "name_en": "Dumbbell Lunges",
+    "primary_muscle": "quadriceps",
+    "secondary_muscles": ["glutes", "hamstrings", "adductors"],
+    "equipment": "dumbbell",
+    "level": "beginner",
+    "mechanic": "compound",
+    "category": "strength",
+    "steps": [
+      "Fique em pé com o tronco ereto, segurando um halter em cada mão ao lado do corpo.",
+      "Dê um passo largo à frente com a perna direita.",
+      "Desça o corpo dobrando os dois joelhos até o joelho de trás quase tocar o chão.",
+      "Mantenha a canela da frente perto da vertical e o tronco ereto.",
+      "Empurre o chão com o calcanhar da frente e volte à posição inicial.",
+      "Complete as repetições e troque de perna."
+    ],
+    "common_mistakes": [
+      "Dar um passo curto demais e jogar o joelho muito à frente.",
+      "Inclinar o tronco para frente.",
+      "Deixar o joelho da frente cair para dentro."
+    ],
+    "tips": [
+      "Puxe o ar ao descer e solte ao subir.",
+      "Mantenha os ombros para trás e o abdômen firme.",
+      "Deixe os pés afastados na largura do quadril para ganhar equilíbrio."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "avanco-caminhando",
+    "name": "Avanço caminhando",
+    "name_en": "Bodyweight Walking Lunge",
+    "primary_muscle": "quadriceps",
+    "secondary_muscles": ["glutes", "hamstrings", "adductors"],
+    "equipment": "body_weight",
+    "level": "beginner",
+    "mechanic": "compound",
+    "category": "strength",
+    "steps": [
+      "Fique em pé com os pés na largura dos ombros e as mãos na cintura.",
+      "Dê um passo à frente com uma perna e desça dobrando os dois joelhos.",
+      "Desça até o joelho de trás quase tocar o chão, com o tronco ereto.",
+      "Empurre com o calcanhar da frente e estenda os joelhos para subir.",
+      "Traga o pé de trás à frente e faça o próximo passo com a outra perna."
+    ],
+    "common_mistakes": [
+      "Deixar o joelho da frente passar muito à frente do pé ou cair para dentro.",
+      "Inclinar o tronco à frente.",
+      "Bater o joelho de trás no chão."
+    ],
+    "tips": [
+      "Puxe o ar ao descer e solte ao subir.",
+      "Olhe à frente para manter o equilíbrio.",
+      "Faça passos de tamanho constante durante toda a série."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "afundo-com-salto",
+    "name": "Afundo com salto",
+    "name_en": "Split Squats",
+    "primary_muscle": "quadriceps",
+    "secondary_muscles": ["glutes", "hamstrings", "calves"],
+    "equipment": "body_weight",
+    "level": "intermediate",
+    "mechanic": "compound",
+    "category": "plyometrics",
+    "steps": [
+      "Fique em pé com os pés na largura do quadril.",
+      "Salte para a posição de afundo, com uma perna à frente e a outra atrás, dobrando os joelhos.",
+      "Assim que chegar embaixo, inverta a direção e salte para cima.",
+      "No ar, troque a posição das pernas.",
+      "Aterrisse de forma suave já no afundo com a outra perna à frente e repita."
+    ],
+    "common_mistakes": [
+      "Aterrissar com as pernas rígidas.",
+      "Deixar o joelho da frente cair para dentro na aterrissagem.",
+      "Perder o tronco ereto e jogar o peso à frente."
+    ],
+    "tips": [
+      "Solte o ar no salto e puxe o ar na aterrissagem.",
+      "Aterrisse com a ponta e o meio do pé, amortecendo com os joelhos.",
+      "Use os braços para ajudar no impulso."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "subida-no-banco-com-halteres",
+    "name": "Subida no banco com halteres",
+    "name_en": "Dumbbell Step Ups",
+    "primary_muscle": "quadriceps",
+    "secondary_muscles": ["glutes", "hamstrings", "calves"],
+    "equipment": "dumbbell",
+    "level": "intermediate",
+    "mechanic": "compound",
+    "category": "strength",
+    "steps": [
+      "Fique em pé de frente para um banco ou caixa, com um halter em cada mão ao lado do corpo.",
+      "Apoie o pé direito inteiro em cima do banco.",
+      "Empurre com o calcanhar direito e suba estendendo quadril e joelho.",
+      "Leve o pé esquerdo para cima do banco.",
+      "Desça primeiro com o pé esquerdo, controlando com a perna direita, e depois traga o pé direito.",
+      "Complete as repetições e troque de perna."
+    ],
+    "common_mistakes": [
+      "Dar impulso com a perna de baixo.",
+      "Usar um banco alto demais e curvar o tronco.",
+      "Deixar o joelho de apoio cair para dentro."
+    ],
+    "tips": [
+      "Solte o ar ao subir e puxe ao descer.",
+      "Mantenha o tronco ereto e o olhar à frente.",
+      "Desça devagar para aproveitar a fase de controle."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "mesa-flexora",
+    "name": "Mesa flexora",
+    "name_en": "Lying Leg Curls",
+    "primary_muscle": "hamstrings",
+    "secondary_muscles": ["calves"],
+    "equipment": "machine",
+    "level": "beginner",
+    "mechanic": "isolation",
+    "category": "strength",
+    "steps": [
+      "Ajuste a máquina à sua altura e deite de bruços com os joelhos logo após a borda do banco.",
+      "Posicione o rolo na parte de trás das pernas, um pouco acima dos calcanhares.",
+      "Segure as alças, com as pernas estendidas e o quadril apoiado.",
+      "Flexione os joelhos levando o rolo o mais perto possível dos glúteos.",
+      "Segure um segundo na contração.",
+      "Volte devagar até estender as pernas."
+    ],
+    "common_mistakes": [
+      "Tirar o quadril do banco ao puxar.",
+      "Usar impulso e deixar o peso cair na volta.",
+      "Fazer amplitude curta."
+    ],
+    "tips": [
+      "Solte o ar ao flexionar e puxe ao estender.",
+      "Pressione o quadril contra o banco o tempo todo.",
+      "Controle a volta em cerca de dois segundos."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "cadeira-flexora",
+    "name": "Cadeira flexora",
+    "name_en": "Seated Leg Curl",
+    "primary_muscle": "hamstrings",
+    "secondary_muscles": ["calves"],
+    "equipment": "machine",
+    "level": "beginner",
+    "mechanic": "isolation",
+    "category": "strength",
+    "steps": [
+      "Ajuste a máquina para que os joelhos fiquem alinhados ao eixo e sente-se com as costas no encosto.",
+      "Apoie a parte de trás da perna, logo acima dos calcanhares, sobre o rolo.",
+      "Prenda a almofada sobre as coxas, logo acima dos joelhos, e segure as alças.",
+      "Com as pernas estendidas, flexione os joelhos puxando o rolo para baixo e para trás.",
+      "Segure um segundo na contração.",
+      "Volte devagar até estender as pernas."
+    ],
+    "common_mistakes": [
+      "Deixar a almofada das coxas frouxa.",
+      "Mexer o tronco para ajudar a puxar.",
+      "Soltar o peso rápido na volta."
+    ],
+    "tips": [
+      "Solte o ar ao flexionar e puxe ao voltar.",
+      "Mantenha as costas apoiadas no encosto.",
+      "Faça a amplitude completa sem bater o peso."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "stiff-com-halteres",
+    "name": "Stiff com halteres",
+    "name_en": "Stiff-Legged Dumbbell Deadlift",
+    "primary_muscle": "hamstrings",
+    "secondary_muscles": ["glutes", "lower_back"],
+    "equipment": "dumbbell",
+    "level": "beginner",
+    "mechanic": "compound",
+    "category": "strength",
+    "steps": [
+      "Fique em pé com um halter em cada mão, na frente das coxas.",
+      "Afaste os pés na largura do quadril e dobre levemente os joelhos.",
+      "Mantendo os joelhos fixos e as costas retas, leve o quadril para trás e desça os halteres junto às pernas.",
+      "Desça até sentir alongar a parte de trás das coxas, sem arredondar as costas.",
+      "Estenda o quadril e volte à posição em pé."
+    ],
+    "common_mistakes": [
+      "Arredondar as costas na descida.",
+      "Afastar os halteres das pernas.",
+      "Dobrar os joelhos e transformar em agachamento."
+    ],
+    "tips": [
+      "Puxe o ar ao descer e solte ao subir.",
+      "Pense em levar o quadril para trás, não o tronco para baixo.",
+      "Contraia os glúteos ao chegar no topo."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "elevacao-gluteo-isquiotibial",
+    "name": "Elevação glúteo-isquiotibial",
+    "name_en": "Glute Ham Raise",
+    "primary_muscle": "hamstrings",
+    "secondary_muscles": ["glutes", "calves", "lower_back"],
+    "equipment": "machine",
+    "level": "intermediate",
+    "mechanic": "compound",
+    "category": "strength",
+    "steps": [
+      "Ajuste o aparelho ao seu corpo, com os joelhos logo atrás da almofada.",
+      "Prenda os pés entre os rolos, apoiados na plataforma, e deite de bruços.",
+      "Comece com o tronco para baixo e as costas retas.",
+      "Empurre os pés contra a plataforma e flexione os joelhos para levantar o corpo.",
+      "Suba até o tronco ficar na vertical.",
+      "Volte devagar à posição inicial, controlando a descida."
+    ],
+    "common_mistakes": [
+      "Dobrar o quadril em vez de flexionar os joelhos.",
+      "Descer sem controle.",
+      "Arredondar as costas."
+    ],
+    "tips": [
+      "Solte o ar ao subir e puxe ao descer.",
+      "Mantenha glúteos e abdômen contraídos durante todo o movimento.",
+      "Use as mãos ou um elástico para ajudar no início, se necessário."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "elevacao-pelvica-com-barra",
+    "name": "Elevação pélvica com barra",
+    "name_en": "Barbell Hip Thrust",
+    "primary_muscle": "glutes",
+    "secondary_muscles": ["hamstrings", "quadriceps", "adductors"],
+    "equipment": "barbell",
+    "level": "intermediate",
+    "mechanic": "compound",
+    "category": "strength",
+    "steps": [
+      "Sente no chão com um banco logo atrás e a barra carregada sobre as pernas.",
+      "Role a barra até ficar sobre o quadril; use uma proteção na barra.",
+      "Apoie a parte de baixo das escápulas na borda do banco e os pés no chão, na largura do quadril.",
+      "Empurre o chão com os pés e eleve o quadril até o tronco ficar alinhado com as coxas.",
+      "Contraia os glúteos no topo por um segundo.",
+      "Desça o quadril de forma controlada e repita."
+    ],
+    "common_mistakes": [
+      "Arquear a lombar no topo em vez de estender o quadril.",
+      "Deixar os pés longe demais e sentir mais a parte de trás da coxa.",
+      "Abrir ou fechar os joelhos durante a subida."
+    ],
+    "tips": [
+      "Solte o ar ao subir e puxe ao descer.",
+      "Mantenha o queixo levemente recolhido e o olhar à frente.",
+      "No topo, as canelas devem ficar próximas da vertical."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "ponte-de-gluteos",
+    "name": "Ponte de glúteos",
+    "name_en": "Butt Lift (Bridge)",
+    "primary_muscle": "glutes",
+    "secondary_muscles": ["hamstrings"],
+    "equipment": "body_weight",
+    "level": "beginner",
+    "mechanic": "isolation",
+    "category": "strength",
+    "steps": [
+      "Deite de costas no chão, com os joelhos dobrados e os braços ao lado do corpo.",
+      "Apoie os pés no chão, afastados na largura do quadril.",
+      "Empurre com os calcanhares e eleve o quadril até alinhar joelhos, quadril e ombros.",
+      "Segure um segundo no topo contraindo os glúteos.",
+      "Desça devagar até a posição inicial."
+    ],
+    "common_mistakes": [
+      "Arquear a lombar no topo.",
+      "Empurrar com a ponta dos pés.",
+      "Deixar os joelhos abrirem ou fecharem."
+    ],
+    "tips": [
+      "Solte o ar ao subir e puxe ao descer.",
+      "Contraia o abdômen para manter a coluna neutra.",
+      "Concentre a força nos glúteos no topo do movimento."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "ponte-de-gluteos-com-barra",
+    "name": "Ponte de glúteos com barra",
+    "name_en": "Barbell Glute Bridge",
+    "primary_muscle": "glutes",
+    "secondary_muscles": ["hamstrings", "quadriceps"],
+    "equipment": "barbell",
+    "level": "intermediate",
+    "mechanic": "compound",
+    "category": "strength",
+    "steps": [
+      "Sente no chão com a barra carregada sobre as pernas; use uma proteção na barra.",
+      "Role a barra até ficar sobre o quadril e deite de costas no chão.",
+      "Dobre os joelhos e apoie os pés no chão, na largura do quadril.",
+      "Empurre com os calcanhares e eleve o quadril até alinhar joelhos, quadril e ombros.",
+      "Contraia os glúteos no topo por um segundo.",
+      "Desça de forma controlada e repita."
+    ],
+    "common_mistakes": [
+      "Arquear a lombar no topo.",
+      "Deixar a barra rolar para fora do quadril.",
+      "Descer o quadril de forma brusca."
+    ],
+    "tips": [
+      "Solte o ar ao subir e puxe ao descer.",
+      "Segure a barra com as mãos para mantê-la estável.",
+      "Mantenha o abdômen firme durante todo o movimento."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "coice-de-gluteo-no-solo",
+    "name": "Coice de glúteo no solo",
+    "name_en": "Glute Kickback",
+    "primary_muscle": "glutes",
+    "secondary_muscles": ["hamstrings"],
+    "equipment": "body_weight",
+    "level": "beginner",
+    "mechanic": "isolation",
+    "category": "strength",
+    "steps": [
+      "Fique em quatro apoios no colchonete, com as mãos abaixo dos ombros e os joelhos abaixo do quadril.",
+      "Mantenha os joelhos dobrados a 90 graus e o olhar para o chão, um pouco à frente.",
+      "Eleve a perna direita para trás e para cima até a coxa ficar alinhada com as costas, mantendo o joelho dobrado.",
+      "Segure um segundo contraindo o glúteo.",
+      "Volte à posição inicial e repita com a outra perna, alternando."
+    ],
+    "common_mistakes": [
+      "Arquear a lombar ao subir a perna.",
+      "Girar o quadril para o lado.",
+      "Fazer o movimento rápido, com balanço."
+    ],
+    "tips": [
+      "Solte o ar ao subir a perna e puxe ao descer.",
+      "Contraia o abdômen para manter as costas retas.",
+      "Pense em empurrar o calcanhar em direção ao teto."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "coice-de-gluteo-na-polia",
+    "name": "Coice de glúteo na polia",
+    "name_en": "One-Legged Cable Kickback",
+    "primary_muscle": "glutes",
+    "secondary_muscles": ["hamstrings"],
+    "equipment": "cable",
+    "level": "intermediate",
+    "mechanic": "isolation",
+    "category": "strength",
+    "steps": [
+      "Prenda uma tornozeleira na polia baixa e encaixe-a no tornozelo.",
+      "Fique de frente para a máquina, a cerca de 60 cm, segurando a estrutura para apoio.",
+      "Com joelhos e quadril levemente dobrados e o abdômen firme, leve a perna para trás em arco, o mais alto que for confortável.",
+      "Contraia o glúteo por um segundo no ponto mais alto.",
+      "Volte devagar à posição inicial, resistindo à tração do cabo.",
+      "Complete as repetições e troque de perna."
+    ],
+    "common_mistakes": [
+      "Arquear a lombar para subir mais a perna.",
+      "Inclinar o tronco e girar o quadril.",
+      "Deixar o cabo puxar a perna de volta sem controle."
+    ],
+    "tips": [
+      "Solte o ar ao levar a perna para trás e puxe ao voltar.",
+      "Mantenha o quadril de frente para a máquina.",
+      "Prefira amplitude controlada a carga alta."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "cadeira-abdutora",
+    "name": "Cadeira abdutora",
+    "name_en": "Thigh Abductor",
+    "primary_muscle": "abductors",
+    "secondary_muscles": ["glutes"],
+    "equipment": "machine",
+    "level": "beginner",
+    "mechanic": "isolation",
+    "category": "strength",
+    "steps": [
+      "Escolha a carga e sente na cadeira abdutora com as costas apoiadas.",
+      "Posicione a parte de fora dos joelhos contra as almofadas e segure as alças laterais.",
+      "Afaste as pernas empurrando as almofadas para fora.",
+      "Segure um segundo na posição aberta.",
+      "Volte devagar até a posição inicial, sem deixar o peso bater."
+    ],
+    "common_mistakes": [
+      "Balançar o tronco para ajudar a abrir as pernas.",
+      "Soltar o peso rápido na volta.",
+      "Fazer amplitude curta."
+    ],
+    "tips": [
+      "Solte o ar ao abrir as pernas e puxe ao fechar.",
+      "Mantenha o tronco parado e o abdômen firme.",
+      "Controle a volta em cerca de dois segundos."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "cadeira-adutora",
+    "name": "Cadeira adutora",
+    "name_en": "Thigh Adductor",
+    "primary_muscle": "adductors",
+    "secondary_muscles": ["glutes", "hamstrings"],
+    "equipment": "machine",
+    "level": "beginner",
+    "mechanic": "isolation",
+    "category": "strength",
+    "steps": [
+      "Escolha a carga e sente na cadeira adutora com as costas apoiadas.",
+      "Posicione a parte de dentro dos joelhos contra as almofadas e segure as alças laterais.",
+      "Feche as pernas empurrando as almofadas uma em direção à outra.",
+      "Segure um segundo na posição fechada.",
+      "Volte devagar até a posição inicial, sem deixar o peso bater."
+    ],
+    "common_mistakes": [
+      "Fazer movimentos bruscos, com tranco.",
+      "Abrir as pernas além do confortável na volta.",
+      "Mexer o tronco durante o movimento."
+    ],
+    "tips": [
+      "Solte o ar ao fechar as pernas e puxe ao abrir.",
+      "Mantenha o tronco parado e o abdômen firme.",
+      "Ajuste a abertura inicial a uma amplitude que você controle."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "caminhada-monstro-com-elastico",
+    "name": "Caminhada monstro com elástico",
+    "name_en": "Monster Walk",
+    "primary_muscle": "abductors",
+    "secondary_muscles": ["glutes"],
+    "equipment": "band",
+    "level": "beginner",
+    "mechanic": "compound",
+    "category": "strength",
+    "steps": [
+      "Coloque um elástico em volta dos tornozelos e outro em volta dos joelhos.",
+      "Fique com os pés na largura dos ombros, de modo que os elásticos fiquem esticados.",
+      "Dobre levemente joelhos e quadril, com o tronco ereto.",
+      "Dê passos curtos à frente, alternando os pés e mantendo a tensão nos elásticos.",
+      "Depois de alguns passos, caminhe para trás até o ponto de partida."
+    ],
+    "common_mistakes": [
+      "Deixar os joelhos fecharem para dentro.",
+      "Juntar os pés e perder a tensão dos elásticos.",
+      "Balançar o tronco de um lado para o outro."
+    ],
+    "tips": [
+      "Respire de forma contínua, soltando o ar a cada passo.",
+      "Mantenha a semiflexão dos joelhos durante toda a série.",
+      "Faça passos curtos e controlados."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "panturrilha-em-pe",
+    "name": "Panturrilha em pé",
+    "name_en": "Standing Calf Raises",
+    "primary_muscle": "calves",
+    "secondary_muscles": [],
+    "equipment": "machine",
+    "level": "beginner",
+    "mechanic": "isolation",
+    "category": "strength",
+    "steps": [
+      "Ajuste as almofadas da máquina à sua altura.",
+      "Encaixe os ombros sob as almofadas e apoie a ponta dos pés no degrau, com os calcanhares para fora.",
+      "Estenda quadril e joelhos até ficar em pé, mantendo os joelhos levemente dobrados.",
+      "Suba os calcanhares o mais alto possível, contraindo a panturrilha.",
+      "Segure um segundo no topo.",
+      "Desça devagar até sentir a panturrilha alongar."
+    ],
+    "common_mistakes": [
+      "Dobrar e estender os joelhos para ajudar a subir.",
+      "Fazer amplitude curta, sem alongar embaixo.",
+      "Quicar no fundo do movimento."
+    ],
+    "tips": [
+      "Solte o ar ao subir e puxe ao descer.",
+      "Mantenha os joelhos fixos durante toda a série.",
+      "Faça uma pausa breve embaixo antes de subir."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "panturrilha-sentado",
+    "name": "Panturrilha sentado",
+    "name_en": "Seated Calf Raise",
+    "primary_muscle": "calves",
+    "secondary_muscles": [],
+    "equipment": "machine",
+    "level": "beginner",
+    "mechanic": "isolation",
+    "category": "strength",
+    "steps": [
+      "Sente na máquina e apoie a ponta dos pés na plataforma, com os calcanhares para fora.",
+      "Ajuste a almofada para que fique sobre a parte de baixo das coxas.",
+      "Suba um pouco os calcanhares e solte a trava de segurança.",
+      "Desça os calcanhares devagar até sentir a panturrilha alongar.",
+      "Suba os calcanhares o mais alto possível e segure um segundo.",
+      "Ao terminar, recoloque a trava de segurança."
+    ],
+    "common_mistakes": [
+      "Fazer amplitude curta.",
+      "Quicar no fundo do movimento.",
+      "Usar o tronco para empurrar a almofada."
+    ],
+    "tips": [
+      "Puxe o ar ao descer e solte ao subir.",
+      "Mantenha as mãos sobre a almofada para estabilizar.",
+      "Controle a descida em cerca de dois segundos."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "panturrilha-no-leg-press",
+    "name": "Panturrilha no leg press",
+    "name_en": "Calf Press On The Leg Press Machine",
+    "primary_muscle": "calves",
+    "secondary_muscles": [],
+    "equipment": "machine",
+    "level": "beginner",
+    "mechanic": "isolation",
+    "category": "strength",
+    "steps": [
+      "Sente no leg press e coloque os pés na plataforma na largura dos ombros.",
+      "Estenda as pernas sem travar os joelhos; se a máquina permitir, mantenha as travas de segurança fechadas.",
+      "Deslize os pés até apoiar só a ponta e a parte da frente dos pés na borda de baixo da plataforma.",
+      "Empurre a plataforma estendendo os tornozelos o máximo possível.",
+      "Segure um segundo no topo.",
+      "Volte devagar, deixando os calcanhares descerem até alongar a panturrilha."
+    ],
+    "common_mistakes": [
+      "Dobrar os joelhos durante o movimento.",
+      "Apoiar os pés muito alto e escorregar da plataforma.",
+      "Fazer amplitude curta."
+    ],
+    "tips": [
+      "Solte o ar ao empurrar e puxe ao voltar.",
+      "Mantenha os joelhos fixos, levemente dobrados.",
+      "Use carga que permita controlar a descida."
+    ],
+    "text_source": "free-exercise-db"
+  }
+]

@@ -25,6 +25,13 @@ Para instalação e configuração completas, veja o `README.md`.
 
 ## 2. Pendências, em ordem de prioridade
 
+0. **Módulo de treinos, Fase 1 (biblioteca de exercícios + mapa corporal) — pronta localmente, NÃO publicada.** Pedido completo em `docs/PROMPT_MODULO_TREINOS.md`. Para publicar (só com ok do usuário):
+   - Criar um store de Blob **público** só para mídias de exercícios e cadastrar `MEDIA_READ_WRITE_TOKEN` na Vercel (todos os ambientes).
+   - Aplicar as migrations `0013_exercise_library.sql` e `0014_exercise_catalog.sql` no Neon (`npm run db:migrate`).
+   - Rodar `node --env-file=.env.local scripts/import-exercise-media.mjs --apply` (antes, sem `--apply`, para ver o resumo).
+   - Gravar os vídeos próprios da lista "falta gravar" (filtro "Sem mídia" em /exercicios, visível só para admin).
+   - Próxima fase: Fase 2 (fichas de musculação + executar treino).
+
 1. **E-mail de recuperação de senha (Resend)**. Sem ele, o link de recuperação só aparece no log do servidor.
    - Instalar a integração: `vercel integration add resend/resend-email --no-claim --non-interactive`. Ela pede a aceitação dos termos no navegador (link que a CLI imprime).
    - Criar a chave de API no Resend e cadastrar `RESEND_API_KEY` na Vercel (produção, preview e development). `EMAIL_FROM` também pode ser definido.
@@ -62,6 +69,11 @@ Para instalação e configuração completas, veja o `README.md`.
 - Várias comprovações (migration 0012): até 5 por atividade. A primeira (capa) fica em `activities.proof_path`; as outras em `activity_extra_proofs` (posição 1–4). Só o dono adiciona/remove e só enquanto a atividade está pendente; a rota `/api/proofs` aceita as duas tabelas. Galeria e card de compartilhar usam todas.
 - Formulário de atividade sem controles nativos do iOS para modalidade e data: `src/components/activity-pickers.tsx` (folha com grade de modalidades; atalhos Hoje/Ontem + calendário abaixo do campo). O saldo do limite diário é o da data escolhida.
 - Projeto de referência: o repositório `ReservaQuadras` (Supabase) serviu de modelo para o push, a conversão de imagem e a câmera. O código foi adaptado, não copiado.
+- Biblioteca de exercícios (migrations 0013/0014): catálogo global, lido por quem está logado e escrito só pelo admin. Textos do free-exercise-db (domínio público) traduzidos; NUNCA usar as fotos dele. Mídias só CC0, CC BY ou CC BY-SA (wger, Everkinetic, Wikimedia Commons) ou próprias; ODbL e conteúdo gerado por IA ficam de fora; sem autor no wger → "Contribuidores do wger". Arquivos sempre copiados para o nosso Blob público (nunca apontar para servidores de terceiros).
+- Mídias de exercício em Blob **público separado** (`MEDIA_READ_WRITE_TOKEN`); comprovações continuam no Blob privado. Vídeo próprio: até 10 s e 20 MB, limitado no navegador, sem conversão no servidor. Mídia própria aparece antes da de terceiros.
+- "Flexão militar" = flexão com cotovelos colados ao corpo; "abdominal remador" = sentar recolhendo os joelhos ao peito.
+- O plano de treino pago do usuário (pedido em `docs/PROMPT_MODULO_TREINOS.md`, arquivo só local, fora do Git porque o repositório é público) é dele: fica só na conta dele e nas cópias que ele compartilhar; nunca como modelo público.
+- O app só tem tema escuro (o pedido citava claro e escuro; tema claro não existe hoje).
 
 ## 4. Infra e variáveis (nomes, não valores)
 
@@ -72,7 +84,7 @@ Variáveis na Vercel (todos os ambientes, exceto onde indicado):
 - `NEXT_PUBLIC_SITE_URL` (produção e preview: `https://desafio-fitness-brown.vercel.app`).
 - `BLOB_READ_WRITE_TOKEN` (injetada pelo store de Blob).
 - `NEXT_PUBLIC_VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY` (secreta), `VAPID_SUBJECT` (`https://desafio-fitness-brown.vercel.app`).
-- Pendentes: `RESEND_API_KEY`, `EMAIL_FROM`.
+- Pendentes: `RESEND_API_KEY`, `EMAIL_FROM`, `MEDIA_READ_WRITE_TOKEN` (Blob público das mídias de exercícios).
 
 Valores secretos não estão no repositório. Para usar a mesma configuração em outra máquina, veja a seção 5.
 

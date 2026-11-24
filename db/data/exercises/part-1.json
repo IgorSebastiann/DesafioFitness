@@ -1,0 +1,796 @@
+[
+  {
+    "slug": "flexao-de-braco",
+    "name": "Flexão de braço",
+    "name_en": "Pushups",
+    "primary_muscle": "chest",
+    "secondary_muscles": ["front_delts", "triceps", "abs"],
+    "equipment": "body_weight",
+    "level": "beginner",
+    "mechanic": "compound",
+    "category": "strength",
+    "steps": [
+      "Apoie as mãos no chão um pouco mais abertas que a largura dos ombros.",
+      "Estenda as pernas e apoie as pontas dos pés, formando uma linha reta da cabeça aos calcanhares.",
+      "Desça o corpo dobrando os cotovelos até o peito quase encostar no chão.",
+      "Faça uma breve pausa embaixo.",
+      "Empurre o chão e estenda os braços até voltar à posição inicial."
+    ],
+    "common_mistakes": [
+      "Deixar o quadril cair ou ficar empinado.",
+      "Abrir demais os cotovelos, em linha com os ombros.",
+      "Fazer só metade do movimento, sem descer o peito."
+    ],
+    "tips": [
+      "Contraia o abdômen e os glúteos para manter o corpo alinhado.",
+      "Mantenha os cotovelos a cerca de 45 graus do tronco.",
+      "Puxe o ar ao descer e solte ao empurrar."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "flexao-militar",
+    "name": "Flexão militar (cotovelos colados)",
+    "name_en": "Push-Ups - Close Triceps Position",
+    "primary_muscle": "triceps",
+    "secondary_muscles": ["chest", "front_delts"],
+    "equipment": "body_weight",
+    "level": "intermediate",
+    "mechanic": "compound",
+    "category": "strength",
+    "steps": [
+      "Apoie as mãos no chão na largura dos ombros, logo abaixo do peito.",
+      "Estenda as pernas e apoie as pontas dos pés, com o corpo reto.",
+      "Desça o corpo mantendo os cotovelos colados ao tronco e apontando para trás.",
+      "Desça até o peito ficar perto do chão.",
+      "Empurre o chão e estenda os braços, mantendo os cotovelos junto ao corpo."
+    ],
+    "common_mistakes": [
+      "Deixar os cotovelos abrirem para os lados durante a descida.",
+      "Deixar o quadril cair ou subir demais.",
+      "Encurtar a amplitude para conseguir mais repetições."
+    ],
+    "tips": [
+      "Pense em raspar os cotovelos nas costelas durante todo o movimento.",
+      "Mantenha o abdômen firme para não arquear a lombar.",
+      "Puxe o ar ao descer e solte ao empurrar."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "supino-reto-com-barra",
+    "name": "Supino reto com barra",
+    "name_en": "Barbell Bench Press - Medium Grip",
+    "primary_muscle": "chest",
+    "secondary_muscles": ["front_delts", "triceps"],
+    "equipment": "barbell",
+    "level": "beginner",
+    "mechanic": "compound",
+    "category": "strength",
+    "steps": [
+      "Deite no banco reto com os pés firmes no chão e os olhos abaixo da barra.",
+      "Segure a barra com as mãos um pouco mais abertas que os ombros.",
+      "Tire a barra do suporte e posicione-a acima do peito com os braços estendidos.",
+      "Desça a barra devagar até tocar levemente a parte média do peito.",
+      "Faça uma breve pausa e empurre a barra de volta até estender os braços.",
+      "Ao terminar a série, devolva a barra ao suporte com controle."
+    ],
+    "common_mistakes": [
+      "Tirar o quadril do banco ao empurrar.",
+      "Quicar a barra no peito.",
+      "Abrir os cotovelos a 90 graus do tronco.",
+      "Deixar os punhos dobrados para trás."
+    ],
+    "tips": [
+      "Junte as escápulas e mantenha-as firmes no banco durante a série.",
+      "Mantenha os punhos alinhados com os antebraços.",
+      "Puxe o ar ao descer e solte ao empurrar."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "supino-inclinado-com-halteres",
+    "name": "Supino inclinado com halteres",
+    "name_en": "Incline Dumbbell Press",
+    "primary_muscle": "chest",
+    "secondary_muscles": ["front_delts", "triceps"],
+    "equipment": "dumbbell",
+    "level": "beginner",
+    "mechanic": "compound",
+    "category": "strength",
+    "steps": [
+      "Ajuste o banco com inclinação entre 30 e 45 graus.",
+      "Sente com um halter em cada mão apoiado nas coxas e deite levando os halteres à altura do peito.",
+      "Posicione os halteres ao lado do peito, com as palmas voltadas para a frente.",
+      "Empurre os halteres para cima até estender os braços, aproximando-os no alto.",
+      "Desça devagar até os halteres ficarem na altura do peito.",
+      "Repita mantendo as costas apoiadas no banco."
+    ],
+    "common_mistakes": [
+      "Usar inclinação alta demais, transferindo o trabalho para os ombros.",
+      "Bater os halteres no alto do movimento.",
+      "Descer rápido demais e perder o controle da carga."
+    ],
+    "tips": [
+      "Mantenha as escápulas juntas e o peito aberto.",
+      "Controle a descida em cerca de dois segundos.",
+      "Solte o ar ao empurrar e puxe ao descer."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "supino-reto-com-halteres",
+    "name": "Supino reto com halteres",
+    "name_en": "Dumbbell Bench Press",
+    "primary_muscle": "chest",
+    "secondary_muscles": ["front_delts", "triceps"],
+    "equipment": "dumbbell",
+    "level": "beginner",
+    "mechanic": "compound",
+    "category": "strength",
+    "steps": [
+      "Sente na ponta do banco reto com os halteres apoiados nas coxas.",
+      "Deite levando os halteres junto ao peito com ajuda das coxas.",
+      "Posicione os halteres ao lado do peito, com as palmas voltadas para a frente.",
+      "Empurre os halteres para cima até estender os braços.",
+      "Desça devagar até os halteres chegarem ao lado do peito.",
+      "Repita mantendo os pés firmes no chão."
+    ],
+    "common_mistakes": [
+      "Deixar os halteres descerem desalinhados, um mais baixo que o outro.",
+      "Tirar o quadril do banco ao empurrar.",
+      "Travar os cotovelos com força no alto."
+    ],
+    "tips": [
+      "Mantenha as escápulas juntas e apoiadas no banco.",
+      "Deixe os cotovelos levemente abaixo da linha dos ombros.",
+      "Solte o ar ao empurrar e puxe ao descer."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "supino-declinado-com-barra",
+    "name": "Supino declinado com barra",
+    "name_en": "Decline Barbell Bench Press",
+    "primary_muscle": "chest",
+    "secondary_muscles": ["triceps", "front_delts"],
+    "equipment": "barbell",
+    "level": "beginner",
+    "mechanic": "compound",
+    "category": "strength",
+    "steps": [
+      "Deite no banco declinado e prenda as pernas no apoio.",
+      "Segure a barra com as mãos um pouco mais abertas que os ombros.",
+      "Tire a barra do suporte e posicione-a acima do peito com os braços estendidos.",
+      "Desça a barra devagar até tocar a parte baixa do peito.",
+      "Empurre a barra de volta até estender os braços.",
+      "Ao terminar, devolva a barra ao suporte com controle."
+    ],
+    "common_mistakes": [
+      "Descer a barra em direção ao pescoço.",
+      "Quicar a barra no peito.",
+      "Fazer o exercício sem ajuda com cargas altas."
+    ],
+    "tips": [
+      "Peça ajuda para tirar e devolver a barra ao suporte.",
+      "Mantenha as escápulas juntas durante toda a série.",
+      "Puxe o ar ao descer e solte ao empurrar."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "supino-inclinado-com-barra",
+    "name": "Supino inclinado com barra",
+    "name_en": "Barbell Incline Bench Press - Medium Grip",
+    "primary_muscle": "chest",
+    "secondary_muscles": ["front_delts", "triceps"],
+    "equipment": "barbell",
+    "level": "beginner",
+    "mechanic": "compound",
+    "category": "strength",
+    "steps": [
+      "Deite no banco inclinado com os pés firmes no chão.",
+      "Segure a barra com as mãos um pouco mais abertas que os ombros.",
+      "Tire a barra do suporte e posicione-a acima da parte alta do peito.",
+      "Desça a barra devagar até tocar a parte alta do peito.",
+      "Empurre a barra de volta até estender os braços.",
+      "Ao terminar, devolva a barra ao suporte com controle."
+    ],
+    "common_mistakes": [
+      "Descer a barra na parte baixa do peito.",
+      "Arquear demais a lombar e tirar o quadril do banco.",
+      "Abrir os cotovelos totalmente para os lados."
+    ],
+    "tips": [
+      "Mantenha as escápulas juntas e o peito aberto.",
+      "Controle a descida e evite quicar a barra.",
+      "Puxe o ar ao descer e solte ao empurrar."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "crucifixo-reto-com-halteres",
+    "name": "Crucifixo reto com halteres",
+    "name_en": "Dumbbell Flyes",
+    "primary_muscle": "chest",
+    "secondary_muscles": ["front_delts"],
+    "equipment": "dumbbell",
+    "level": "beginner",
+    "mechanic": "isolation",
+    "category": "strength",
+    "steps": [
+      "Deite no banco reto com um halter em cada mão.",
+      "Estenda os braços acima do peito, com as palmas voltadas uma para a outra.",
+      "Dobre levemente os cotovelos e mantenha esse ângulo durante todo o movimento.",
+      "Abra os braços em arco para os lados até sentir o peito alongar.",
+      "Volte pelo mesmo arco, aproximando os halteres acima do peito."
+    ],
+    "common_mistakes": [
+      "Dobrar e estender os cotovelos, transformando o exercício em supino.",
+      "Descer os braços muito abaixo da linha do tronco.",
+      "Usar carga alta demais e perder o controle."
+    ],
+    "tips": [
+      "Pense em abraçar uma árvore ao subir os halteres.",
+      "Mantenha as escápulas juntas e o peito aberto.",
+      "Puxe o ar ao abrir os braços e solte ao fechar."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "crucifixo-inclinado-com-halteres",
+    "name": "Crucifixo inclinado com halteres",
+    "name_en": "Incline Dumbbell Flyes",
+    "primary_muscle": "chest",
+    "secondary_muscles": ["front_delts"],
+    "equipment": "dumbbell",
+    "level": "beginner",
+    "mechanic": "isolation",
+    "category": "strength",
+    "steps": [
+      "Ajuste o banco com inclinação entre 30 e 45 graus e deite com um halter em cada mão.",
+      "Estenda os braços acima do peito, com as palmas voltadas uma para a outra.",
+      "Dobre levemente os cotovelos e mantenha esse ângulo.",
+      "Abra os braços em arco para os lados até sentir o peito alongar.",
+      "Volte pelo mesmo arco, aproximando os halteres acima do peito."
+    ],
+    "common_mistakes": [
+      "Dobrar demais os cotovelos e empurrar a carga como num supino.",
+      "Descer os halteres além do ponto confortável para os ombros.",
+      "Tirar as costas do banco."
+    ],
+    "tips": [
+      "Movimente apenas os ombros, mantendo os cotovelos fixos.",
+      "Controle bem a descida.",
+      "Puxe o ar ao abrir os braços e solte ao fechar."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "voador-polia-alta",
+    "name": "Voador na polia alta (crossover)",
+    "name_en": "Cable Crossover",
+    "primary_muscle": "chest",
+    "secondary_muscles": ["front_delts"],
+    "equipment": "cable",
+    "level": "beginner",
+    "mechanic": "isolation",
+    "category": "strength",
+    "steps": [
+      "Ajuste as duas polias na posição alta e segure uma pegada em cada mão.",
+      "Dê um passo à frente, com um pé à frente do outro, e incline levemente o tronco.",
+      "Abra os braços com os cotovelos levemente dobrados, sentindo o peito alongar.",
+      "Puxe as pegadas em arco para baixo e para a frente até as mãos se encontrarem na frente do corpo.",
+      "Segure a contração por um segundo.",
+      "Volte devagar pelo mesmo arco até a posição inicial."
+    ],
+    "common_mistakes": [
+      "Dobrar e estender os cotovelos durante o movimento.",
+      "Usar o peso do corpo para puxar os cabos.",
+      "Deixar os cabos voltarem rápido, sem controle."
+    ],
+    "tips": [
+      "Mantenha o tronco firme e o peito aberto.",
+      "Mantenha o mesmo ângulo dos cotovelos do início ao fim.",
+      "Solte o ar ao fechar os braços e puxe ao abrir."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "voador-maquina",
+    "name": "Voador na máquina (peck deck)",
+    "name_en": "Butterfly",
+    "primary_muscle": "chest",
+    "secondary_muscles": ["front_delts"],
+    "equipment": "machine",
+    "level": "beginner",
+    "mechanic": "isolation",
+    "category": "strength",
+    "steps": [
+      "Ajuste o banco para que os braços fiquem paralelos ao chão ao segurar as pegadas.",
+      "Sente com as costas apoiadas no encosto e segure as pegadas.",
+      "Aproxime as pegadas na frente do corpo, contraindo o peito.",
+      "Segure a contração por um segundo.",
+      "Volte devagar até sentir o peito alongar."
+    ],
+    "common_mistakes": [
+      "Tirar as costas do encosto ao fechar os braços.",
+      "Deixar a carga voltar rápido e bater os pesos.",
+      "Ajustar o banco alto ou baixo demais."
+    ],
+    "tips": [
+      "Mantenha os ombros para baixo e para trás.",
+      "Controle a volta tanto quanto a ida.",
+      "Solte o ar ao fechar os braços e puxe ao abrir."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "paralelas-peitoral",
+    "name": "Paralelas (foco no peitoral)",
+    "name_en": "Dips - Chest Version",
+    "primary_muscle": "chest",
+    "secondary_muscles": ["triceps", "front_delts"],
+    "equipment": "body_weight",
+    "level": "intermediate",
+    "mechanic": "compound",
+    "category": "strength",
+    "steps": [
+      "Segure as barras paralelas e suba até ficar com os braços estendidos.",
+      "Incline o tronco cerca de 30 graus para a frente.",
+      "Desça devagar dobrando os cotovelos, levemente abertos, até sentir o peito alongar.",
+      "Empurre as barras e estenda os braços até voltar à posição inicial.",
+      "Contraia o peito por um segundo no alto."
+    ],
+    "common_mistakes": [
+      "Manter o tronco totalmente reto, tirando o foco do peitoral.",
+      "Descer demais e forçar os ombros.",
+      "Balançar as pernas para ganhar impulso."
+    ],
+    "tips": [
+      "Mantenha os ombros longe das orelhas durante todo o movimento.",
+      "Desça só até onde consegue manter o controle.",
+      "Puxe o ar ao descer e solte ao subir."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "elevacao-lateral-com-halteres",
+    "name": "Elevação lateral com halteres",
+    "name_en": "Side Lateral Raise",
+    "primary_muscle": "side_delts",
+    "secondary_muscles": ["traps"],
+    "equipment": "dumbbell",
+    "level": "beginner",
+    "mechanic": "isolation",
+    "category": "strength",
+    "steps": [
+      "Fique em pé com um halter em cada mão, braços ao lado do corpo e palmas voltadas para dentro.",
+      "Dobre levemente os cotovelos e incline o tronco um pouco à frente.",
+      "Eleve os braços para os lados até a altura dos ombros.",
+      "Faça uma breve pausa no alto.",
+      "Desça os halteres devagar até a posição inicial."
+    ],
+    "common_mistakes": [
+      "Balançar o tronco para subir a carga.",
+      "Subir os halteres acima da altura dos ombros.",
+      "Encolher os ombros durante a subida."
+    ],
+    "tips": [
+      "Pense em levar os halteres para longe, e não para cima.",
+      "Mantenha os cotovelos um pouco acima das mãos no alto.",
+      "Solte o ar ao subir e puxe ao descer."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "elevacao-frontal-com-halteres",
+    "name": "Elevação frontal com halteres",
+    "name_en": "Front Dumbbell Raise",
+    "primary_muscle": "front_delts",
+    "secondary_muscles": ["side_delts", "chest"],
+    "equipment": "dumbbell",
+    "level": "beginner",
+    "mechanic": "isolation",
+    "category": "strength",
+    "steps": [
+      "Fique em pé com um halter em cada mão à frente das coxas, palmas voltadas para o corpo.",
+      "Mantenha o tronco firme e os cotovelos levemente dobrados.",
+      "Eleve um ou os dois braços à frente até a altura dos ombros.",
+      "Faça uma breve pausa no alto.",
+      "Desça os halteres devagar até a posição inicial."
+    ],
+    "common_mistakes": [
+      "Jogar o tronco para trás para subir a carga.",
+      "Subir os halteres muito acima da linha dos ombros.",
+      "Descer os halteres sem controle."
+    ],
+    "tips": [
+      "Contraia o abdômen para manter o tronco parado.",
+      "Use uma carga que permita subir sem impulso.",
+      "Solte o ar ao subir e puxe ao descer."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "crucifixo-invertido-com-halteres",
+    "name": "Crucifixo invertido com halteres",
+    "name_en": "Reverse Flyes",
+    "primary_muscle": "rear_delts",
+    "secondary_muscles": ["middle_back", "traps"],
+    "equipment": "dumbbell",
+    "level": "beginner",
+    "mechanic": "isolation",
+    "category": "strength",
+    "steps": [
+      "Segure um halter em cada mão e incline o tronco à frente, quase paralelo ao chão, com os joelhos levemente dobrados.",
+      "Deixe os braços pendurados abaixo do peito, com as palmas voltadas uma para a outra.",
+      "Dobre levemente os cotovelos e mantenha esse ângulo.",
+      "Abra os braços para os lados até a altura dos ombros.",
+      "Desça os halteres devagar até a posição inicial."
+    ],
+    "common_mistakes": [
+      "Arredondar as costas durante o movimento.",
+      "Levantar o tronco para ajudar a subir a carga.",
+      "Juntar demais as escápulas e transformar o exercício em remada."
+    ],
+    "tips": [
+      "Mantenha a coluna neutra e o pescoço alinhado.",
+      "Pense em levar os halteres para os lados, e não para trás.",
+      "Solte o ar ao abrir os braços e puxe ao descer."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "desenvolvimento-com-halteres",
+    "name": "Desenvolvimento com halteres",
+    "name_en": "Dumbbell Shoulder Press",
+    "primary_muscle": "front_delts",
+    "secondary_muscles": ["side_delts", "triceps"],
+    "equipment": "dumbbell",
+    "level": "intermediate",
+    "mechanic": "compound",
+    "category": "strength",
+    "steps": [
+      "Sente em um banco com encosto, com um halter em cada mão apoiado nas coxas.",
+      "Leve os halteres até a altura dos ombros, com as palmas voltadas para a frente.",
+      "Empurre os halteres para cima até estender os braços.",
+      "Faça uma breve pausa no alto.",
+      "Desça devagar até os halteres voltarem à altura dos ombros."
+    ],
+    "common_mistakes": [
+      "Arquear demais a lombar ao empurrar.",
+      "Descer os halteres só até a metade.",
+      "Bater os halteres no alto do movimento."
+    ],
+    "tips": [
+      "Mantenha as costas apoiadas no encosto e o abdômen firme.",
+      "Deixe os cotovelos levemente à frente do corpo.",
+      "Solte o ar ao empurrar e puxe ao descer."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "desenvolvimento-militar-com-barra-em-pe",
+    "name": "Desenvolvimento militar com barra em pé",
+    "name_en": "Standing Military Press",
+    "primary_muscle": "front_delts",
+    "secondary_muscles": ["side_delts", "triceps", "abs"],
+    "equipment": "barbell",
+    "level": "beginner",
+    "mechanic": "compound",
+    "category": "strength",
+    "steps": [
+      "Ajuste a barra no suporte na altura do peito.",
+      "Segure a barra com as mãos um pouco mais abertas que os ombros, palmas para a frente.",
+      "Tire a barra do suporte e apoie-a na frente dos ombros, com os pés na largura do quadril.",
+      "Empurre a barra para cima até estender os braços, passando-a próxima ao rosto.",
+      "Desça a barra devagar até a frente dos ombros."
+    ],
+    "common_mistakes": [
+      "Inclinar o tronco para trás e arquear a lombar.",
+      "Empurrar a barra para a frente, longe do corpo.",
+      "Dobrar os joelhos para ganhar impulso."
+    ],
+    "tips": [
+      "Contraia o abdômen e os glúteos durante toda a série.",
+      "Afaste levemente a cabeça para a barra passar e volte-a ao lugar no alto.",
+      "Solte o ar ao empurrar e puxe ao descer."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "desenvolvimento-na-maquina",
+    "name": "Desenvolvimento na máquina",
+    "name_en": "Machine Shoulder (Military) Press",
+    "primary_muscle": "front_delts",
+    "secondary_muscles": ["side_delts", "triceps"],
+    "equipment": "machine",
+    "level": "beginner",
+    "mechanic": "compound",
+    "category": "strength",
+    "steps": [
+      "Ajuste o banco para que as pegadas fiquem na altura dos ombros.",
+      "Sente com as costas apoiadas no encosto e segure as pegadas.",
+      "Empurre as pegadas para cima até estender os braços.",
+      "Faça uma breve pausa no alto.",
+      "Desça devagar até as mãos voltarem à altura dos ombros."
+    ],
+    "common_mistakes": [
+      "Tirar as costas do encosto ao empurrar.",
+      "Travar os cotovelos com força no alto.",
+      "Deixar o peso bater ao descer."
+    ],
+    "tips": [
+      "Mantenha os ombros para baixo, longe das orelhas.",
+      "Controle a descida em cerca de dois segundos.",
+      "Solte o ar ao empurrar e puxe ao descer."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "desenvolvimento-arnold",
+    "name": "Desenvolvimento Arnold",
+    "name_en": "Arnold Dumbbell Press",
+    "primary_muscle": "front_delts",
+    "secondary_muscles": ["side_delts", "triceps"],
+    "equipment": "dumbbell",
+    "level": "intermediate",
+    "mechanic": "compound",
+    "category": "strength",
+    "steps": [
+      "Sente em um banco com encosto, com um halter em cada mão.",
+      "Segure os halteres na frente do peito, na altura do queixo, com as palmas voltadas para você.",
+      "Empurre os halteres para cima girando os punhos até as palmas ficarem voltadas para a frente.",
+      "Estenda os braços no alto e faça uma breve pausa.",
+      "Desça girando os punhos de volta até a posição inicial."
+    ],
+    "common_mistakes": [
+      "Separar o giro da subida, fazendo dois movimentos.",
+      "Arquear a lombar ao empurrar.",
+      "Usar carga alta demais e perder o controle do giro."
+    ],
+    "tips": [
+      "Faça o giro de forma suave e contínua durante a subida.",
+      "Mantenha o abdômen firme e as costas apoiadas.",
+      "Solte o ar ao empurrar e puxe ao descer."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "face-pull-na-polia",
+    "name": "Face pull na polia",
+    "name_en": "Face Pull",
+    "primary_muscle": "rear_delts",
+    "secondary_muscles": ["middle_back", "traps"],
+    "equipment": "cable",
+    "level": "intermediate",
+    "mechanic": "compound",
+    "category": "strength",
+    "steps": [
+      "Prenda uma corda na polia ajustada na altura do rosto.",
+      "Segure as pontas da corda com as palmas voltadas uma para a outra e dê alguns passos para trás.",
+      "Estenda os braços à frente, mantendo o tronco firme.",
+      "Puxe a corda em direção ao rosto, afastando as mãos e levando os cotovelos para os lados.",
+      "Faça uma breve pausa, juntando as escápulas.",
+      "Volte devagar até estender os braços."
+    ],
+    "common_mistakes": [
+      "Puxar com os cotovelos baixos, como numa remada.",
+      "Inclinar o tronco para trás para ajudar a puxar.",
+      "Usar carga alta demais e encurtar o movimento."
+    ],
+    "tips": [
+      "Mantenha os cotovelos na altura dos ombros ou um pouco acima.",
+      "Use carga leve e foque na contração dos ombros.",
+      "Solte o ar ao puxar e puxe o ar ao voltar."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "crucifixo-invertido-na-polia",
+    "name": "Crucifixo invertido na polia",
+    "name_en": "Cable Rear Delt Fly",
+    "primary_muscle": "rear_delts",
+    "secondary_muscles": ["middle_back", "traps"],
+    "equipment": "cable",
+    "level": "beginner",
+    "mechanic": "isolation",
+    "category": "strength",
+    "steps": [
+      "Ajuste as duas polias na altura dos ombros, sem pegadas, segurando a ponta dos cabos.",
+      "Segure o cabo da esquerda com a mão direita e o da direita com a mão esquerda, cruzando os braços à frente.",
+      "Fique no centro, com os braços estendidos à frente na altura dos ombros.",
+      "Abra os braços para os lados e para trás, mantendo-os estendidos.",
+      "Faça uma breve pausa quando os braços ficarem alinhados com o corpo.",
+      "Volte devagar até a posição inicial."
+    ],
+    "common_mistakes": [
+      "Dobrar os cotovelos e transformar o movimento em remada.",
+      "Inclinar o tronco para trás.",
+      "Encolher os ombros durante o movimento."
+    ],
+    "tips": [
+      "Mantenha os ombros para baixo e o peito aberto.",
+      "Use carga leve e movimento controlado.",
+      "Solte o ar ao abrir os braços e puxe ao voltar."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "remada-alta-com-barra",
+    "name": "Remada alta com barra",
+    "name_en": "Upright Barbell Row",
+    "primary_muscle": "side_delts",
+    "secondary_muscles": ["traps", "front_delts", "biceps"],
+    "equipment": "barbell",
+    "level": "beginner",
+    "mechanic": "compound",
+    "category": "strength",
+    "steps": [
+      "Fique em pé segurando a barra à frente das coxas, com as mãos um pouco mais fechadas que os ombros.",
+      "Mantenha as costas retas e os braços estendidos.",
+      "Puxe a barra para cima, próxima ao corpo, levando os cotovelos para os lados.",
+      "Suba até os cotovelos ficarem na altura dos ombros.",
+      "Faça uma breve pausa e desça a barra devagar."
+    ],
+    "common_mistakes": [
+      "Subir os cotovelos muito acima da linha dos ombros.",
+      "Usar pegada muito fechada e forçar os punhos.",
+      "Balançar o tronco para subir a carga."
+    ],
+    "tips": [
+      "Deixe os cotovelos sempre acima das mãos.",
+      "Mantenha a barra próxima ao corpo durante todo o movimento.",
+      "Solte o ar ao subir e puxe ao descer."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "crucifixo-invertido-sentado-polia-baixa",
+    "name": "Crucifixo invertido sentado na polia baixa",
+    "name_en": "Cable Seated Lateral Raise",
+    "primary_muscle": "rear_delts",
+    "secondary_muscles": ["middle_back", "traps"],
+    "equipment": "cable",
+    "level": "beginner",
+    "mechanic": "isolation",
+    "category": "strength",
+    "steps": [
+      "Posicione um banco entre duas polias baixas e sente na ponta, com os pés à frente dos joelhos.",
+      "Incline o tronco à frente com as costas retas, apoiando o peito sobre as coxas.",
+      "Segure o cabo da esquerda com a mão direita e o da direita com a mão esquerda, passando os cabos por baixo dos joelhos.",
+      "Com os cotovelos levemente dobrados, abra os braços para os lados até a altura dos ombros.",
+      "Segure a contração por um segundo.",
+      "Desça os braços devagar até a posição inicial."
+    ],
+    "common_mistakes": [
+      "Levantar o tronco das coxas para ajudar a puxar.",
+      "Dobrar e estender os cotovelos durante o movimento.",
+      "Usar carga alta demais e encurtar a amplitude."
+    ],
+    "tips": [
+      "Mantenha os braços perpendiculares ao tronco ao subir.",
+      "Mantenha o pescoço alinhado com a coluna.",
+      "Solte o ar ao abrir os braços e puxe ao descer."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "elevacao-lateral-com-elastico",
+    "name": "Elevação lateral com elástico",
+    "name_en": "Lateral Raise - With Bands",
+    "primary_muscle": "side_delts",
+    "secondary_muscles": ["traps"],
+    "equipment": "band",
+    "level": "beginner",
+    "mechanic": "isolation",
+    "category": "strength",
+    "steps": [
+      "Pise no meio do elástico de forma que ele já tenha tensão com os braços estendidos.",
+      "Segure as pontas ao lado das coxas, com as palmas voltadas para o corpo.",
+      "Dobre levemente os cotovelos e mantenha as costas retas.",
+      "Eleve os braços para os lados até um pouco acima da altura dos ombros.",
+      "Faça uma breve pausa no alto.",
+      "Desça os braços devagar até a posição inicial."
+    ],
+    "common_mistakes": [
+      "Balançar o tronco para subir os braços.",
+      "Encolher os ombros durante a subida.",
+      "Deixar o elástico puxar os braços de volta sem controle."
+    ],
+    "tips": [
+      "Mantenha o tronco parado e o abdômen firme.",
+      "Ajuste a posição dos pés para mudar a tensão do elástico.",
+      "Solte o ar ao subir e puxe ao descer."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "abertura-de-bracos-com-elastico",
+    "name": "Abertura de braços com elástico",
+    "name_en": "Band Pull Apart",
+    "primary_muscle": "rear_delts",
+    "secondary_muscles": ["middle_back", "traps"],
+    "equipment": "band",
+    "level": "beginner",
+    "mechanic": "isolation",
+    "category": "strength",
+    "steps": [
+      "Fique em pé segurando o elástico com as duas mãos, braços estendidos à frente na altura dos ombros.",
+      "Mantenha os ombros para trás e o peito aberto.",
+      "Abra os braços para os lados, mantendo os cotovelos estendidos.",
+      "Leve o elástico até perto do peito.",
+      "Faça uma breve pausa e volte devagar à posição inicial."
+    ],
+    "common_mistakes": [
+      "Dobrar os cotovelos durante a abertura.",
+      "Arquear a lombar para conseguir abrir os braços.",
+      "Encolher os ombros em direção às orelhas."
+    ],
+    "tips": [
+      "Escolha um elástico que permita abrir os braços por completo.",
+      "Junte as escápulas no fim do movimento.",
+      "Solte o ar ao abrir os braços e puxe ao voltar."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "encolhimento-com-barra",
+    "name": "Encolhimento com barra",
+    "name_en": "Barbell Shrug",
+    "primary_muscle": "traps",
+    "secondary_muscles": ["forearms"],
+    "equipment": "barbell",
+    "level": "beginner",
+    "mechanic": "isolation",
+    "category": "strength",
+    "steps": [
+      "Fique em pé segurando a barra à frente das coxas, mãos na largura dos ombros e palmas voltadas para o corpo.",
+      "Mantenha os braços estendidos e as costas retas.",
+      "Eleve os ombros o máximo possível em direção às orelhas.",
+      "Segure a contração por um segundo.",
+      "Desça os ombros devagar até a posição inicial."
+    ],
+    "common_mistakes": [
+      "Girar os ombros em círculo durante o movimento.",
+      "Dobrar os cotovelos para ajudar a subir a carga.",
+      "Projetar a cabeça para a frente."
+    ],
+    "tips": [
+      "Mantenha os braços relaxados e estendidos, como ganchos.",
+      "Faça o movimento só para cima e para baixo.",
+      "Solte o ar ao subir os ombros e puxe ao descer."
+    ],
+    "text_source": "free-exercise-db"
+  },
+  {
+    "slug": "encolhimento-com-halteres",
+    "name": "Encolhimento com halteres",
+    "name_en": "Dumbbell Shrug",
+    "primary_muscle": "traps",
+    "secondary_muscles": ["forearms"],
+    "equipment": "dumbbell",
+    "level": "beginner",
+    "mechanic": "isolation",
+    "category": "strength",
+    "steps": [
+      "Fique em pé com um halter em cada mão ao lado do corpo, palmas voltadas para dentro.",
+      "Mantenha os braços estendidos e as costas retas.",
+      "Eleve os ombros o máximo possível em direção às orelhas.",
+      "Segure a contração por um segundo.",
+      "Desça os ombros devagar até a posição inicial."
+    ],
+    "common_mistakes": [
+      "Girar os ombros em círculo durante o movimento.",
+      "Dobrar os cotovelos para ajudar a subir a carga.",
+      "Usar carga alta demais e encurtar a amplitude."
+    ],
+    "tips": [
+      "Mantenha o pescoço alinhado e o olhar à frente.",
+      "Faça o movimento só para cima e para baixo.",
+      "Solte o ar ao subir os ombros e puxe ao descer."
+    ],
+    "text_source": "free-exercise-db"
+  }
+]

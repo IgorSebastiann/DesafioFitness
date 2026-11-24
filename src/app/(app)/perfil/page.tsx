@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { BarChart3, Bell, CalendarDays, ChevronRight, Gift, Images, LogOut, Medal, ShieldCheck, Swords } from "lucide-react";
+import { BarChart3, Bell, Dumbbell, CalendarDays, ChevronRight, Gift, Images, LogOut, Medal, ShieldCheck, Swords } from "lucide-react";
 import { AvatarUploader, ProfileForm } from "@/components/profile-forms";
 import { WeeklyGoalForm } from "@/components/weekly-goal-form";
+import { BodyFigureForm } from "@/components/body-figure-form";
 import { Card, PageHeader, SectionTitle } from "@/components/ui";
 import { getViewer } from "@/lib/data/viewer";
 import { avatarUrlFor, getDashboard, getWeeklyGoal } from "@/lib/data/queries";
@@ -31,6 +32,7 @@ export default async function ProfilePage() {
     { href: "/desafio", label: "Meu desafio", icon: Swords },
     { href: "/calendario", label: "Calendário", icon: CalendarDays },
     { href: "/estatisticas", label: "Estatísticas", icon: BarChart3 },
+    { href: "/exercicios", label: "Exercícios", icon: Dumbbell },
     { href: "/galeria", label: "Galeria", icon: Images },
     { href: "/premiacoes", label: "Premiações", icon: Gift },
     { href: "/conquistas", label: "Conquistas", icon: Medal },
@@ -54,6 +56,10 @@ export default async function ProfilePage() {
             <p className="text-xs text-muted">Atividades aprovadas</p>
           </div>
         </div>
+      </Card>
+
+      <Card>
+        <BodyFigureForm value={profile.body_figure ?? null} />
       </Card>
 
       {challenge ? (
