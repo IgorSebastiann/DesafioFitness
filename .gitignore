@@ -44,3 +44,6 @@ next-env.d.ts
 .env*
 
 reports/visual-audit/
+
+# Dados pessoais (ex.: treino pago do usuário) — nunca vão para o Git
+/private/

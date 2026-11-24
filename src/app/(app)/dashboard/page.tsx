@@ -17,6 +17,9 @@ import { displayName } from "@/lib/format";
 import { toneOf } from "@/lib/people";
 import { formatDayMonth, formatMonthTitle } from "@/lib/time";
 import { cn } from "@/lib/cn";
+import { TodayWorkoutCard } from "@/components/today-workout";
+import { getTodayWorkout } from "@/lib/data/workouts";
+import { weekdayOf } from "@/lib/domain/workouts";
 
 export const metadata: Metadata = { title: "Início" };
 
@@ -32,7 +35,10 @@ export default async function DashboardPage({
   const { periodo } = await searchParams;
   const period: Period = periodo === "mes" || periodo === "geral" ? periodo : "semana";
   const data = await getDashboard(user.id, challenge);
-  const weekFacts = await getActivityFacts(user.id, challenge.id, data.week);
+  const [weekFacts, todayWorkout] = await Promise.all([
+    getActivityFacts(user.id, challenge.id, data.week),
+    getTodayWorkout(user.id, data.today, weekdayOf(data.today)),
+  ]);
   const mission = missionForWeek(data.week.start);
   const missionRows: MissionRow[] = viewer.people.map((p) => ({
     userId: p.id,
@@ -92,6 +98,8 @@ export default async function DashboardPage({
       />
 
       <StreakBanner streak={data.stats.currentStreak} trainedToday={data.stats.trainedToday} />
+
+      <TodayWorkoutCard data={todayWorkout} />
 
       {challenge.ends_on || data.today < challenge.starts_on ? (
         <ChallengeProgress startsOn={challenge.starts_on} endsOn={challenge.ends_on} today={data.today} compact />

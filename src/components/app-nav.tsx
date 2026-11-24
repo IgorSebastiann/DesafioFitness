@@ -7,6 +7,7 @@ import {
   BarChart3,
   Bell,
   CalendarDays,
+  ClipboardList,
   Download,
   Dumbbell,
   Flame,
@@ -35,6 +36,7 @@ const MOBILE_TABS = [
 
 /** Itens que, no celular, ficam na gaveta "Mais". */
 const MORE_LINKS = [
+  { href: "/treinos", label: "Treinos", icon: ClipboardList },
   { href: "/desafio", label: "Meu desafio", icon: Swords },
   { href: "/calendario", label: "Calendário", icon: CalendarDays },
   { href: "/estatisticas", label: "Estatísticas", icon: BarChart3 },
@@ -52,6 +54,7 @@ const SIDE_LINKS = [
   { href: "/atividades", label: "Atividades", icon: ListChecks },
   { href: "/desafio", label: "Meu desafio", icon: Swords },
   { href: "/atividades/nova", label: "Registrar atividade", icon: Plus },
+  { href: "/treinos", label: "Treinos", icon: ClipboardList },
   { href: "/calendario", label: "Calendário", icon: CalendarDays },
   { href: "/ranking", label: "Ranking", icon: Trophy },
   { href: "/estatisticas", label: "Estatísticas", icon: BarChart3 },

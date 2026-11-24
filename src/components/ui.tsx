@@ -83,13 +83,16 @@ export function PageHeader({
   title,
   subtitle,
   action,
+  className,
 }: {
   title: string;
   subtitle?: string;
   action?: ReactNode;
+  /** Ex.: "mb-0" quando o contêiner já espaça os filhos com gap. */
+  className?: string;
 }) {
   return (
-    <header className="mb-6 flex items-end justify-between gap-4">
+    <header className={cn("mb-6 flex items-end justify-between gap-4", className)}>
       <div className="min-w-0">
         <h1 className="text-2xl font-bold tracking-tight">{title}</h1>
         {subtitle ? <p className="mt-1 text-sm text-muted">{subtitle}</p> : null}

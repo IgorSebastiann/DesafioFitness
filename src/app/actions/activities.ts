@@ -46,6 +46,11 @@ const createSchema = z.object({
     })
     .min(1, { error: "Envie uma foto ou um vídeo como comprovação." })
     .max(MAX_PROOFS, { error: `Envie no máximo ${MAX_PROOFS} arquivos.` }),
+  workoutSessions: z
+    .string()
+    .optional()
+    .transform((v) => (v ? v.split(",").filter(Boolean) : []))
+    .pipe(z.array(z.uuid()).max(10)),
 });
 
 function readProofs(value: FormDataEntryValue | null): unknown {
@@ -90,6 +95,7 @@ export async function createActivity(_prev: ActionState, formData: FormData): Pr
     distanceKm: formData.get("distanceKm") ?? undefined,
     description: formData.get("description") ?? undefined,
     proofs: rawProofs,
+    workoutSessions: formData.get("workoutSessions") ?? undefined,
   });
 
   if (!parsed.success) {
@@ -127,6 +133,14 @@ export async function createActivity(_prev: ActionState, formData: FormData): Pr
           cover.kind,
         ],
       );
+      // Treinos executados que originaram esta atividade (fim do "executar treino").
+      if (input.workoutSessions.length) {
+        await sql.query(
+          `update workout_sessions set activity_id = $1
+            where id = any($2::uuid[]) and user_id = $3 and status = 'finished' and activity_id is null`,
+          [rows[0].id, input.workoutSessions, viewer.userId],
+        );
+      }
       for (const [i, extra] of extras.entries()) {
         await sql.query(
           `insert into activity_extra_proofs (activity_id, position, proof_path, proof_kind) values ($1, $2, $3, $4)`,

@@ -156,3 +156,23 @@ O catálogo (112 exercícios) fica em `db/data/exercises/*.json` e vira a migrat
 **Mapa corporal** (`src/lib/body-map/figures.ts` + `src/components/body-map.tsx`): desenho próprio; cada forma é a metade esquerda em pontos (dx, y) espelhada, com spline Catmull-Rom. O corpo feminino aplica um perfil de largura por altura sobre os mesmos pontos. Cada músculo é um `<a>` focável com `aria-label` (Tab + Enter).
 
 **Mídias**: Blob público separado (`MEDIA_READ_WRITE_TOKEN`); comprovações continuam no Blob privado. Upload do admin por `/api/exercise-media/upload` (só admin, `exercises/{slug}/own-*`, vídeo até 10 s/20 MB checado no navegador, poster gerado no navegador). Importação de terceiros por `scripts/import-exercise-media.mjs` (simulação por padrão; `--apply` grava), vínculos em `db/data/exercise-sources.json`. Ordem de exibição: própria → principal → vídeo → ordem (`sortMedia`).
+
+## 10. Módulo de treinos — Fase 2: fichas de musculação e executar treino
+
+**Banco** (migration `0015_workouts.sql`):
+- `workout_sheets` (ficha: dono, nome, descrição, `is_shared`, `copied_from`; modelos com `is_template` + `template_group` e sem dono), `workout_blocks` (tipo, séries/voltas, descanso, texto do aquecimento), `workout_block_items` (exercício da biblioteca, repetições **ou** sequência `reps_scheme` **ou** tempo, carga, descanso, observação).
+- Tipos de bloco: `warmup` (texto), `straight` (1 exercício), `biset` (exatamente 2), `alternating` (1 exercício com sequência, ex.: 6/12), `circuit` (2+ exercícios com tempo; séries = voltas). O formato é conferido por **constraint triggers adiados** (`check_workout_block`), no fim da transação.
+- `replace_workout_blocks(ficha, jsonb)` grava a ficha inteira (editor, script pessoal, modelos); roda com as permissões de quem chama. `copy_workout_sheet(ficha)` copia uma ficha visível para a conta de quem chama.
+- `workout_schedule` (dia da semana 0–6 → ficha; só fichas próprias), `workout_sessions` (execução: início/fim, status, `local_date` em Brasília, `activity_id`), `workout_set_logs` (série feita: reps, carga, tempo; chave única por sessão/item/série/passo).
+- RLS: ficha própria; compartilhada visível (só leitura) para quem está no mesmo desafio (`shares_challenge_with`); modelos visíveis para todos e editáveis só pelo admin. Agenda, sessões e séries: só o dono. Triggers impedem executar/agendar ficha de outra pessoa, gravar série em treino encerrado, reabrir treino e ligar atividade de outra pessoa. Editar a ficha não apaga o histórico (o log só perde o `item_id`).
+- 10 modelos genéricos com IDs fixos (ABC, ABCD, Full Body, Upper/Lower).
+
+**Telas**: `/treinos` (agenda da semana, minhas fichas, compartilhadas comigo, modelos), `/treinos/[id]` (ficha; começar, editar, compartilhar, excluir ou copiar), `/treinos/[id]/editar` (editor de blocos com seletor nativo agrupado por músculo), `/treinos/agenda`, `/treinos/[id]/executar?sessao=` (execução), `/treinos/concluido?sessao=`, `/treinos/1rm`. Card "Treino de hoje" no Início; "Sua evolução" (recorde, 1RM estimado, gráfico) na página do exercício.
+
+**Execução** (`workout-runner.tsx`): a ficha vira uma lista de passos (`buildSteps`: bi-set A1, B1, descanso…; carga alternada 6 e 12 na mesma série; circuito por tempo). Cada série é gravada na hora (`logSet`), então o treino continua se o app fechar. Descanso começa sozinho; circuito anda sozinho com bipe (Web Audio) e vibração; a tela fica acesa (Wake Lock); som pode ser desligado (preferência por aparelho).
+
+**Fim do treino → atividade**: `/atividades/nova?treino=1` junta os treinos terminados de hoje que ainda não viraram atividade (ex.: B + D), preenche Musculação, horário do início, duração somada e descrição; o usuário anexa a foto. `createActivity` liga as sessões à atividade na mesma transação. Pontuação, limite diário, duplicidade e aprovação seguem as regras de sempre.
+
+**Treino pessoal**: `scripts/seed-meu-treino.mjs` lê `private/meu-treino.json` (pasta fora do Git, porque o repositório é público), pergunta o e-mail e os dias (ou `--email`/`--dias`), é idempotente e tem `--simular`.
+
+**1RM**: Epley e Brzycki (`src/lib/domain/workouts.ts`); a estimativa do histórico usa a média das duas até 10 repetições.

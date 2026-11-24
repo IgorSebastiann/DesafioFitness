@@ -31,6 +31,7 @@ export function ActivityForm({
   nowTime,
   dailyLimit,
   pointsUsedByDate,
+  prefill,
 }: {
   categories: Category[];
   userId: string;
@@ -42,13 +43,17 @@ export function ActivityForm({
   dailyLimit: number;
   /** Pontos já usados em cada dia (YYYY-MM-DD), para o saldo da data escolhida. */
   pointsUsedByDate: Record<string, number>;
+  /** Vindo do fim de um treino executado: modalidade, horário, duração e descrição já preenchidos. */
+  prefill?: { categoryId?: string; time: string; durationMinutes: number; description: string; sessionIds: string[] };
 }) {
   const [state, formAction, isSaving] = useActionState(createActivity, null);
   const [uploading, startTransition] = useTransition();
   const [uploadError, setUploadError] = useState<string | null>(null);
   const [picked, setPicked] = useState<Picked[]>([]);
   const [preparing, setPreparing] = useState(false);
-  const [categoryId, setCategoryId] = useState(categories[0]?.id ?? "");
+  const [categoryId, setCategoryId] = useState(
+    prefill?.categoryId && categories.some((c) => c.id === prefill.categoryId) ? prefill.categoryId : (categories[0]?.id ?? ""),
+  );
   const [activityDate, setActivityDate] = useState(today);
   const formRef = useRef<HTMLFormElement>(null);
   const cameraRef = useRef<HTMLInputElement>(null);
@@ -156,6 +161,7 @@ export function ActivityForm({
 
   return (
     <form ref={formRef} onSubmit={onSubmit} className="flex flex-col gap-6" noValidate>
+      {prefill ? <input type="hidden" name="workoutSessions" value={prefill.sessionIds.join(",")} /> : null}
       <ModalityPicker
         name="categoryId"
         categories={categories}
@@ -175,7 +181,7 @@ export function ActivityForm({
 
       <div className="grid grid-cols-2 gap-4">
         <Field label="Horário" error={fieldErr(state, "activityTime")}>
-          <input name="activityTime" type="time" defaultValue={nowTime} required className={inputClass} />
+          <input name="activityTime" type="time" defaultValue={prefill?.time ?? nowTime} required className={inputClass} />
         </Field>
         <Field
           label="Duração (min)"
@@ -190,6 +196,7 @@ export function ActivityForm({
             max={1440}
             step={1}
             required
+            defaultValue={prefill?.durationMinutes}
             placeholder={selected ? String(selected.min_duration_minutes) : "30"}
             className={inputClass}
           />
@@ -203,7 +210,7 @@ export function ActivityForm({
       </div>
 
       <Field label="Descrição" hint="Opcional. Até 500 caracteres." error={fieldErr(state, "description")}>
-        <textarea name="description" rows={3} maxLength={500} className={`${inputClass} h-auto py-3`} placeholder="Ex.: treino de pernas com a Ana" />
+        <textarea name="description" defaultValue={prefill?.description} rows={3} maxLength={500} className={`${inputClass} h-auto py-3`} placeholder="Ex.: treino de pernas com a Ana" />
       </Field>
 
       <div className="flex flex-col gap-3">

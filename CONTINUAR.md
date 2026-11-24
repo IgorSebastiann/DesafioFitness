@@ -29,7 +29,12 @@ Para instalação e configuração completas, veja o `README.md`.
    - Store de Blob público `desafio-fitness-exercise-media` conectado com prefixo `MEDIA` → variável `MEDIA_READ_WRITE_TOKEN` (todos os ambientes). Para uso local: `vercel env pull` em arquivo à parte e passar como segundo `--env-file`.
    - Migrations 0013 e 0014 aplicadas no Neon; mídias importadas com `scripts/import-exercise-media.mjs --apply` (rodar de novo é seguro: pula o que já existe).
    - Gravar os vídeos próprios da lista "falta gravar" (filtro "Sem mídia" em /exercicios, visível só para admin).
-   - Próxima fase: Fase 2 (fichas de musculação + executar treino).
+   - **Fase 2 (fichas, agenda, executar treino, 1RM, evolução) — pronta localmente, NÃO publicada.** Para publicar (só com ok do usuário):
+     - Aplicar `0015_workouts.sql` no Neon (`npm run db:migrate`).
+     - Commit e deploy.
+     - Cadastrar o treino pessoal: `node --env-file=.env.local scripts/seed-meu-treino.mjs` (pergunta e-mail e dias; lê `private/meu-treino.json`, que fica fora do Git). Corrida (terça, quinta e sábado) entra na Fase 3.
+   - Próxima fase: Fase 3 (planos de corrida, FCmáx e corrida guiada).
+   - Teste local sem Neon: Postgres em Docker (`df-local-pg`, porta 54329) e `next dev -p 3147` com `DATABASE_URL` local (`?sslmode=disable`) e um `BETTER_AUTH_SECRET` qualquer na linha de comando (o segredo da Vercel é sensível e não vem no `env pull`).
 
 1. **E-mail de recuperação de senha (Resend)**. Sem ele, o link de recuperação só aparece no log do servidor.
    - Instalar a integração: `vercel integration add resend/resend-email --no-claim --non-interactive`. Ela pede a aceitação dos termos no navegador (link que a CLI imprime).

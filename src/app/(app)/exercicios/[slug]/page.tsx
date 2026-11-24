@@ -7,6 +7,8 @@ import { ExerciseMediaPlayer } from "@/components/exercise-media-player";
 import { ButtonLink, Card, SectionTitle } from "@/components/ui";
 import { getViewer } from "@/lib/data/viewer";
 import { getExercise } from "@/lib/data/exercises";
+import { getExerciseProgress } from "@/lib/data/workouts";
+import { ExerciseProgressCard } from "@/components/exercise-progress";
 import { CATEGORIES, EQUIPMENT, LEVELS, MECHANICS, muscleName } from "@/lib/domain/exercises";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -24,6 +26,7 @@ export default async function ExercisePage({ params }: Props) {
   const viewer = await getViewer();
   const exercise = await getExercise(viewer.userId, slug);
   if (!exercise) notFound();
+  const progress = await getExerciseProgress(viewer.userId, exercise.id);
 
   const facts = [
     { label: "Equipamento", value: EQUIPMENT[exercise.equipment] },
@@ -99,6 +102,8 @@ export default async function ExercisePage({ params }: Props) {
               </div>
             ))}
           </dl>
+
+          <ExerciseProgressCard progress={progress} />
 
           <Card>
             <SectionTitle>
